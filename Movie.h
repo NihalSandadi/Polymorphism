@@ -13,13 +13,11 @@ public:
 
 	Movie();
 	virtual ~Movie();
-	virtual ostream& operator<<(ostream& Os,const Media& M);
+	virtual ostream& operator<<(ostream& Os, const Media& M);
 };
 
 class MovieFactory {
 private:
-	//bst acess using the type of movie and points to a specific movie type
-	//movieType[c] will return comedy 
 	map<char, Movie*> MovieTypes;
 public:
 	MovieFactory();
