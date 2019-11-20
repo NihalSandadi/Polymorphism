@@ -31,7 +31,7 @@ public:
     Customer* getCustomer(int ID);
     bool clear();
 private:
-    vector<Customer*> Customers;
+    vector<Customer*> Customers; // Vector of customer pointers
     int getHash(int ID);
 };
 
