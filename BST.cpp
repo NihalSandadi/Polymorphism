@@ -1,4 +1,3 @@
-#include "BST.h"
 //Jayden Stipek stipejay@uw.edu
 // 15 Jan 2019
 
@@ -247,6 +246,12 @@ public:
 		}
 	}
 
+	template<class T>
+	Node* BST<T>::getRoot() const
+	{
+		return Root;
+	}
+
 	// Number of nodes in BST using an inorder traversal (not done)
 	int numberOfNodes() const {
 		if (Root == nullptr) return 0;
@@ -371,6 +376,10 @@ public:
 			return false;
 		}
 		return containsRec(Root, Item);
+	}
+	template<class T>
+	void BST<T>::inOrderTraverse(Node* Root)
+	{
 	}
 	//recusrive function to traverse tree
 	bool containsRec(Node* N, const T& Item) const

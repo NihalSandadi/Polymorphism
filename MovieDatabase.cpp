@@ -12,6 +12,7 @@ MovieDatabase::~MovieDatabase()
 
 Movie* MovieDatabase::getMovie(string)
 {
+
 	return nullptr;
 }
 

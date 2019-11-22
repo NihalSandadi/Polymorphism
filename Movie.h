@@ -52,35 +52,3 @@ public:
 	~Classic();
     ostream& operator<<(ostream& Os, const Movie& M) override;
 };
-
-/*
-class Movie
-{
-private:
-	string Director;
-	int ReleaseMonth;
-	int ReleaseYear;
-	char MovieType;
-	string ActorFirstName;
-	string ActorLastName;
-public:
-
-	Movie(string Director, int ReleaseYear, char MovieType)
-	{
-		this->Director = Director;
-		this->ReleaseYear = ReleaseYear;
-		this->MovieType = MovieType;
-	}
-
-	Movie(string Director, int ReleaseMonth, int ReleaseYear, char MovieType, string ActorFirstName, string ActorLastName)
-	{
-		this->Director = Director;
-		this->ReleaseMonth = ReleaseMonth;
-		this->ReleaseYear = ReleaseYear;
-		this->MovieType = MovieType;
-		this->ActorFirstName = ActorFirstName;
-		this->ActorLastName = ActorLastName;
-	}
-		
-}
-*/
