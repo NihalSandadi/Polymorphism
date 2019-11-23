@@ -11,7 +11,7 @@ public:
 	char MovieType;
 	string Director;
 	Movie();
-	Movie(char, string);
+	Movie(char Type, string Director);
 	virtual ~Movie();
 	friend ostream& operator<<(ostream& Os, const Media& M);
 };
@@ -40,6 +40,7 @@ public:
 	int ReleaseYear;
 
 	Drama();
+	Drama(string Director, int ReleaseYear);
 	~Drama();
   friend ostream& operator<<(ostream& Os, const Drama& M);
 };
@@ -49,6 +50,8 @@ public:
 	int ReleaseYear, ReleaseMonth;
   string ActorFirstName, ActorLastName;
   Classic();
+	Classic(string Director, int ReleaseYear, int ReleaseMonth,
+		string ActorFirstName, string ActorLastName);
 	~Classic();
   friend ostream& operator<<(ostream& Os, const Classic& M);
 };
