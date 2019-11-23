@@ -13,7 +13,7 @@ public:
 
 	Movie();
 	virtual ~Movie();
-	virtual ostream& operator<<(ostream& Os, const Media& M);
+	friend ostream& operator<<(ostream& Os, const Media& M);
 };
 
 class MovieFactory {
@@ -31,7 +31,7 @@ public:
 
 	Comedy();
 	~Comedy();
-    ostream& operator<<(ostream& Os, const Comedy& M) override;
+  friend ostream& operator<<(ostream& Os, const Comedy& M) override;
 };
 
 class Drama: public Movie{
@@ -40,15 +40,15 @@ public:
 
 	Drama();
 	~Drama();
-    ostream& operator<<(ostream& Os, const Comedy& M) override;
+  friend ostream& operator<<(ostream& Os, const Drama& M) override;
 };
 
 class Classic : public Movie {
 public:
 	int ReleaseYear, ReleaseMonth;
-    string ActorFirstName, ActorLastName;
+  string ActorFirstName, ActorLastName;
 
-    Classic();
+  Classic();
 	~Classic();
-    ostream& operator<<(ostream& Os, const Movie& M) override;
+  friend ostream& operator<<(ostream& Os, const Classic& M) override;
 };

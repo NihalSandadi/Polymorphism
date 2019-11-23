@@ -9,7 +9,7 @@ class Movie;
 
 class Media
 {
-	public:
+	public: // protected
 		char MediaType;
 		int Quantity;
 		string Title;
@@ -18,7 +18,7 @@ class Media
 		virtual ~Media();
 		void increaseQuanity();
 		void decreaseQuanity();
-        virtual ostream& operator<<(ostream& Os, const Media& M);
+    friend ostream& operator<<(ostream& Os, const Media& M);
 };
 
 class MediaFactory
