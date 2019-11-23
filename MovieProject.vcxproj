@@ -160,7 +160,6 @@
     <ClCompile Include="Transactions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\BST.h" />
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Customers.h" />
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Media.h" />
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Movie.h" />

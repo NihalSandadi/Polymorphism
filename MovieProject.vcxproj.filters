@@ -38,9 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\BST.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Customers.h">
       <Filter>Source Files</Filter>
     </ClInclude>

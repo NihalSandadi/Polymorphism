@@ -15,8 +15,8 @@ public:
 	MovieDatabase();
 	~MovieDatabase();
 	Movie* getMovie(string);
-	bool add(Movie*);
-	bool remove(Movie*);
+	bool add(Movie* movie);
+	bool remove(Movie* movie);
 	bool clear();
 	void showInventory();
 	int getHash(string);

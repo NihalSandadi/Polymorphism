@@ -28,15 +28,16 @@ MovieFactory::MovieFactory()
 {
 	map<char, Movie*> MovieTypes;
 }
-
+//clears the entire map of movies deconstuctor
 MovieFactory::~MovieFactory()
 {
 	MovieTypes.clear();
 }
 
-Movie* MovieFactory::makeMovie(char)
+//creates a movie of a certain type and returns a movie pointer of that type
+Movie* MovieFactory::makeMovie(char type)
 {
-	return new MovieTypes[MovieType];
+	return MovieTypes[type];
 }
 //Beginning Of Comedy Class
 Comedy::Comedy()
@@ -46,6 +47,7 @@ Comedy::Comedy()
 
 Comedy::~Comedy() {};
 
+//printing out the comedy movie
 ostream& Comedy::operator<<(ostream& Os, const Comedy& M) override
 {
 
@@ -57,8 +59,10 @@ Drama::Drama()
 	int ReleaseYear;
 }
 
+//Drama deconstructor
 Drama::~Drama() {};
 
+//Printing the Drama movie out
 ostream& Drama::operator<<(ostream& Os, const Comedy& M) override
 {
 
@@ -72,8 +76,10 @@ Classic::Classic()
 
 }
 
+//classic deconstructor
 Classic::~Classic() {};
 
+//printing the classic Movie
 ostream& Classic::operator<<(ostream& Os, const Movie& M) override
 {
 

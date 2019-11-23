@@ -23,7 +23,7 @@ public:
 private:
     CustomerDatabase* Customers;
     MovieDatabase* Movies;
-    TransactionsDatabase* Transactions;
+    TransactionDatabase* Transactions;
     void parseMovies();
     void parseCustomers();
 };
