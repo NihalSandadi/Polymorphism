@@ -2,7 +2,7 @@
 
 Media::Media()
 {
-  MediaType = '';
+  MediaType = '\0';
   Quantity = 0;
   Title = "";
 }
@@ -19,18 +19,24 @@ void Media::decreaseQuanity()
   --Quantity;
 }
 
-friend ostream& operator<<(ostream& Os, const Media& M)
+ostream& operator<<(ostream& Os, const Media& M)
 {
-  Os << "MediaType = " << M->MediaType << " Quantity = " << M->Quantity
-    << " Title = " << M->Title;
+  Os << "MediaType = " << M.MediaType << " Quantity = " << M.Quantity
+    << " Title = " << M.Title;
+  return Os;
 }
 
-class MediaFactory
+MediaFactory::MediaFactory()
 {
-private:
-map<char, Media*> MediaTypes;
-public:
-MediaFactory::MediaFactory();
-MediaFactory::~MediaFactory();
-Media* MediaFactory::makeMedia(char);
-};
+  MediaTypes = {};
+}
+
+MediaFactory::~MediaFactory()
+{
+  MediaTypes.clear();
+}
+
+Media* MediaFactory::makeMedia(char Type)
+{
+    return MediaTypes[Type];
+}
