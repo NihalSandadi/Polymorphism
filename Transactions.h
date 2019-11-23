@@ -22,7 +22,7 @@ public:
     Transaction(char, Customer*, Media*);
     ~Transaction();
     bool execute();
-    ostream& operator<<(ostream& Os, const Transaction& T);
+    //ostream& operator<<(ostream& Os, const Transaction& T);
 };
 
 class TransactionDatabase

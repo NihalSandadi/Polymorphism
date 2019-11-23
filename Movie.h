@@ -10,8 +10,8 @@ class Movie: public Media {
 public:
 	char MovieType;
 	string Director;
-
 	Movie();
+	Movie(char, string);
 	virtual ~Movie();
 	friend ostream& operator<<(ostream& Os, const Media& M);
 };
@@ -30,8 +30,9 @@ public:
 	int ReleaseYear;
 
 	Comedy();
+	Comedy(string Director, int ReleaseYear);
 	~Comedy();
-  friend ostream& operator<<(ostream& Os, const Comedy& M) override;
+  friend ostream& operator<<(ostream& Os, const Comedy& M);
 };
 
 class Drama: public Movie{
@@ -40,15 +41,14 @@ public:
 
 	Drama();
 	~Drama();
-  friend ostream& operator<<(ostream& Os, const Drama& M) override;
+  friend ostream& operator<<(ostream& Os, const Drama& M);
 };
 
 class Classic : public Movie {
 public:
 	int ReleaseYear, ReleaseMonth;
   string ActorFirstName, ActorLastName;
-
   Classic();
 	~Classic();
-  friend ostream& operator<<(ostream& Os, const Classic& M) override;
+  friend ostream& operator<<(ostream& Os, const Classic& M);
 };
