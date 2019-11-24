@@ -25,7 +25,8 @@ ostream& operator<<(ostream &Os,const Movie& M) {}
 //Beginning of Movie Factory
 MovieFactory::MovieFactory()
 {
-	MovieTypes;
+	MovieTypes = {};
+	
 }
 //clears the entire map of movies deconstuctor
 MovieFactory::~MovieFactory()
