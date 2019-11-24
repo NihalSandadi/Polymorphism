@@ -10,14 +10,15 @@ class Movie: public Media {
 public:
 	char MovieType;
 	string Director;
+
 	Movie();
 	Movie(char Type, string Director);
 	virtual ~Movie();
-	friend ostream& operator<<(ostream& Os, const Media& M);
+	friend ostream& operator<<(ostream& Os, const Movie& M);
 };
 
 class MovieFactory {
-private:
+public: // should be protected/private
 	map<char, Movie*> MovieTypes;
 public:
 	MovieFactory();
@@ -49,6 +50,7 @@ class Classic : public Movie {
 public:
 	int ReleaseYear, ReleaseMonth;
   string ActorFirstName, ActorLastName;
+
   Classic();
 	Classic(string Director, int ReleaseYear, int ReleaseMonth,
 		string ActorFirstName, string ActorLastName);
