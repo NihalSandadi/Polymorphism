@@ -1,5 +1,6 @@
 // MovieProject.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#include <vector>
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -51,8 +52,7 @@ bool StoreDriver::readMovies(string File)
       Movie* Temp = makeMovie('F');
       MovieDatabase.add(Temp);
       Temp->MovieType = SplitByComma[0]; // possible error, string to char
-      // temp->Stock = SplitByComma[1]; // should add a stock variable to
-                                        // the movie class
+      Temp->Quantity = SplitByComma[1];
       Temp->Director = SplitByComma[2];
       Temp->Title = SplitByComma[3];
       Temp->ReleaseYear = stoi(SplitByComma[4]);
@@ -63,8 +63,7 @@ bool StoreDriver::readMovies(string File)
       Movie* Temp = makeMovie('D');
       MovieDatabase.add(Temp);
       Temp->MovieType = SplitByComma[0]; // possible error, string to char
-      // temp->Stock = SplitByComma[1]; // should add a stock variable to
-                                        // the movie class
+      Temp->Quantity = SplitByComma[1];
       Temp->Director = SplitByComma[2];
       Temp->Title = SplitByComma[3];
       Temp->ReleaseYear = stoi(SplitByComma[4]);
@@ -81,8 +80,7 @@ bool StoreDriver::readMovies(string File)
       char CharArray[1];
       strcpy(CharArray, SplitByComma[0].c_str())
       Temp->MovieType = CharArray[0]; // possible error, string to char
-      // temp->Stock = SplitByComma[1]; // should add a stock variable to
-                                        // the movie class
+      temp->Quantity = SplitByComma[1];
       Temp->Director = SplitByComma[2];
       Temp->Title = SplitByComma[3];
       Temp->ActorFirstName = SplitBySpace[0];
@@ -99,9 +97,33 @@ bool StoreDriver::readMovies(string File)
   return true;
 }
 
+bool readCustomers(String File)
+{
+  ifstream InFile;
+  InFile.open(File);
+  string Line;
+
+  // while not end of file
+  while(!InFile.eof())
+  {
+    // gets the next line
+    getline(InFile, Line);
+
+    // splits the line by comma and stores in a vector
+    vector<string> SplitByComma = split(Line, ',');
+    // 3333 Witch Wicked
+    Customer* NewCustomer = makeCustomer(stoi(SplitByComma[0]));
+    NewCustomer->FirstName = SplitByComma[1];
+    NewCustomer->LastName = SplitByComma[2];
+  }
+  return true;
+}
+
 int main()
 {
-    std::cout << "Hello World!\n";
+  bool check = readMovies(data4movies);
+  cout << check << endl;
+  std::cout << "Hello World!\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -16,13 +16,13 @@ class StoreDriver
 public:
     StoreDriver();
     ~StoreDriver();
-    bool readMovies(string File);
-    // bool readCustomers(string File);
+    bool readMovies(string File); // done
+    bool readCustomers(string File);
     // bool readTransactions(string File);
     // bool executeTransactions();
 private:
-    // CustomerDatabase* Customers;
-    MovieDatabase* MoviesDatabase;
+    CustomerDatabase* Customers;
+    MovieDatabase* MoviesDatabase; // done
     // TransactionDatabase* Transactions;
     vector<string> split(const string& s, char delimiter)
     void parseMovies();
