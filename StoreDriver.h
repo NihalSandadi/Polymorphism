@@ -1,7 +1,8 @@
 // StoreDriver class
+
 #ifndef ASSIGNMENT4_STOREDRIVER_H
 #define ASSIGNMENT4_STOREDRIVER_H
-#include "Media.h"
+
 #include <string>
 
 using namespace std;
@@ -16,13 +17,14 @@ public:
     StoreDriver();
     ~StoreDriver();
     bool readMovies(string File);
-    bool readCustomers(string File);
-    bool readTransactions(string File);
-    bool executeTransactions();
+    // bool readCustomers(string File);
+    // bool readTransactions(string File);
+    // bool executeTransactions();
 private:
-    CustomerDatabase* Customers;
-    MovieDatabase* Movies;
-    TransactionDatabase* Transactions;
+    // CustomerDatabase* Customers;
+    MovieDatabase* MoviesDatabase;
+    // TransactionDatabase* Transactions;
+    vector<string> split(const string& s, char delimiter)
     void parseMovies();
     void parseCustomers();
 };

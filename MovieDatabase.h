@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-#include "BST.h"
+#include "BST.cpp"
 
 using namespace std;
 
@@ -9,7 +9,8 @@ class Movie;
 
 class MovieDatabase {
 private:
-	 vector<BST<Movie*>> Movies;
+	 // vector<BST<Movie*>> Movies;
+	 vector<Movie*> Movies;
 
 public:
 	MovieDatabase();
