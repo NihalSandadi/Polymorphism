@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "BST.cpp"
-
+#include "Movie.h"
 using namespace std;
 
 //forward declaration
@@ -10,8 +10,8 @@ class Movie;
 
 class MovieDatabase {
 private:
-	 // vector<BST<Movie*>> Movies;
-	 vector<Movie*> Movies;
+	 vector<BST<Movie*>> MoviesVector;
+	 //vector<Movie*> MoviesVector;
 
 public:
 	MovieDatabase();

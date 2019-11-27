@@ -4,64 +4,65 @@
 //MovieDatabase constuctor
 MovieDatabase::MovieDatabase()
 {
-	Movies = {};
+	MoviesVector = {};
 }
 
 //Deconstructor
 MovieDatabase::~MovieDatabase()
 {
-	for (auto X : Movies)
-		delete X;
+	for (auto X : MoviesVector)// needs to traverse the BST
+		for(auto Movies : X.getRoot())
+		delete Movies;
 }
 
-//Getting a movie by the string given often
+//Getting a movie by the string given often (implement later)
 Movie* MovieDatabase::getMovie(string Title)
 {
-	for (auto X : Movies)
+	/*for (auto X : Movies)
 	{
-		if (X->Title == Title)
+		if (X->title == Title)
 			return X;
 	}
-	return nullptr;
+	return nullptr;*/
 }
 
-//Adding a movie to the database
+//Adding a movie to the database (not implemented)
 bool MovieDatabase::add(Movie* Movie)
 {
-	Movies.push_back(Movie);
+	MoviesVector.push_back(Movie);
 	return true;
 }
 
 //Removing a movie from the database
-bool MovieDatabase::remove(Movie* Movie)
+bool MovieDatabase::remove(Movie* tempMovie)
 {
-	vector<Movies*>::iterator It;
-	It = find(Movies.begin(), Movies.end(), Movie);
+	/*vector<BST<Movie*>>::iterator It;
+	It = find(Movies.begin(), Movies.end(), tempMovie);
 	for (auto X : Movies)
 	{
-		if (X == Movie)
+		if (X == tempMovie)
 			{
 				delete X;
 				Movies.erase(It);
 				return true;
 			}
 	}
-	return false;
+	return false;*/
 }
 
 //clear the entire database of movies
 bool MovieDatabase::clear()
 {
-	for (auto X : Movies)
+	for (auto X : MoviesVector)
 		delete X;
-	Movies.clear();
+	MoviesVector.clear();
 	return true;
 }
 
 //printout the entire database
 void MovieDatabase::showInventory()
 {
-	for (auto X : Movies)
+	for (auto X : MoviesVector)
 	{
 		cout << X << endl;
 	}

@@ -28,7 +28,7 @@ ostream& operator<<(ostream& Os, const Media& M)
 
 MediaFactory::MediaFactory()
 {
-  MediaTypes = {};
+  //MediaTypes = {'d'};
 }
 
 MediaFactory::~MediaFactory()

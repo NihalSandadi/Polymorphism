@@ -152,7 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BST.cpp" />
+    <ClCompile Include="bsttest.cpp" />
     <ClCompile Include="Customers.cpp" />
+    <ClCompile Include="HashMapDatabase.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Media.cpp" />
     <ClCompile Include="Movie.cpp" />
     <ClCompile Include="MovieDatabase.cpp" />
@@ -165,6 +168,7 @@
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Movie.h" />
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\StoreDriver.h" />
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Transactions.h" />
+    <ClInclude Include="HashMapDatabase.h" />
     <ClInclude Include="MovieDatabase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

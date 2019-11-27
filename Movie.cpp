@@ -16,7 +16,7 @@ Movie::Movie(char Type, string Director)
 	this->Director = Director;
 }
 
-//Deconstructor
+//Deconstructor (needs to be implemented)
 Movie::~Movie() {}
 
 // Printing out the movie
@@ -61,6 +61,12 @@ ostream& operator<<(ostream& Os, const Comedy& M)
 	return Os;
 }
 
+//bool Comedy :: operator<(const Movie& parent)const
+//{
+//	const Comedy& param = static_cast<const Comedy&>(parent);
+//
+//	if(title.compare )
+//}
 //Beginning Of Drama Class
 Drama::Drama() : Movie()
 {

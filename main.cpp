@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Movie.h"
+#include "bsttest.cpp"
 
 using namespace std;
 

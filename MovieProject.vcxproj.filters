@@ -36,6 +36,15 @@
     <ClCompile Include="MovieDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HashMapDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bsttest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Customers.h">
@@ -54,6 +63,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="MovieDatabase.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HashMapDatabase.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

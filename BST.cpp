@@ -214,6 +214,7 @@ public:
 		this->clear();
 		Root = nullptr;
 	}
+
 	//Use's the recursive function clearTree
 	void destroyRecursive()
 	{
@@ -246,8 +247,7 @@ public:
 		}
 	}
 
-	template<class T>
-	Node* BST<T>::getRoot() const
+	Node* getRoot() const
 	{
 		return Root;
 	}
@@ -377,8 +377,8 @@ public:
 		}
 		return containsRec(Root, Item);
 	}
-	template<class T>
-	void BST<T>::inOrderTraverse(Node* Root)
+
+	void inOrderTraverse(void Visit(const T& Item)) const 
 	{
 		if (Root == nullptr) return;
 		inOrderHelper(Visit, Root);

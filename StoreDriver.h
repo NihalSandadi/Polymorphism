@@ -3,7 +3,13 @@
 #ifndef ASSIGNMENT4_STOREDRIVER_H
 #define ASSIGNMENT4_STOREDRIVER_H
 
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <iterator>
+#include <sstream>
 #include <string>
+#include "Media.h"
 
 using namespace std;
 
@@ -22,9 +28,9 @@ public:
     // bool executeTransactions();
 private:
     CustomerDatabase* Customers;
-    MovieDatabase* MoviesDatabase; // done
+    MovieDatabase* Movies; // done
     // TransactionDatabase* Transactions;
-    vector<string> split(const string& s, char delimiter)
+	vector<string> split(const string& s, char delimiter);
     void parseMovies();
     void parseCustomers();
 };

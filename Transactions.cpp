@@ -1,5 +1,4 @@
 #include "Transactions.h";
-#include "..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Transactions.h"
 
 Transaction::Transaction()
 {
@@ -26,10 +25,10 @@ bool Transaction::execute()
 	return false;
 }
 
-ostream& Transaction::operator<<(ostream& Os, const Transaction& T)
-{
-	// TODO: insert return statement here
-}
+//ostream& Transaction::operator<<(ostream& Os, const Transaction& T)
+//{
+//	// TODO: insert return statement here
+//}
 
 TransactionDatabase::TransactionDatabase()
 {
