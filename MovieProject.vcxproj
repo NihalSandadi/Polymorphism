@@ -155,7 +155,6 @@
     <ClCompile Include="bsttest.cpp" />
     <ClCompile Include="Customers.cpp" />
     <ClCompile Include="HashMapDatabase.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Media.cpp" />
     <ClCompile Include="Movie.cpp" />
     <ClCompile Include="MovieDatabase.cpp" />

@@ -5,6 +5,7 @@
 #include <vector>
 #include "BST.cpp"
 #include "Movie.h"
+#include <ctype.h>
 using namespace std;
 
 //forward declaration

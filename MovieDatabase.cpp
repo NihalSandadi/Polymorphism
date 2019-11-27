@@ -43,37 +43,39 @@ bool MovieDatabase::add(Movie* newMovie)
 	{
 		MoviesVector['f'].add(newMovie);
 	}
+	else
+	{
+		return false;
+	}
 	return true;
 }
 
-//Removing a movie from the database
+//Removing a movie from the database (possibly working needs testing)
 bool MovieDatabase::remove(Movie* tempMovie)
 {
-	/*vector<BST<Movie*>>::iterator It;
-	It = find(Movies.begin(), Movies.end(), tempMovie);
-	for (auto X : Movies)
+	vector<BST<Movie*>>::iterator It;
+	//It = find(MoviesVector.begin(), MoviesVector.end(), tempMovie); //Iterate through the Vector (THIS THROWS ERROR)
+	for (auto X : MoviesVector) //for every BST inside the vector
 	{
-		if (X == tempMovie)
+		if (X.contains(tempMovie)) //if the tempmovie is inside 
 			{
-				delete X;
-				Movies.erase(It);
+				X.remove(tempMovie);//remove it 
+				MoviesVector.erase(It);
 				return true;
 			}
-	}*/
+	}
 	return false;
 }
 
 //clear the entire database of movies
 bool MovieDatabase::clear()
 {
-	/*for (auto X : MoviesVector)
-		for(auto Bst : X)
-		{
-			BST.clear();
-		}
-		delete X;
+	for (auto X : MoviesVector)
+	{
+		X.clear(); //clears entire tree
+		//X is a BST I believe on the stack do we have to do anything else?
+	}
 	MoviesVector.clear();
-	*/
 	return true;
 }
 
@@ -86,8 +88,8 @@ void MovieDatabase::showInventory()
 	}
 }
 
-//not sure how to implement this or why it is needed
-int MovieDatabase::getHash(string)
+//hashing the nodes inside the BST or possibly hashing the bst's
+int MovieDatabase::getHash(string param)
 {
-	return 0;
+	return (param[0] - 'A') % 10;
 }

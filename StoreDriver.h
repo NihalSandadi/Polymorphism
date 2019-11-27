@@ -3,11 +3,13 @@
 #pragma once
 #include <vector>
 #include <fstream>
+#include <cstring>
 #include <iostream>
 #include <iterator>
 #include <sstream>
 #include <string>
 #include "Media.h"
+#include "MovieDatabase.h"
 
 using namespace std;
 

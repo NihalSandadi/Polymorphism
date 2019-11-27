@@ -39,9 +39,6 @@
     <ClCompile Include="HashMapDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="bsttest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

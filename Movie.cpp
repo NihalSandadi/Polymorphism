@@ -49,7 +49,6 @@ Movie* MovieFactory::makeMovie(char type)
 Comedy::Comedy() : Movie()
 {
 	ReleaseYear = 0;
-	return;
 }
 
 Comedy::Comedy(string Director, int ReleaseYear) : Movie('F', Director)
