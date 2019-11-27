@@ -1,6 +1,8 @@
+//MovieDatabase
+
+#pragma once
 #include <string>
 #include <vector>
-
 #include "BST.cpp"
 #include "Movie.h"
 using namespace std;

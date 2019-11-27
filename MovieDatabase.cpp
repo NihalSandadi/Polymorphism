@@ -10,9 +10,9 @@ MovieDatabase::MovieDatabase()
 //Deconstructor
 MovieDatabase::~MovieDatabase()
 {
-	for (auto X : MoviesVector)// needs to traverse the BST
-		for(auto Movies : X.getRoot())
-		delete Movies;
+	//for (auto X : MoviesVector)// needs to traverse the BST
+	//	for(auto Movies : X.getRoot())
+	//	delete Movies;
 }
 
 //Getting a movie by the string given often (implement later)
@@ -23,13 +23,26 @@ Movie* MovieDatabase::getMovie(string Title)
 		if (X->title == Title)
 			return X;
 	}
-	return nullptr;*/
+	*/
+	return nullptr;
 }
 
 //Adding a movie to the database (not implemented)
-bool MovieDatabase::add(Movie* Movie)
+bool MovieDatabase::add(Movie* newMovie)
 {
-	MoviesVector.push_back(Movie);
+	char type = newMovie->MovieType;
+	if (type == 'c')
+	{
+		MoviesVector['c'].add(newMovie);
+	}
+	if (type == 'd')
+	{
+		MoviesVector['d'].add(newMovie);
+	}
+	if (type == 'f')
+	{
+		MoviesVector['f'].add(newMovie);
+	}
 	return true;
 }
 
@@ -46,16 +59,21 @@ bool MovieDatabase::remove(Movie* tempMovie)
 				Movies.erase(It);
 				return true;
 			}
-	}
-	return false;*/
+	}*/
+	return false;
 }
 
 //clear the entire database of movies
 bool MovieDatabase::clear()
 {
-	for (auto X : MoviesVector)
+	/*for (auto X : MoviesVector)
+		for(auto Bst : X)
+		{
+			BST.clear();
+		}
 		delete X;
 	MoviesVector.clear();
+	*/
 	return true;
 }
 

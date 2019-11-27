@@ -47,26 +47,26 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Customers.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Media.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Movie.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\StoreDriver.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Transactions.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MovieDatabase.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Customers.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HashMapDatabase.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Media.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Movie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieDatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StoreDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transactions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

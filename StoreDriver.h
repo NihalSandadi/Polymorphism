@@ -1,8 +1,6 @@
 // StoreDriver class
 
-#ifndef ASSIGNMENT4_STOREDRIVER_H
-#define ASSIGNMENT4_STOREDRIVER_H
-
+#pragma once
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -35,4 +33,3 @@ private:
     void parseCustomers();
 };
 
-#endif //ASSIGNMENT4_STOREDRIVER_H

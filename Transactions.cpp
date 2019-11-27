@@ -1,10 +1,10 @@
-#include "Transactions.h";
+#include "Transactions.h"
 
 Transaction::Transaction()
 {
 }
 
-Transaction::Transaction(char)
+Transaction::Transaction(char type)
 {
 }
 

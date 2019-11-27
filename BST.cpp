@@ -8,9 +8,6 @@
 // binarysearchtreee.cpp file is included at the bottom of the .h file
 // binarysearchtreee.cpp is part of the template, cannot be compiled separately (wrong)
 
-#ifndef BST_HPP
-#define BST_HPP
-
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
@@ -116,8 +113,8 @@ private:
 		const static char SP = ' ';
 		const static char UND = '_';
 		int Nodes = 0;
-		int MaxN = pow(2, Depth - 1);
-		int SpaceForEachItem = Width * pow(2, MaxDepth - 1) / MaxN; // NOLINT
+		int MaxN = (int)pow(2, Depth - 1);
+		int SpaceForEachItem = Width * (int)pow(2, MaxDepth - 1) / MaxN; // NOINT
 		string
 			Bigspace = string(static_cast<uint64_t>(SpaceForEachItem / 4), SP);
 		while (Nodes++ < MaxN) {
@@ -559,4 +556,3 @@ public:
 	}
 };
 
-#endif  // BST_HPP

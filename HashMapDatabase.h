@@ -1,8 +1,9 @@
-#pragma once
+//HashMapDatabase (aka Customers database)
 
+#pragma once
 #include <string>
 #include <vector>
-#include "Customers.cpp"
+#include "Customers.h"
 
 class HashMapDatabase
 {

@@ -1,6 +1,6 @@
-#ifndef ASSIGNMENT4_CUSTOMERS_H
-#define ASSIGNMENT4_CUSTOMERS_H
+//Customers.h
 
+#pragma once
 #include <string>
 #include <vector>
 
@@ -23,17 +23,16 @@ private:
     vector<Movie*> CurrentlyBorrowed;
 };
 
-class CustomerDatabase
-{
-public:
-    bool add(Customer* C);
-    bool remove(int ID);
-    Customer* getCustomer(int ID);
-    bool clear();
-private:
-    vector<Customer*> Customers; // Vector of customer pointers
-    int getHash(int ID);
-};
+//class CustomerDatabase
+//{
+//public:
+//    bool add(Customer* C);
+//    bool remove(int ID);
+//    Customer* getCustomer(int ID);
+//    bool clear();
+//private:
+//    vector<Customer*> Customers; // Vector of customer pointers
+//    int getHash(int ID);
+//};
 
 
-#endif //ASSIGNMENT4_CUSTOMERS_H

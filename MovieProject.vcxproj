@@ -163,13 +163,13 @@
     <ClCompile Include="Transactions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Customers.h" />
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Media.h" />
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Movie.h" />
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\StoreDriver.h" />
-    <ClInclude Include="..\..\..\..\OneDrive\Documents\GitHub\Polymorphism\Transactions.h" />
+    <ClInclude Include="Customers.h" />
     <ClInclude Include="HashMapDatabase.h" />
+    <ClInclude Include="Media.h" />
+    <ClInclude Include="Movie.h" />
     <ClInclude Include="MovieDatabase.h" />
+    <ClInclude Include="StoreDriver.h" />
+    <ClInclude Include="Transactions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,7 +2,7 @@
 #include <string>
 
 #include "Movie.h"
-#include "bsttest.cpp"
+//#include "bsttest.cpp"
 
 using namespace std;
 
@@ -51,12 +51,12 @@ void testMovieFactory()
   cout << "===!!!WORKS!!!===" << endl;
 }
 
-int main()
-{
-  testComedy();
-  testDrama();
-  testClassic();
-  testMovieFactory();
-  cout << "===END OF TESTS===" << endl;
-  return 0;
-}
+//int main()
+//{
+//  //testComedy();
+//  //testDrama();
+//  //testClassic();
+//  //testMovieFactory();
+//  cout << "===END OF TESTS===" << endl;
+//  return 0;
+//}

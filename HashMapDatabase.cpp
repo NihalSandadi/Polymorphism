@@ -8,11 +8,8 @@ bool HashMapDatabase::add(Customer* C)
 		Customers[C->CustomerId] = C;
 		return true;
 	}
-	else
-	{
-		//already inside hashmap
-		return false;
-	}
+	//already inside hashmap
+	return false;
 }
 
 bool HashMapDatabase::remove(int ID)

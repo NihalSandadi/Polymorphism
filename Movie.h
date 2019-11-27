@@ -1,22 +1,26 @@
 //Movie, MovieFactory, Classic, Drama, Comedy
+
+#pragma once 
+#include "Media.h"
 #include <iostream>
 #include <map>
 #include <string>
-#include "Media.h"
+
 
 using namespace std;
-
-class Movie: public Media {
+//got rid of : class Media ( was breaking the code)
+class Movie{
 public:
 	char MovieType;
 	string Director;
-
+	//virtual MediaFactory* makeMedia(ifstream&) = 0;
 	Movie();
 	Movie(char Type, string Director);
 	virtual ~Movie();
 	friend ostream& operator<<(ostream& Os, const Movie& M);
 };
 
+//MovieFactory creates movies and is a child of the Movie class 
 class MovieFactory {
 public: // should be protected/private
 	map<char, Movie*> MovieTypes;
@@ -29,7 +33,6 @@ public:
 class Comedy: public Movie{
 public:
 	int ReleaseYear;
-
 	Comedy();
 	Comedy(string Director, int ReleaseYear);
 	~Comedy();
@@ -48,10 +51,11 @@ public:
 
 class Classic : public Movie {
 public:
+	//variables
 	int ReleaseYear, ReleaseMonth;
-  string ActorFirstName, ActorLastName;
+	string ActorFirstName, ActorLastName;
 
-  Classic();
+	Classic();
 	Classic(string Director, int ReleaseYear, int ReleaseMonth,
 		string ActorFirstName, string ActorLastName);
 	~Classic();

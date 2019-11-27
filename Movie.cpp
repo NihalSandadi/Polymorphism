@@ -3,13 +3,14 @@
 
 using namespace std;
 
-//Movie Constructor
+//Movie Default Constructor
 Movie::Movie()
 {
 	MovieType = '\0';
 	Director = "";
 }
 
+//Movie Constructor with Type and Director
 Movie::Movie(char Type, string Director)
 {
 	this->MovieType = Type;
@@ -20,13 +21,14 @@ Movie::Movie(char Type, string Director)
 Movie::~Movie() {}
 
 // Printing out the movie
-ostream& operator<<(ostream &Os,const Movie& M) {}
+ostream& operator<<(ostream& Os, const Movie& M) { 
+	return Os;
+}
 
 //Beginning of Movie Factory
 MovieFactory::MovieFactory()
 {
 	MovieTypes = {};
-	
 }
 //clears the entire map of movies deconstuctor
 MovieFactory::~MovieFactory()
@@ -38,13 +40,16 @@ MovieFactory::~MovieFactory()
 Movie* MovieFactory::makeMovie(char type)
 {
 	if (MovieTypes.count(type) > 0)
+	{
 		throw "BAD MOVIE TYPE";
+	}
 	return MovieTypes[type];
 }
 //Beginning Of Comedy Class
 Comedy::Comedy() : Movie()
 {
-	int ReleaseYear;
+	ReleaseYear = 0;
+	return;
 }
 
 Comedy::Comedy(string Director, int ReleaseYear) : Movie('F', Director)
@@ -70,7 +75,7 @@ ostream& operator<<(ostream& Os, const Comedy& M)
 //Beginning Of Drama Class
 Drama::Drama() : Movie()
 {
-	ReleaseYear;
+	ReleaseYear = 0;
 }
 
 Drama::Drama(string Director, int ReleaseYear) : Movie('D', Director)
@@ -84,7 +89,7 @@ Drama::~Drama() {}
 //Printing the Drama movie out
 ostream& operator<<(ostream& Os, const Drama& M)
 {
-	// Os << M.MovieType << " F " << M.Title << ", " << M.ReleaseYear;
+	Os << M.MovieType << " F " << ", " << M.ReleaseYear;
 	return Os;
 }
 
@@ -111,9 +116,9 @@ Classic::~Classic() {}
 
 //printing the classic Movie
 ostream& operator<<(ostream& Os, const Classic& M)
-{ /*
-	Os << M.MovieType << " C " << M.Title << " " <<
+{ 
+	Os << M.MovieType << " C " << " " <<
 	M.ActorFirstName << " " << M.ActorLastName << " " << M.ReleaseMonth
-	 << " " << M.ReleaseYear;*/
+	 << " " << M.ReleaseYear;
 	 return Os;
 }

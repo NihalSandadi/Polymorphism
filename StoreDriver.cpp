@@ -1,15 +1,15 @@
 // StoreDriver.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 #include "StoreDriver.h"
-#include "MovieDatabase.cpp"
-#include "Movie.h"
-#include "Customers.h"
-#include "Transactions.h"
+//#include "MovieDatabase.h"
+//#include "Movie.h"
+//#include "Customers.h"
+//#include "Transactions.h"
 #include <cstring>
 
 StoreDriver::StoreDriver()
 {
-  MoviesDatabase = new MovieDatabase();
+  //MoviesDatabase = new MovieDatabase();
 }
 
 StoreDriver::~StoreDriver()
@@ -33,6 +33,7 @@ vector<string> StoreDriver::split(const string& s, char delimiter)
 
 bool StoreDriver::readMovies(string File)
 {
+	return false;
 	MovieFactory MFactory;
 	MediaFactory MediaFactory;
 	ifstream InFile;
@@ -100,9 +101,9 @@ bool StoreDriver::readMovies(string File)
  //     newMovie->ReleaseYear = stoi(SplitBySpace[3]);
 
  //   }else // bad case (incorrect movie type)
-    {
+   /* {
       return false;
-    }
+    }*/
   }
   InFile.close();
   return true;
@@ -115,35 +116,25 @@ bool readCustomers(string File)
   string Line;
 
   // while not end of file
-  while(!InFile.eof())
-  {
-    // gets the next line
-    getline(InFile, Line);
+  //while(!InFile.eof())
+  //{
+  //  // gets the next line
+  //  getline(InFile, Line);
 
-    // splits the line by comma and stores in a vector
-    vector<string> SplitByComma = split(Line, ',');
-    // 3333 Witch Wicked
-    Customers* NewCustomer = makeCustomer(stoi(SplitByComma[0]));
-    NewCustomer->FirstName = SplitByComma[1];
-    NewCustomer->LastName = SplitByComma[2];
-  }
+  //  // splits the line by comma and stores in a vector
+  //  vector<string> SplitByComma = split(Line, ',');
+  //  // 3333 Witch Wicked
+  //  Customers* NewCustomer = makeCustomer(stoi(SplitByComma[0]));
+  //  NewCustomer->FirstName = SplitByComma[1];
+  //  NewCustomer->LastName = SplitByComma[2];
+  //}
   return true;
 }
 
 int main()
 {
-  bool check = readMovies(data4movies);
-  cout << check << endl;
+  //bool check = readMovies(data4movies);
+  //cout << check << endl;
   std::cout << "Hello World!\n";
+  return 1;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started:
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

@@ -1,8 +1,6 @@
 // Transaction and TransactionDatabase classes
 
-#ifndef ASSIGNMENT4_TRANSACTIONS_H
-#define ASSIGNMENT4_TRANSACTIONS_H
-
+#pragma once
 #include <iostream>
 #include <queue>
 #include <string>
@@ -36,4 +34,3 @@ private:
     bool clear();
 };
 
-#endif //ASSIGNMENT4_TRANSACTIONS_H
