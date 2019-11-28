@@ -4,9 +4,13 @@
 //MovieDatabase constuctor
 MovieDatabase::MovieDatabase()
 {
-	MoviesVector['C'];
-	MoviesVector['D'];
-	MoviesVector['F']; 
+	BST<Movie*> Classic;
+	BST<Movie*> Drama;
+	BST<Movie*> Comedy;
+	MoviesVector['C'] = Classic;
+	MoviesVector['D'] = Drama;
+	MoviesVector['F'] = Comedy;
+	MoviesVector = { Classic,Drama,Comedy };
 }
 
 //Deconstructor
@@ -39,12 +43,12 @@ bool MovieDatabase::add(Movie* newMovie)
 		if(!MoviesVector[type].contains(newMovie)) //if the movie is not already inside the vector
 		MoviesVector[type].add(newMovie); //add it to the bst
 	}
-	if (type == 'D')//drama
+	if (type == 'D') //Drama
 	{
 		if (!MoviesVector[type].contains(newMovie)) //if the movie is not already inside the vector
 			MoviesVector[type].add(newMovie); //add it to the bs
 	}
-	if (type == 'F')//comedy
+	if (type == 'F') //Comedy
 	{
 		if (!MoviesVector[type].contains(newMovie)) //if the movie is not already inside the vector
 			MoviesVector[type].add(newMovie); //add it to the bs

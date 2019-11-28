@@ -36,6 +36,10 @@ bool StoreDriver::readMovies(string File)
 	ifstream InFile;
 	InFile.open(File);
 	string Line;
+	if (!InFile) {
+		cout << "File could not be opened." << endl;
+		return false;
+	}
 
   // while not end of file
   while(!InFile.eof())
@@ -45,7 +49,6 @@ bool StoreDriver::readMovies(string File)
 
     // splits the line by comma and stores in a vector
     vector<string> SplitByComma = split(Line, ',');
-
     if (SplitByComma[0] == "F") // for comedy movies
     {
 		auto newMovie1 = (Comedy*)MovFactory.makeMovie('F');
@@ -169,6 +172,7 @@ bool readCustomers(string File)
 
 void testMovieFactory()
 {
+
 		//created a toy database
 		//MovieDatabase Movies;
 		cout << "===TESTING MOVIE FACTORY===" << endl;
@@ -200,11 +204,11 @@ void Testing()
 //main function for input and output
 int main()
 {
-	//StoreDriver sd;
+	auto* store = new StoreDriver();
 	//bool check = readMovies(data4movies);
 	//cout << check << endl;
 	Testing();
-	//sd.readMovies("data4movies");
+	store->readMovies("data4movies");
 	cout << endl << "Finished Tests" << endl;
 	return 1;
 }
