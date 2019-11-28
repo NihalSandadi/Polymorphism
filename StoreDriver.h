@@ -8,6 +8,7 @@
 #include <iterator>
 #include <sstream>
 #include <string>
+#include <stdlib.h>
 #include "Media.h"
 #include "MovieDatabase.h"
 #include "hashmapDatabase.h"

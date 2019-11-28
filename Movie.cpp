@@ -6,48 +6,45 @@ using namespace std;
 //Movie Default Constructor
 Movie::Movie()
 {
-	MovieType = '\0';
-	Director = "";
-	Title = "";
-}
-
-//Movie Constructor with Type and Director
-Movie::Movie(char Type, string Director, string Title, int Quantity)
-{
-	this->MovieType = Type;
-	this->Director = Director;
-	this->Title = Title;
-	this->Quantity = Quantity;
+	Quantity = 0;
 }
 
 //Deconstructor (needs to be implemented)
 Movie::~Movie() {}
 
 // Printing out the movie
-ostream& operator<<(ostream& Os, const Movie& M) { 
+ostream& operator<<(ostream& Os, const Movie& M) {
 	Os << " Title: " << M.Title << " Director: " << M.Director << " Quantity: " << M.Quantity;
-	return Os; 
+	return Os;
 }
 
 //Beginning of Movie Factory
-MovieFactory::MovieFactory()
-{
-	MovieTypes = {};
-}
+MovieFactory::MovieFactory() {}
+
 //clears the entire map of movies deconstuctor
-MovieFactory::~MovieFactory()
-{
-	MovieTypes.clear();
-}
+MovieFactory::~MovieFactory() {}
 
 //creates a movie of a certain type and returns a movie pointer of that type
 Movie* MovieFactory::makeMovie(char type)
 {
-	if (MovieTypes.count(type) > 0)
+	if (type == 'F')
 	{
-		throw "BAD MOVIE TYPE";
+		return new Comedy();
 	}
-	return MovieTypes[type];
+	if (type == 'D')
+	{
+		return new Drama();
+	}
+	if (type == 'C')
+	{
+		return new Classic();
+	}
+	else
+	{
+		cout << "BAD MOVIE TYPE" << endl;
+		//return nullptr;
+	}
+	return new Movie();
 }
 
 //increase the Quanity
@@ -61,17 +58,16 @@ void Movie::decreaseQuanity()
 	--Quantity;
 }
 
-//Beginning of all the Genres 
+//Beginning of all the Genres
 
 //Beginning Of Comedy Class
 Comedy::Comedy() : Movie()
 {
+	MovieType = 'F';
+	Director = "";
+	Title = "";
+	Quantity = 0;
 	ReleaseYear = 0;
-}
-
-Comedy::Comedy(string Director, int ReleaseYear) : Movie('F', Director, Title, Quantity)
-{
-	this->ReleaseYear = ReleaseYear;
 }
 
 Comedy::~Comedy() {}
@@ -79,26 +75,49 @@ Comedy::~Comedy() {}
 //printing out the comedy movie
 ostream& operator<<(ostream& Os, const Comedy& M)
 {
-	 Os << M.MovieType << " Title " << M.Title << ", " << M.ReleaseYear;
+	Os << "Type:" << M.MovieType << " Director: " << M.Director << " Title: " << M.Title << ", " << " Release Year " <<  M.ReleaseYear;
 	return Os;
 }
 
-//bool Comedy :: operator<(const Movie& parent)const
-//{
-//	const Comedy& param = static_cast<const Comedy&>(parent);
-//
-//	if(title.compare )
-//}
+// overloading the compare operator for comedy movies
+bool Comedy::operator<(const Comedy& rhs) const
+{
+	if (this->Title < rhs.Title)
+	{
+		return true;
+	}
+	else if (this->Title == rhs.Title)
+	{
+		return false;
+
+		//return (this->ReleaseYear < rhs.ReleaseYear);
+	}
+	return false;
+}
+
+// overloading equals to operator for Classic
+bool Comedy::operator==(const Comedy& rhs) const
+{
+	if (
+		this->MovieType == rhs.MovieType &&
+		this->Director == rhs.Director &&
+		this->Title == rhs.Title &&
+		this->ReleaseYear == rhs.ReleaseYear
+		)
+	{
+		return true;
+	}
+	return false;
+}
 
 //Beginning Of Drama Class
 Drama::Drama() : Movie()
 {
+	MovieType = 'D';
+	Director = "";
+	Title = "";
+	Quantity = 0;
 	ReleaseYear = 0;
-}
-
-Drama::Drama(string Director, int ReleaseYear) : Movie('D', Director, Title, Quantity)
-{
-	this->ReleaseYear = ReleaseYear;
 }
 
 //Drama deconstructor
@@ -107,26 +126,51 @@ Drama::~Drama() {}
 //Printing the Drama movie out
 ostream& operator<<(ostream& Os, const Drama& M)
 {
-	Os << M.MovieType << " F " << ", " << M.Title <<  ", " << M.ReleaseYear;
+	Os << M.MovieType << " D " << ", " << M.Title << ", " << M.ReleaseYear;
 	return Os;
 }
 
-//Beginning Of Classic Class
-Classic::Classic() : Movie()
+// overloading the compare operator for drama movies
+bool Drama::operator<(const Drama& rhs) const
 {
+	if (this->Director < rhs.Director)
+	{
+		return true;
+	}
+	else if (this->Director == rhs.Director)
+	{
+		return false;
+		//return (this->Title < rhs.Title);
+	}
+	return false;
+}
+
+// overloading equals to operator for Drama
+bool Drama::operator==(const Drama& rhs) const
+{
+	if (
+		this->MovieType == rhs.MovieType &&
+		this->Director == rhs.Director &&
+		this->Title == rhs.Title &&
+		this->ReleaseYear == rhs.ReleaseYear
+		)
+	{
+		return true;
+	}
+	return false;
+}
+
+//Beginning Of Classic Class
+Classic::Classic()
+{
+	MovieType = 'C';
+	Director = "";
+	Title = "";
+	Quantity = 0;
 	ReleaseYear = 0;
 	ReleaseMonth = 0;
 	ActorFirstName = "";
 	ActorLastName = "";
-}
-
-Classic::Classic(string Director, int ReleaseYear, int ReleaseMonth,
-	string ActorFirstName, string ActorLastName) : Movie('C', Director, Title, Quantity)
-{
-	this->ReleaseYear = ReleaseYear;
-	this->ReleaseMonth = ReleaseMonth;
-	this->ActorFirstName = ActorFirstName;
-	this->ActorLastName = ActorLastName;
 }
 
 //classic deconstructor
@@ -134,9 +178,59 @@ Classic::~Classic() {}
 
 //printing the classic Movie
 ostream& operator<<(ostream& Os, const Classic& M)
-{ 
-	Os << M.MovieType << " C " << ", " << M.Title << " " << 
-	M.ActorFirstName << " " << M.ActorLastName << " " << M.ReleaseMonth
-	 << " " << M.ReleaseYear;
-	 return Os;
+{
+	Os << M.MovieType << " C " << ", " << M.Title << " " <<
+		M.ActorFirstName << " " << M.ActorLastName << " " << M.ReleaseMonth
+		<< " " << M.ReleaseYear;
+	return Os;
+}
+
+// overloading the compare operator for drama movies
+bool Classic::operator<(const Classic& rhs) const
+{
+	// comparing release year
+	if (this->ReleaseYear < rhs.ReleaseYear)
+	{
+		return true;
+	}
+	else if (this->ReleaseYear == rhs.ReleaseYear)
+	{
+		// comparing release month
+		if (this->ReleaseMonth < rhs.ReleaseMonth)
+		{
+			return true;
+		}
+		else if (this->ReleaseMonth == rhs.ReleaseMonth)
+		{
+			// comparing actor first name
+			if (this->ActorFirstName < rhs.ActorFirstName)
+			{
+				return true;
+			}
+			else if (this->ActorFirstName == rhs.ActorFirstName)
+			{
+				return false;
+				//return (this->ActorLastName < rhs.ActorLastName);
+			}
+		}
+	}
+	return false;
+}
+
+// overloading equals to operator for Classic
+bool Classic::operator==(const Classic& rhs) const
+{
+	if (
+		this->MovieType == rhs.MovieType &&
+		this->Director == rhs.Director &&
+		this->Title == rhs.Title &&
+		this->ActorFirstName == rhs.ActorFirstName &&
+		this->ActorLastName == rhs.ActorLastName &&
+		this->ReleaseMonth == rhs.ReleaseMonth &&
+		this->ReleaseYear == rhs.ReleaseYear
+		)
+	{
+		return true;
+	}
+	return false;
 }

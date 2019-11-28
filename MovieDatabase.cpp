@@ -4,30 +4,33 @@
 //MovieDatabase constuctor
 MovieDatabase::MovieDatabase()
 {
-	MoviesVector = {};
+	MoviesVector['C'];
+	MoviesVector['D'];
+	MoviesVector['F']; 
 }
 
 //Deconstructor
 MovieDatabase::~MovieDatabase()
 {
-	//for (auto X : MoviesVector)// needs to traverse the BST
-	//	for(auto Movies : X.getRoot())
-	//	delete Movies;
+	for (auto X : MoviesVector)// needs to traverse the BST
+	{
+		X.clear(); //delete all pointers inside tree
+	}
+	//MoviesVector = nullptr;
 }
 
 //Getting a movie by the string given often (implement later)
 Movie* MovieDatabase::getMovie(string Command)
 {
-	/*for (auto X : Movies)
-	{
-		if (X->title == Title)
-			return X;
-	}
-	*/
+	//if (MoviesVector[Command[0]] != nullptr)//check the genre exists
+	//{
+	//	//traverse the tree for each type properly 
+	//	return MoviesVector[Command[0]].contains(Command[1]); //returns null if non existant or the movie pointer
+	//}
 	return nullptr;
 }
 
-//Adding a movie to the database (not implemented)
+//Adding a movie to the database 
 bool MovieDatabase::add(Movie* newMovie)
 {
 	char type = newMovie->MovieType;
@@ -56,7 +59,7 @@ bool MovieDatabase::add(Movie* newMovie)
 //Removing a movie from the database (possibly working needs testing)
 bool MovieDatabase::remove(Movie* tempMovie)
 {
-	vector<BST<Movie*>>::iterator It; //also why do we need an iterator?
+	//vector<BST<Movie*>>::iterator It; //also why do we need an iterator?
 	//It = find(MoviesVector.begin(), MoviesVector.end(), tempMovie); //Iterate through the Vector (THIS THROWS ERROR)
 	for (auto X : MoviesVector) //for every BST inside the vector
 	{
@@ -92,7 +95,7 @@ void MovieDatabase::showInventory()
 }
 
 //hashing the nodes inside the BST or possibly hashing the bst's
-int MovieDatabase::getHash(string param)
+int MovieDatabase::getHash(string Title)
 {
-	return (param[0] - 'A') % 10; // Not sure if this is a proper hashing function
+	return (Title[0] - 'A') % 10; // Not sure if this is a proper hashing function
 }
