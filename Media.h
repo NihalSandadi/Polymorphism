@@ -14,13 +14,8 @@ class Media
 {
 	public: // protected
 		char MediaType;
-		int Quantity;
-		string Title;
-
 		Media();
 		virtual ~Media();
-		void increaseQuanity();
-		void decreaseQuanity();
     friend ostream& operator<<(ostream& Os, const Media& M);
 };
 

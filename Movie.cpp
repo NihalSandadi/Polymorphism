@@ -8,13 +8,16 @@ Movie::Movie()
 {
 	MovieType = '\0';
 	Director = "";
+	Title = "";
 }
 
 //Movie Constructor with Type and Director
-Movie::Movie(char Type, string Director)
+Movie::Movie(char Type, string Director, string Title, int Quantity)
 {
 	this->MovieType = Type;
 	this->Director = Director;
+	this->Title = Title;
+	this->Quantity = Quantity;
 }
 
 //Deconstructor (needs to be implemented)
@@ -22,7 +25,8 @@ Movie::~Movie() {}
 
 // Printing out the movie
 ostream& operator<<(ostream& Os, const Movie& M) { 
-	return Os;
+	Os << " Title: " << M.Title << " Director: " << M.Director << " Quantity: " << M.Quantity;
+	return Os; 
 }
 
 //Beginning of Movie Factory
@@ -45,13 +49,27 @@ Movie* MovieFactory::makeMovie(char type)
 	}
 	return MovieTypes[type];
 }
+
+//increase the Quanity
+void Movie::increaseQuanity()
+{
+	++Quantity;
+}
+
+void Movie::decreaseQuanity()
+{
+	--Quantity;
+}
+
+//Beginning of all the Genres 
+
 //Beginning Of Comedy Class
 Comedy::Comedy() : Movie()
 {
 	ReleaseYear = 0;
 }
 
-Comedy::Comedy(string Director, int ReleaseYear) : Movie('F', Director)
+Comedy::Comedy(string Director, int ReleaseYear) : Movie('F', Director, Title, Quantity)
 {
 	this->ReleaseYear = ReleaseYear;
 }
@@ -61,7 +79,7 @@ Comedy::~Comedy() {}
 //printing out the comedy movie
 ostream& operator<<(ostream& Os, const Comedy& M)
 {
-	// Os << M.MovieType << " F " << M.Title << ", " << M.ReleaseYear;
+	 Os << M.MovieType << " Title " << M.Title << ", " << M.ReleaseYear;
 	return Os;
 }
 
@@ -71,13 +89,14 @@ ostream& operator<<(ostream& Os, const Comedy& M)
 //
 //	if(title.compare )
 //}
+
 //Beginning Of Drama Class
 Drama::Drama() : Movie()
 {
 	ReleaseYear = 0;
 }
 
-Drama::Drama(string Director, int ReleaseYear) : Movie('D', Director)
+Drama::Drama(string Director, int ReleaseYear) : Movie('D', Director, Title, Quantity)
 {
 	this->ReleaseYear = ReleaseYear;
 }
@@ -88,7 +107,7 @@ Drama::~Drama() {}
 //Printing the Drama movie out
 ostream& operator<<(ostream& Os, const Drama& M)
 {
-	Os << M.MovieType << " F " << ", " << M.ReleaseYear;
+	Os << M.MovieType << " F " << ", " << M.Title <<  ", " << M.ReleaseYear;
 	return Os;
 }
 
@@ -102,7 +121,7 @@ Classic::Classic() : Movie()
 }
 
 Classic::Classic(string Director, int ReleaseYear, int ReleaseMonth,
-	string ActorFirstName, string ActorLastName) : Movie('C', Director)
+	string ActorFirstName, string ActorLastName) : Movie('C', Director, Title, Quantity)
 {
 	this->ReleaseYear = ReleaseYear;
 	this->ReleaseMonth = ReleaseMonth;
@@ -116,7 +135,7 @@ Classic::~Classic() {}
 //printing the classic Movie
 ostream& operator<<(ostream& Os, const Classic& M)
 { 
-	Os << M.MovieType << " C " << " " <<
+	Os << M.MovieType << " C " << ", " << M.Title << " " << 
 	M.ActorFirstName << " " << M.ActorLastName << " " << M.ReleaseMonth
 	 << " " << M.ReleaseYear;
 	 return Os;

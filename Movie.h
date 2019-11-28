@@ -8,14 +8,20 @@
 
 
 using namespace std;
-//got rid of : class Media ( was breaking the code)
+//got rid of : class Media (Was breaking the code)
+
 class Movie{
 public:
 	char MovieType;
 	string Director;
+	string Title;
+	int Quantity;
+
 	//virtual MediaFactory* makeMedia(ifstream&) = 0;
 	Movie();
-	Movie(char Type, string Director);
+	Movie(char Type, string Director, string Title,	int Quantity);
+	void increaseQuanity();
+	void decreaseQuanity();
 	virtual ~Movie();
 	friend ostream& operator<<(ostream& Os, const Movie& M);
 };

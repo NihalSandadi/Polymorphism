@@ -3,7 +3,8 @@
 #include "StoreDriver.h"
 StoreDriver::StoreDriver()
 {
-  //MoviesDatabase = new MovieDatabase();
+  Movies = new MovieDatabase();
+  Customers = new HashMapDatabase();
 }
 
 StoreDriver::~StoreDriver()
@@ -131,17 +132,21 @@ bool readCustomers(string File)
 
 void testComedy()
 {
+	//(char Type, string Director, string Title, int Quantity)
 	cout << "===TESTING COMEDY INITIALIZATION===" << endl;
-	Movie* Movie1 = new Movie('F', "Nihal Sandadi");
+	Movie* Movie1 = new Movie('F', "Nihal Sandadi","GodSave",10);
 	cout << "Printing Director for Movie1 : " << Movie1->Director << endl;
 	cout << "Printing MovieType for Movie1 : " << Movie1->MovieType << endl;
+
+	cout << "Print the movie" << endl;
+	cout << *Movie1 << endl;
 	cout << "===!!!WORKS!!!===" << endl;
 }
 
 void testDrama()
 {
 	cout << "===TESTING DRAMA INITIALIZATION===" << endl;
-	Movie* Movie1 = new Movie('D', "Nihal Sandadi");
+	Movie* Movie1 = new Movie('D', "Nihal Sandadi","Bobs Crew", 20);
 	cout << "Printing Director for Movie1 : " << Movie1->Director << endl;
 	cout << "Printing MovieType for Movie1 : " << Movie1->MovieType << endl;
 	cout << "===!!!WORKS!!!===" << endl;
@@ -150,7 +155,7 @@ void testDrama()
 void testClassic()
 {
 	cout << "===TESTING CLASSIC INITIALIZATION===" << endl;
-	Movie* Movie1 = new Movie('C', "Nihal Sandadi");
+	Movie* Movie1 = new Movie('C', "Nihal Sandadi", "Skeet skeet", 30);
 	cout << "Printing Director for Movie1 : " << Movie1->Director << endl;
 	cout << "Printing MovieType for Movie1 : " << Movie1->MovieType << endl;
 	cout << "===!!!WORKS!!!===" << endl;
@@ -160,9 +165,9 @@ void testMovieFactory()
 {
 	cout << "===TESTING MOVIE FACTORY===" << endl;
 	MovieFactory* Factory1 = new MovieFactory();
-	Factory1->MovieTypes['F'] = new Movie('F', "Nihal");
-	Factory1->MovieTypes['D'] = new Movie('D', "Jayden");
-	Factory1->MovieTypes['C'] = new Movie('C', "Pisan");
+	Factory1->MovieTypes['F'] = new Movie('F', "Nihal", "Skeet skeet", 1);
+	Factory1->MovieTypes['D'] = new Movie('D', "Jayden", "BBBBB", 2);
+	Factory1->MovieTypes['C'] = new Movie('C', "Pisan", "CCCCC", 3);
 
 	cout << "Printing Director for movie F : " <<
 		Factory1->MovieTypes['F']->Director << endl;
@@ -171,6 +176,9 @@ void testMovieFactory()
 	cout << "Printing Director for movie C : " <<
 		Factory1->MovieTypes['C']->Director << endl;
 
+	cout << "Print the Movie's stuff" << endl;
+	cout << *Factory1->MovieTypes['F'] << endl;
+	
 	cout << "===!!!WORKS!!!===" << endl;
 }
 // testing everything

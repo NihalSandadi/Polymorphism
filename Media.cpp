@@ -2,27 +2,13 @@
 
 Media::Media()
 {
-  MediaType = '\0';
-  Quantity = 0;
-  Title = "";
+	MediaType = '\0';
 }
-
 Media::~Media() {}
-
-void Media::increaseQuanity()
-{
-  ++Quantity;
-}
-
-void Media::decreaseQuanity()
-{
-  --Quantity;
-}
 
 ostream& operator<<(ostream& Os, const Media& M)
 {
-  Os << "MediaType = " << M.MediaType << " Quantity = " << M.Quantity
-    << " Title = " << M.Title;
+	Os << "MediaType = " << M.MediaType;
   return Os;
 }
 

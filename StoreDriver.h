@@ -10,10 +10,10 @@
 #include <string>
 #include "Media.h"
 #include "MovieDatabase.h"
-
+#include "hashmapDatabase.h"
 using namespace std;
 
-class CustomerDatabase;
+class HashMapDatabase;
 class MovieDatabase;
 class TransactionDatabase;
 
@@ -27,7 +27,7 @@ public:
     // bool readTransactions(string File);
     // bool executeTransactions();
 private:
-    CustomerDatabase* Customers;
+    HashMapDatabase* Customers;
     MovieDatabase* Movies; // done
     // TransactionDatabase* Transactions;
 	vector<string> split(const string& s, char delimiter);

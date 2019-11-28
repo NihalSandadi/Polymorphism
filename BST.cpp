@@ -374,12 +374,6 @@ public:
 		}
 		return containsRec(Root, Item);
 	}
-
-	void inOrderTraverse(void Visit(const T& Item)) const 
-	{
-		if (Root == nullptr) return;
-		inOrderHelper(Visit, Root);
-	}
 	//recusrive function to traverse tree
 	bool containsRec(Node* N, const T& Item) const
 	{
@@ -404,12 +398,12 @@ public:
 	}
 
 	// inorder traversal: left-root-right
-	// takes a function that takes a single parameter of type T
-	//void inOrderTraverse(void Visit(const T& Item)) const {
-	//	if (Root == nullptr) return;
-	//	inOrderHelper(Visit, Root);
+	 //takes a function that takes a single parameter of type T
+	void inOrderTraverse(void Visit(const T& Item)) const {
+		if (Root == nullptr) return;
+		inOrderHelper(Visit, Root);
 
-	//}
+	}
 	//helper function for in order traversal
 	void inOrderHelper(void Visit(const T& Item), Node* Root) const
 	{
