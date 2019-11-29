@@ -1,0 +1,102 @@
+// Comedy
+// Comedy (‘F’) sorted by Title, then Year it released
+bool Comedy::operator<(const Movie& o) const
+{
+  if (this->Title < o->Title)
+  {
+    return true;
+  }else if (this->Title == o->Title)
+  {
+    return (this->ReleaseYear < o->ReleaseYear)
+  }
+  return false;
+}
+
+bool Comedy::operator==(const Movie& o) const
+{
+  if (
+    this->MovieType == o->MovieType &&
+    this->Director == o->Director &&
+    this->Title == o->Title &&
+    this->ReleaseYear == o->ReleaseYear
+    )
+  {
+    return true;
+  }
+  return false;
+}
+
+// Drama
+// Dramas (‘D’) are sorted by Director, then Title
+bool Drama::operator<(const Movie& o) const
+{
+  if (this->Director < o->Director)
+  {
+    return true;
+  }else if (this->Director == o->Director)
+  {
+    return (this->Title < o->Title)
+  }
+  return false;
+}
+
+bool Drama::operator==(const Movie& o) const
+{
+  if (
+    this->MovieType == o->MovieType &&
+    this->Director == o->Director &&
+    this->Title == o->Title &&
+    this->this->ReleaseYear == o->ReleaseYear
+    )
+  {
+    return true;
+  }
+  return false;
+}
+
+// Classic
+// Classics (‘C’) are sorted by Release date, then Major actor
+bool Classic::operator<(const Movie& o) const
+{
+  // comparing release year
+  if (this->ReleaseYear < o->ReleaseYear)
+  {
+    return true;
+  }else if (this->ReleaseYear == o->ReleaseYear)
+  {
+    // comparing release month
+    if (this->ReleaseMonth < o->ReleaseMonth)
+    {
+      return true;
+    } else if (this->ReleaseMonth == o->ReleaseMonth)
+    {
+      // comparing actor first name
+      if (this->ActorFirstName < o->ActorFirstName)
+      {
+        return true;
+      } else if (this->ActorFirstName == o->ActorFirstName)
+      {
+        return (this->ActorLastName < o->ActorLastName);
+      }
+    }
+  }
+  return false;
+}
+
+bool Classic::operator==(const Movie& o) const
+{
+  if (
+    this->MovieType == o->MovieType &&
+    this->Director == o->Director &&
+    this->Title == o->Title &&
+    this->ActorFirstName == o->ActorFirstName &&
+    this->ActorLastName == o->ActorLastName &&
+    this->ReleaseMonth == o->ReleaseMonth &&
+    this->ReleaseYear == o->Relthis->easeYear
+    )
+  {
+    return true;
+  }
+  return false;
+}
+=============================================================================

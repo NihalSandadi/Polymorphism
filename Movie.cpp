@@ -41,10 +41,9 @@ Movie* MovieFactory::makeMovie(char type)
 	}
 	else
 	{
-		cout << "BAD MOVIE TYPE" << endl;
-		//return nullptr;
+		throw "BAD MOVIE TYPE";
 	}
-	return new Movie();
+	return nullptr;
 }
 
 //increase the Quanity
@@ -63,7 +62,7 @@ void Movie::decreaseQuanity()
 //Beginning Of Comedy Class
 Comedy::Comedy() : Movie()
 {
-	MovieType = 'F';
+	MovieType = 'C';
 	Director = "";
 	Title = "";
 	Quantity = 0;
@@ -75,45 +74,42 @@ Comedy::~Comedy() {}
 //printing out the comedy movie
 ostream& operator<<(ostream& Os, const Comedy& M)
 {
-	Os << "Type:" << M.MovieType << " Director: " << M.Director << " Title: " << M.Title << ", " << " Release Year " <<  M.ReleaseYear;
+	 Os << M.MovieType << " Title " << M.Title << ", " << M.ReleaseYear;
 	return Os;
 }
 
 // overloading the compare operator for comedy movies
 bool Comedy::operator<(const Comedy& rhs) const
 {
-	if (this->Title < rhs.Title)
-	{
-		return true;
-	}
-	else if (this->Title == rhs.Title)
-	{
-		return false;
-
-		//return (this->ReleaseYear < rhs.ReleaseYear);
-	}
-	return false;
+  if (this->Title < rhs.Title)
+  {
+    return true;
+  }else if (this->Title == rhs.Title)
+  {
+    return (this->ReleaseYear < rhs.ReleaseYear);
+  }
+  return false;
 }
 
 // overloading equals to operator for Classic
 bool Comedy::operator==(const Comedy& rhs) const
 {
-	if (
-		this->MovieType == rhs.MovieType &&
-		this->Director == rhs.Director &&
-		this->Title == rhs.Title &&
-		this->ReleaseYear == rhs.ReleaseYear
-		)
-	{
-		return true;
-	}
-	return false;
+  if (
+    this->MovieType == rhs.MovieType &&
+    this->Director == rhs.Director &&
+    this->Title == rhs.Title &&
+    this->ReleaseYear == rhs.ReleaseYear
+    )
+  {
+    return true;
+  }
+  return false;
 }
 
 //Beginning Of Drama Class
 Drama::Drama() : Movie()
 {
-	MovieType = 'D';
+	MovieType = 'C';
 	Director = "";
 	Title = "";
 	Quantity = 0;
@@ -126,38 +122,36 @@ Drama::~Drama() {}
 //Printing the Drama movie out
 ostream& operator<<(ostream& Os, const Drama& M)
 {
-	Os << M.MovieType << " D " << ", " << M.Title << ", " << M.ReleaseYear;
+	Os << M.MovieType << " F " << ", " << M.Title <<  ", " << M.ReleaseYear;
 	return Os;
 }
 
 // overloading the compare operator for drama movies
 bool Drama::operator<(const Drama& rhs) const
 {
-	if (this->Director < rhs.Director)
-	{
-		return true;
-	}
-	else if (this->Director == rhs.Director)
-	{
-		return false;
-		//return (this->Title < rhs.Title);
-	}
-	return false;
+  if (this->Director < rhs.Director)
+  {
+    return true;
+  }else if (this->Director == rhs.Director)
+  {
+    return (this->Title < rhs.Title);
+  }
+  return false;
 }
 
 // overloading equals to operator for Drama
 bool Drama::operator==(const Drama& rhs) const
 {
-	if (
-		this->MovieType == rhs.MovieType &&
-		this->Director == rhs.Director &&
-		this->Title == rhs.Title &&
-		this->ReleaseYear == rhs.ReleaseYear
-		)
-	{
-		return true;
-	}
-	return false;
+  if (
+    this->MovieType == rhs.MovieType &&
+    this->Director == rhs.Director &&
+    this->Title == rhs.Title &&
+    this->ReleaseYear == rhs.ReleaseYear
+    )
+  {
+    return true;
+  }
+  return false;
 }
 
 //Beginning Of Classic Class
@@ -182,55 +176,51 @@ ostream& operator<<(ostream& Os, const Classic& M)
 	Os << M.MovieType << " C " << ", " << M.Title << " " <<
 		M.ActorFirstName << " " << M.ActorLastName << " " << M.ReleaseMonth
 		<< " " << M.ReleaseYear;
-	return Os;
+	 return Os;
 }
 
 // overloading the compare operator for drama movies
 bool Classic::operator<(const Classic& rhs) const
 {
-	// comparing release year
-	if (this->ReleaseYear < rhs.ReleaseYear)
-	{
-		return true;
-	}
-	else if (this->ReleaseYear == rhs.ReleaseYear)
-	{
-		// comparing release month
-		if (this->ReleaseMonth < rhs.ReleaseMonth)
-		{
-			return true;
-		}
-		else if (this->ReleaseMonth == rhs.ReleaseMonth)
-		{
-			// comparing actor first name
-			if (this->ActorFirstName < rhs.ActorFirstName)
-			{
-				return true;
-			}
-			else if (this->ActorFirstName == rhs.ActorFirstName)
-			{
-				return false;
-				//return (this->ActorLastName < rhs.ActorLastName);
-			}
-		}
-	}
-	return false;
+  // comparing release year
+  if (this->ReleaseYear < rhs.ReleaseYear)
+  {
+    return true;
+  }else if (this->ReleaseYear == rhs.ReleaseYear)
+  {
+    // comparing release month
+    if (this->ReleaseMonth < rhs.ReleaseMonth)
+    {
+      return true;
+    } else if (this->ReleaseMonth == rhs.ReleaseMonth)
+    {
+      // comparing actor first name
+      if (this->ActorFirstName < rhs.ActorFirstName)
+      {
+        return true;
+      } else if (this->ActorFirstName == rhs.ActorFirstName)
+      {
+        return (this->ActorLastName < rhs.ActorLastName);
+      }
+    }
+  }
+  return false;
 }
 
 // overloading equals to operator for Classic
 bool Classic::operator==(const Classic& rhs) const
 {
-	if (
-		this->MovieType == rhs.MovieType &&
-		this->Director == rhs.Director &&
-		this->Title == rhs.Title &&
-		this->ActorFirstName == rhs.ActorFirstName &&
-		this->ActorLastName == rhs.ActorLastName &&
-		this->ReleaseMonth == rhs.ReleaseMonth &&
-		this->ReleaseYear == rhs.ReleaseYear
-		)
-	{
-		return true;
-	}
-	return false;
+  if (
+    this->MovieType == rhs.MovieType &&
+    this->Director == rhs.Director &&
+    this->Title == rhs.Title &&
+    this->ActorFirstName == rhs.ActorFirstName &&
+    this->ActorLastName == rhs.ActorLastName &&
+    this->ReleaseMonth == rhs.ReleaseMonth &&
+    this->ReleaseYear == rhs.ReleaseYear
+    )
+  {
+    return true;
+  }
+  return false;
 }
