@@ -10,7 +10,8 @@
 using namespace std;
 //got rid of : class Media (Was breaking the code)
 
-class Movie{
+class Movie {
+	friend ostream& operator<<(ostream& Os, const Movie& M);
 public:
 	char MovieType;
 	string Director;
@@ -22,7 +23,6 @@ public:
 	void increaseQuanity();
 	void decreaseQuanity();
 	virtual ~Movie();
-	friend ostream& operator<<(ostream& Os, const Movie& M);
 };
 
 //MovieFactory creates movies and is a child of the Movie class
@@ -34,31 +34,34 @@ public:
 	Movie* makeMovie(char);
 };
 
-class Comedy: public Movie{
+class Comedy : public Movie {
+	friend ostream& operator<<(ostream& Os, const Comedy& M);
+	friend bool operator<(const Comedy& lhs, const Comedy& rhs);
+	friend bool operator==(const Comedy& lhs, const Comedy& rhs);
 public:
 	int ReleaseYear;
 
 	Comedy();
 	Comedy(string Director, int ReleaseYear);
 	~Comedy();
-  friend ostream& operator<<(ostream& Os, const Comedy& M);
-	friend bool operator<(const Movie& o) const;
-	friend bool operator==(const Movie& o) const;
 };
 
-class Drama: public Movie{
+class Drama : public Movie {
+	friend ostream& operator<<(ostream& Os, const Drama& M);
+	friend bool operator<(const Drama& lhs, const Drama& rhs);
+	friend bool operator==(const Drama& lhs, const Drama& rhs);
 public:
 	int ReleaseYear;
 
 	Drama();
 	Drama(string Director, int ReleaseYear);
 	~Drama();
-  friend ostream& operator<<(ostream& Os, const Drama& M);
-	friend bool operator<(const Movie& o) const;
-	friend bool operator==(const Movie& o) const;
 };
 
 class Classic : public Movie {
+	friend ostream& operator<<(ostream& Os, const Classic& M);
+	friend bool operator<(const Classic& lhs, const Classic& rhs);
+	friend bool operator==(const Classic& lhs, const Classic& rhs);
 public:
 	//variables
 	int ReleaseYear, ReleaseMonth;
@@ -68,7 +71,4 @@ public:
 	Classic(string Director, int ReleaseYear, int ReleaseMonth,
 		string ActorFirstName, string ActorLastName);
 	~Classic();
-  friend ostream& operator<<(ostream& Os, const Classic& M);
-	friend bool operator<(const Movie& o) const;
-	friend bool operator==(const Movie& o) const;
 };

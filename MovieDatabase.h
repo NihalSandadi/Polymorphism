@@ -1,5 +1,3 @@
-//MovieDatabase
-
 #pragma once
 #include <string>
 #include <vector>
@@ -13,7 +11,7 @@ class Movie;
 
 class MovieDatabase {
 private:
-	 vector<BST<Movie*>> MoviesVector;
+	 map<char,vector<Movie*>> MoviesVector;
 	 //vector<Movie*> MoviesVector;
 
 public:

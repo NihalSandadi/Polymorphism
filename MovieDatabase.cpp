@@ -4,47 +4,64 @@
 //MovieDatabase constuctor
 MovieDatabase::MovieDatabase()
 {
-	MoviesVector = {};
+	MoviesVector['C'] = {};
+	MoviesVector['D'] = {};
+	MoviesVector['F'] = {};
 }
 
 //Deconstructor
 MovieDatabase::~MovieDatabase()
 {
-	//for (auto X : MoviesVector)// needs to traverse the BST
-	//	for(auto Movies : X.getRoot())
-	//	delete Movies;
+	for (auto X : MoviesVector)// needs to traverse the BST
+	{
+		for (auto Y : X.second)
+		{
+			delete Y;
+		}
+	}
+	MoviesVector.clear();
 }
 
 //Getting a movie by the string given often (implement later)
 Movie* MovieDatabase::getMovie(string Command)
 {
-	/*for (auto X : Movies)
-	{
-		if (X->title == Title)
-			return X;
-	}
-	*/
+	//if (MoviesVector[Command[0]] != nullptr)//check the genre exists
+	//{
+	//	//traverse the tree for each type properly
+	//	return MoviesVector[Command[0]].contains(Command[1]); //returns null if non existant or the movie pointer
+	//}
 	return nullptr;
 }
 
-//Adding a movie to the database (not implemented)
+bool sortVec(vector<Movie*> &MovieVec, Movie* NewMovie)
+{
+	vector<Movie*>::iterator It;
+	int X = 0;
+	for (It = MovieVec.begin(); It != MovieVec.end(); It++, ++X)
+	{
+		if (NewMovie < MovieVec[X])
+		{
+			MovieVec.insert(It, NewMovie);
+			return true;
+		}
+	}
+	return false;
+}
+
+//Adding a movie to the database
 bool MovieDatabase::add(Movie* newMovie)
 {
 	char type = newMovie->MovieType;
-	if (type == 'C') //Classic
+	if (type == 'C' || type == 'D' || type == 'F')
 	{
-		if(!MoviesVector[type].contains(newMovie)) //if the movie is not already inside the vector
-			MoviesVector[type].add(newMovie); //add it to the bst
-	}
-	if (type == 'D') //drama
-	{
-		if (!MoviesVector[type].contains(newMovie)) //if the movie is not already inside the vector
-			MoviesVector[type].add(newMovie); //add it to the bs
-	}
-	if (type == 'F') //comedy
-	{
-		if (!MoviesVector[type].contains(newMovie)) //if the movie is not already inside the vector
-			MoviesVector[type].add(newMovie); //add it to the bs
+		// if the movie is not already inside the vector
+		if(find(MoviesVector[type].begin(), MoviesVector[type].end(),
+			newMovie) == MoviesVector[type].end())
+		{
+			// adds to vector in the right place
+			sortVec(MoviesVector[type], newMovie);
+		}
+
 	}
 	else
 	{
@@ -56,17 +73,21 @@ bool MovieDatabase::add(Movie* newMovie)
 //Removing a movie from the database (possibly working needs testing)
 bool MovieDatabase::remove(Movie* tempMovie)
 {
-	vector<BST<Movie*>>::iterator It; //also why do we need an iterator?
-	//It = find(MoviesVector.begin(), MoviesVector.end(), tempMovie); //Iterate through the Vector (THIS THROWS ERROR)
-	for (auto X : MoviesVector) //for every BST inside the vector
+	vector<Movie*>::iterator It = find(MoviesVector[tempMovie->MovieType].begin(),
+	MoviesVector[tempMovie->MovieType].end(), tempMovie);
+	if (It == MoviesVector[tempMovie->MovieType].end())
+		return false;
+
+	for (auto X : MoviesVector[tempMovie->MovieType])
 	{
-		if (X.contains(tempMovie)) //if the tempmovie is inside
-			{
-				X.remove(tempMovie);//remove it
-				//MoviesVector.erase(It); why is this needed?
-				return true;
-			}
+		if (X == tempMovie)
+		{
+			delete X;
+			MoviesVector[tempMovie->MovieType].erase(It);
+			return true;
+		}
 	}
+
 	return false;
 }
 
@@ -75,10 +96,12 @@ bool MovieDatabase::clear()
 {
 	for (auto X : MoviesVector) // go into each BST
 	{
-		X.clear(); //clears entire tree (implemented inside the BST)
-		//X is a BST I believe on the stack do we have to do anything else?
+		for (auto Y : X.second)
+		{
+			delete Y;
+		}
 	}
-	MoviesVector.clear(); //maybe?
+	MoviesVector.clear();
 	return true;
 }
 
@@ -87,12 +110,12 @@ void MovieDatabase::showInventory()
 {
 	for (auto X : MoviesVector)
 	{
-		cout << X << endl; //The BST has a operator overload
+		// cout << X << endl; //The BST has a operator overload
 	}
 }
 
 //hashing the nodes inside the BST or possibly hashing the bst's
-int MovieDatabase::getHash(string param)
+int MovieDatabase::getHash(string Title)
 {
-	return (param[0] - 'A') % 10; // Not sure if this is a proper hashing function
+	return (Title[0] - 'A') % 10; // Not sure if this is a proper hashing function
 }
