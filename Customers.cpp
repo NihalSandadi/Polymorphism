@@ -1,5 +1,12 @@
 #include "Customers.h"
 
+Customer::Customer()
+{
+	CustomerId = 0;
+	FirstName = "";
+	LastName = "";
+}
+
 //shows all the transactions the customer has made
 void Customer::showHistory()
 {

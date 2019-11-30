@@ -152,12 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BST.cpp" />
-    <ClCompile Include="bsttest.cpp" />
     <ClCompile Include="Customers.cpp" />
     <ClCompile Include="HashMapDatabase.cpp" />
     <ClCompile Include="Media.cpp" />
     <ClCompile Include="Movie.cpp" />
-    <ClCompile Include="MovieDatabase.cpp" />
     <ClCompile Include="StoreDriver.cpp" />
     <ClCompile Include="Transactions.cpp" />
   </ItemGroup>
@@ -166,7 +164,6 @@
     <ClInclude Include="HashMapDatabase.h" />
     <ClInclude Include="Media.h" />
     <ClInclude Include="Movie.h" />
-    <ClInclude Include="MovieDatabase.h" />
     <ClInclude Include="StoreDriver.h" />
     <ClInclude Include="Transactions.h" />
   </ItemGroup>

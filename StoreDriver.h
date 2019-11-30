@@ -10,12 +10,12 @@
 #include <string>
 #include <stdlib.h>
 #include "Media.h"
-#include "MovieDatabase.h"
-#include "hashmapDatabase.h"
+#include "HashMapDatabase.h"
+#include "BST.cpp"
+
 using namespace std;
 
 class HashMapDatabase;
-class MovieDatabase;
 class TransactionDatabase;
 
 class StoreDriver
@@ -29,8 +29,12 @@ public:
     // bool readTransactions(string File);
     // bool executeTransactions();
 private:
+	BST<Comedy*>* comedyBST; //comedy stores all comedy movies
+	BST<Classic*>* classicBST; //classic stores all classic movies
+	BST<Drama*>* dramaBST; //drama stores all drama movies
+
     HashMapDatabase* Customers;
-    MovieDatabase* Movies; // done
+    //MovieDatabase* Movies; // done
     // TransactionDatabase* Transactions;
 	vector<string> split(const string& s, char delimiter);
     void parseMovies();

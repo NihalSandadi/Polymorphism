@@ -13,6 +13,7 @@ class Movie;
 class Customer
 {
 public:
+	Customer();
 	int CustomerId;
 	string FirstName;
 	string LastName;

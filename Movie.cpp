@@ -1,11 +1,12 @@
 //Movie implementation
 #include "Movie.h"
-
+#include  <iomanip>
 using namespace std;
 
 //Movie Default Constructor
 Movie::Movie()
 {
+	MovieType = '\0';
 	Quantity = 0;
 }
 
@@ -75,7 +76,11 @@ Comedy::~Comedy() {}
 //printing out the comedy movie
 ostream& operator<<(ostream& Os, const Comedy& M)
 {
-	Os << "Type:" << M.MovieType << " Director:" << M.Director << " Title: " << M.Title << ", " << " Release Year " << M.ReleaseYear;
+	Os << "Comedy" << 
+		setw(9) << M.Quantity << " "
+		<< setw(35) << M.Title << 
+		setw(25) << M.Director <<
+		setw(12) << M.ReleaseYear;
 	return Os;
 }
 

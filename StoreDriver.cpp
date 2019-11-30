@@ -3,13 +3,19 @@
 #include "StoreDriver.h"
 StoreDriver::StoreDriver()
 {
-	Movies = new MovieDatabase();
+	comedyBST = new BST<Comedy*>();
+	classicBST = new BST<Classic*>();
+	dramaBST = new BST<Drama*>();
+	//Movies = new MovieDatabase();
 	Customers = new HashMapDatabase();
 }
 
 StoreDriver::~StoreDriver()
 {
-	delete Movies;
+	delete dramaBST;
+	delete comedyBST;
+	delete classicBST;
+	//delete Movies;
 	delete Customers;
 }
 
@@ -56,13 +62,16 @@ bool StoreDriver::readMovies(string File)
 		{
 			auto newMovie = (Comedy*)MovFactory.makeMovie('F');
 			// F, Stock, Director, Title, Year it released
-			if (Movies->add(newMovie)) { //if it can insert the movie
+			if (comedyBST->Add(newMovie)) { //if it can insert the movie
 				newMovie->MovieType = (const char)SplitByComma[0][0]; // (not exactly sure if/how) this works lol
 				newMovie->Quantity = stoi(SplitByComma[1]);
 				newMovie->Director = SplitByComma[2];
 				newMovie->Title = SplitByComma[3];
 				newMovie->ReleaseYear = stoi(SplitByComma[4]);
-				cout << *newMovie << endl;
+
+				cout << "1 if Comedy Movie ADDED?: ";
+				cout << comedyBST->contains(newMovie) << endl;
+				comedyBST->display();
 			}
 			else
 			{
@@ -76,13 +85,13 @@ bool StoreDriver::readMovies(string File)
 
 			auto newMovie = (Drama*)MovFactory.makeMovie('D');
 			// F, Stock, Director, Title, Year it released
-			if (Movies->add(newMovie)) { //if it can insert the movie
+			if (dramaBST->Add(newMovie)) { //if it can insert the movie
 				newMovie->MovieType = (const char)SplitByComma[0][0]; // (not exactly sure if/how) this works lol
 				newMovie->Quantity = stoi(SplitByComma[1]);
 				newMovie->Director = SplitByComma[2];
 				newMovie->Title = SplitByComma[3];
 				newMovie->ReleaseYear = stoi(SplitByComma[4]);
-				cout << *newMovie << endl;
+				//cout << *newMovie << endl; for testing
 
 			}
 			else
@@ -98,7 +107,7 @@ bool StoreDriver::readMovies(string File)
 
 			// C, Stock, Director, Title, Major actor Release date
 			Classic* newMovie = (Classic*)MovFactory.makeMovie('C');
-			if (Movies->add(newMovie))
+			if (classicBST->Add(newMovie))
 			{
 				//newMovie->MovieType = (const char)SplitByComma[0][0]; // possible error, string to char
 				newMovie->Quantity = stoi(SplitByComma[1]);
@@ -109,12 +118,11 @@ bool StoreDriver::readMovies(string File)
 				newMovie->ActorLastName = SplitBySpace[2];
 				newMovie->ReleaseMonth = stoi(SplitBySpace[3]); //broke here?
 				newMovie->ReleaseYear = stoi(SplitBySpace[4]);
-				cout << *newMovie << endl;
+				//cout << *newMovie << endl; for testing
 			}
 		}
 	}
 	InFile.close();
-	Movies->showInventory();
 	return true;
 }
 
@@ -145,6 +153,13 @@ bool StoreDriver::readCustomers(string File)
 			break; //we reached the EOF
 	}
 	return true;
+}
+
+void StoreDriver::printMovies()
+{
+	comedyBST->display();
+	classicBST->display();
+	dramaBST->display();
 }
 
 //TESTING PURPOSES
@@ -219,15 +234,15 @@ int main()
 {
 	StoreDriver store;
 	Testing();
-	//if (store->readMovies("data4movies.txt"))
-	//{
-
-	//}
-	if (store.readCustomers("data4customers.txt"))
+	if (store.readMovies("data4movies.txt"))
+	{
+		cout << "FATE OF THE UNWEARY" << endl;
+	}
+	/*if (store.readCustomers("data4customers.txt"))
 	{
 		cout << "Customers Read & Stored Properly" << endl;
 		return 1;
-	}
+	}*/
 
 	cout << "Failed" << endl;
 	return 0;

@@ -15,54 +15,37 @@
 #include <queue>
 #include <sstream>
 #include <string>
+#include "Movie.h"
 
 using namespace std;
 
 template<class T>
 class BST {
-	// display BST tree in a human-readable format
-	friend ostream& operator<<(ostream& Out, const BST& Bst) {
-		Bst.printSideways(Out, Bst.Root);
-		Out << endl;
-		Bst.printVertical(Out, Bst.Root);
-		return Out;
+	//------------------------- operator<< ---------------------------------
+	// Calls printInOrder() to print out all of the data in the tree
+	// Overloads operator<< to take in BinTrees and prints in order
+	friend ostream& operator<<(ostream& output, const BST& rhs) {
+		if (rhs.isEmpty())
+			output << "Empty!" << endl;
+		else { //print in order (Left, Root, Right)
+			rhs.inOrderTraverse();
+		}
+		output << endl;
+		return output;
 	}
-
 private:
+	
 	// Node for BST
 	struct Node {
 		T Data;
 		struct Node* Left = nullptr;
 		struct Node* Right = nullptr;
 	};
-
 	// refer to data type "struct Node" as Node
 	using Node = struct Node;
 
 	// root of the tree
-	Node* Root{ nullptr };
-
-	// height of a Node, nullptr is 0, Root is 1, static, no access to 'this'
-	static int getHeight(const Node* N) {
-		if (N == nullptr)
-		{
-			return 0;
-		}
-		else
-		{
-			int LDepth = getHeight(N->Left);
-			int RDepth = getHeight(N->Right);
-
-			if (LDepth > RDepth)
-			{
-				return(LDepth + 1);
-			}
-			else
-			{
-				return(RDepth + 1);
-			}
-		}
-	}
+	Node* Root;
 
 	/**
 	 * print tree sideways with root on left
@@ -100,67 +83,6 @@ private:
 		return Out;
 	}
 
-	/**
-	 * print tree with the root at top
-	 *
-		_____0______
-	 __1___      __2___
-	3     4     5     6
-	 *
-	**/
-	static ostream& printTreeLevel(ostream& Out, queue<const Node*>& Q,
-		int Width, int Depth, int MaxDepth) {
-		const static char SP = ' ';
-		const static char UND = '_';
-		int Nodes = 0;
-		int MaxN = (int)pow(2, Depth - 1);
-		int SpaceForEachItem = Width * (int)pow(2, MaxDepth - 1) / MaxN; // NOINT
-		string
-			Bigspace = string(static_cast<uint64_t>(SpaceForEachItem / 4), SP);
-		while (Nodes++ < MaxN) {
-			const Node* Tp = Q.front();
-			Node* TpL = nullptr;
-			Node* TpR = nullptr;
-			Q.pop();
-			string Label = "N";
-			if (Tp) {
-				stringstream Ss;
-				Ss << Tp->Data;
-				Label = Ss.str();
-				TpL = Tp->Left;
-				TpR = Tp->Right;
-			}
-			char Filler = Depth == MaxDepth ? SP : UND;
-			if (Depth == MaxDepth) {
-				centeredPrint(Out, SpaceForEachItem, Label, Filler);
-			}
-			else {
-				Out << Bigspace;
-				centeredPrint(Out, SpaceForEachItem / 2, Label, Filler);
-				Out << Bigspace;
-				Q.push(TpL);
-				Q.push(TpR);
-			}
-		}
-		Out << endl;
-		return Out;
-	}
-
-	// helper function for displaying tree sideways, works recursively
-	static ostream& printVertical(ostream& Out, Node* Curr) {
-		const static int WIDTH = 6;  // must be even
-		if (!Curr)
-			return Out << "[__]";
-		// figure out the maximum depth which determines how wide the tree is
-		int MaxDepth = getHeight(Curr);
-		queue<const Node*> Q;
-		Q.push(Curr);
-		for (int Depth = 1; Depth <= MaxDepth; ++Depth) {
-			printTreeLevel(Out, Q, WIDTH, Depth, MaxDepth);
-		}
-		return Out;
-	}
-
 public:
 	// constructor, empty tree (Good)
 	BST() {
@@ -185,7 +107,7 @@ public:
 
 		for (int I = 0; I < N; I++)
 		{
-			add(Arr[I]);
+			Add(Arr[I]);
 		}
 	}
 
@@ -200,7 +122,7 @@ public:
 	{
 		if (N != nullptr)
 		{
-			this->add(N->Data);
+			this->Add(N->Data);
 			copyHelper(N->Left);
 			copyHelper(N->Right);
 		}
@@ -266,7 +188,7 @@ public:
 	}
 
 	// add a new item, return true if successful (Good, but leak)
-	bool add(const T& Item) {
+	bool Add(const T& Item) {
 		if (Root == nullptr)
 		{
 			Root = new Node();
@@ -396,55 +318,78 @@ public:
 			return containsRec(N->Right, Item);
 		}
 	}
+	bool Retrieve(T* targetData, T*& pointer) const {
+		if (findRecursive(Root), targetData, pointer)
+			return true;
+		pointer = nullptr;
+		//cout << "ERROR: could not locate " << targetData->
+	}
+	bool findRecursive(Node* current, T* target, T* &ptr) const
+	{
+		if (current == nullptr)
+			return false;
 
+		if (*target == *current->data)
+		{
+			ptr = current->data;
+			return true;
+		}
+		else if (*target > * current->data)
+			findRecursive(current->right, target, ptr);//greater than
+		else
+			findRecursive(current->Left, target, ptr); //less than 
+	}
 	// inorder traversal: left-root-right
-	 //takes a function that takes a single parameter of type T
-	void inOrderTraverse(void Visit(const T& Item)) const {
-		if (Root == nullptr) return;
-		inOrderHelper(Visit, Root);
-
+	//prints the tree 
+	void inOrderTraverse() const {
+		inOrderHelper(Root);
 	}
 	//helper function for in order traversal
-	void inOrderHelper(void Visit(const T& Item), Node* Root) const
+	void inOrderHelper(Node* Current) const
 	{
-		if (Root == nullptr) return;
-		inOrderHelper(Visit, Root->Left);
-		Visit(Root->Data);
-		inOrderHelper(Visit, Root->Right);
+		if (Current == nullptr) return;
+		inOrderHelper(Current->Left);
+		cout << *Current->Data << endl;
+		inOrderHelper(Current->Right);
 	}
 
-	// preorder traversal: root-left-right
-	void preOrderTraverse(void Visit(const T& Item)) const {
-		if (Root == nullptr) return;
-		//calling the helper
-		preOrderHelper(Visit, Root);
+	//------------------------- display ---------------------------------
+	// pretty print data in order (overloaded << operator to print in order)
+	void display() const {
+		if (!isEmpty()) {
+			char genre = this->Root->Data->MovieType;
+			// Comedy == 'F'
+			if (genre == 'F') {
+				cout << "Genre "
+					<< setw(12) << "Quantity"
+					<< setw(20) << "Title"
+					<< setw(37) << "Director"
+					<< setw(14) << "Year\n";
+				cout << *this << endl;
+			}
+			// Drama == 'D'
+			else if (genre == 'D') {
+				cout << "Genre "
+					<< setw(12) << "Quantity"
+					<< setw(20) << "Title"
+					<< setw(36) << "Director"
+					<< setw(15) << "Year\n";
+				inOrderTraverse();
+			}
+			// Classic == 'C'
+			else if (genre == 'C') {
+				cout << " Genre"
+					<< setw(12) << "Quantity"
+					<< setw(20) << "Title"
+					<< setw(36) << "Major Actor"
+					<< setw(15) << "Year\n";
+				inOrderTraverse();
+			}
+		}
+		// bad input
+		else
+			cout << "Empty Tree!" << endl;
 	}
-	//helper function for preorder traversal
-	void preOrderHelper(void Visit(const T& Item), Node* Root) const
-	{
-		if (Root == nullptr) return;
-		Visit(Root->Data);
-		preOrderHelper(Visit, Root->Left);
-		preOrderHelper(Visit, Root->Right);
-	}
-
-	// postorder traversal: left-right-root
-	void postOrderTraverse(void Visit(const T& Item)) const {
-		if (Root == nullptr)
-			return;
-
-		// first recur on left subtree pasing in a function
-		postOrderHelper(Visit, Root);
-	}
-	//recusrively goes through the tree in postorder fashion
-	void postOrderHelper(void Visit(const T& Item), Node* Root) const
-	{
-		if (Root == nullptr) return;
-		postOrderHelper(Visit, Root->Left);
-		postOrderHelper(Visit, Root->Right);
-		Visit(Root->Data);
-	}
-
 	// create dynamic array, copy all the items to the array
 	// and then read the array to re-create this tree from scratch
 	// so that resulting tree is balanced
@@ -511,42 +456,6 @@ public:
 		clearTree(N->Left);
 		clearTree(N->Right);
 		delete(N);
-	}
-
-	// trees are equal if they have the same structure
-	// AND the same item values at all the nodes
-	bool operator==(const BST<T>& Other) const {
-		if (this->Root == nullptr && Other.Root == nullptr)
-		{
-			return true;
-		}
-		return identicalTrees(this->Root, Other.Root);
-	}
-
-	//Helper for ==operator
-	/* Given two trees, return true if they are
-  structurally identical */
-	bool identicalTrees(const Node* a, const Node* b) const
-	{
-		/*1. both empty */
-		if (a == nullptr && b == nullptr)
-			return true;
-
-		/* 2. both non-empty -> compare them */
-		if (a != nullptr && b != nullptr)
-		{
-			return
-				(a->Data == b->Data &&
-					identicalTrees(a->Left, b->Left) &&
-					identicalTrees(a->Right, b->Right)
-					);
-		}
-		return false;
-	}
-
-	// not == to each other easier to use than recoding == 
-	bool operator!=(const BST<T>& Other) const {
-		return !(*this == Other);
 	}
 };
 
