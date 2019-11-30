@@ -18,6 +18,7 @@ public:
     Transaction(char);
     Transaction(char, Customer*);
     Transaction(char, Customer*, Media*);
+	friend ostream& operator<<(ostream& Os, const Transaction& T);
     ~Transaction();
     bool execute();
     //ostream& operator<<(ostream& Os, const Transaction& T);

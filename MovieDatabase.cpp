@@ -34,7 +34,7 @@ Movie* MovieDatabase::getMovie(string Command)
 }
 
 //Sorting is perfect 
-bool sortVec(vector<Movie*> &MovieVec, Movie* NewMovie)
+bool sortVec(vector<Movie*>& MovieVec, Movie* NewMovie)
 {
 	vector<Movie*>::iterator It;
 	int X = 0;
@@ -56,7 +56,7 @@ bool MovieDatabase::add(Movie* newMovie)
 	if (type == 'C' || type == 'D' || type == 'F')
 	{
 		// if the movie is not already inside the vector
-		if(find(MoviesVector[type].begin(), MoviesVector[type].end(),
+		if (find(MoviesVector[type].begin(), MoviesVector[type].end(),
 			newMovie) == MoviesVector[type].end())
 		{
 			// adds to vector in the right place
@@ -74,7 +74,7 @@ bool MovieDatabase::add(Movie* newMovie)
 bool MovieDatabase::remove(Movie* tempMovie)
 {
 	vector<Movie*>::iterator It = find(MoviesVector[tempMovie->MovieType].begin(),
-	MoviesVector[tempMovie->MovieType].end(), tempMovie);
+		MoviesVector[tempMovie->MovieType].end(), tempMovie);
 	if (It == MoviesVector[tempMovie->MovieType].end())
 		return false;
 
@@ -110,10 +110,14 @@ void MovieDatabase::showInventory()
 {
 	for (auto X : MoviesVector)
 	{
-		 //cout << X.second.data << endl; //The BST has a operator overload
+		cout << X.first << endl; //Maps the 
+		for (auto Y : X.second)
+		{
+			cout << *Y << ", ";
+		}
+		cout << endl;
 	}
 }
-
 //hashing the nodes inside the BST or possibly hashing the bst's
 int MovieDatabase::getHash(string Title)
 {

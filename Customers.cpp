@@ -3,11 +3,15 @@
 //shows all the transactions the customer has made
 void Customer::showHistory()
 {
+	cout << this->CustomerId << "-" << this->FirstName << " " << this->LastName << endl;
+	for (Transaction history : History)
+	{
+		cout << history << endl;
+	}
 }
 
 //Add a transaction to the history Vector 
-void Customer::updateHistory()
+void Customer::updateHistory(Transaction newT)
 {
-	//implement once we have transactions done
-	//History.push_back(this);
+	History.push_back(newT); //history is just a queue
 }

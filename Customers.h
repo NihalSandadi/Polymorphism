@@ -3,9 +3,9 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Transactions.h"
 
 using namespace std;
-
 // forward declaration
 class Transaction;
 class Movie;
@@ -13,26 +13,14 @@ class Movie;
 class Customer
 {
 public:
-    int CustomerId;
-    string FirstName;
-    string LastName;
-    void showHistory();
-    void updateHistory();
+	int CustomerId;
+	string FirstName;
+	string LastName;
+	void showHistory();
+	void updateHistory(Transaction);
 private:
-    vector<Transaction*> History;
-    vector<Movie*> CurrentlyBorrowed;
+	vector<Transaction> History;
+	//vector<Movie*> CurrentlyBorrowed; not implementing atm 
 };
-
-//class CustomerDatabase
-//{
-//public:
-//    bool add(Customer* C);
-//    bool remove(int ID);
-//    Customer* getCustomer(int ID);
-//    bool clear();
-//private:
-//    vector<Customer*> Customers; // Vector of customer pointers
-//    int getHash(int ID);
-//};
 
 

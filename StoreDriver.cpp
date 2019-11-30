@@ -46,18 +46,12 @@ bool StoreDriver::readMovies(string File)
 		// gets the next line
 		getline(InFile, Line);
 
-		if (Line == " ")
+		if (Line == "") //end of file
 		{
-			InFile.close();
-			return true;
+			break;
 		}
 		// splits the line by comma and stores in a vector
 		vector<string> SplitByComma = split(Line, ',');
-		if (SplitByComma[0] == "")
-		{
-			InFile.close();
-			return true;
-		}
 		if (SplitByComma[0] == "F") // for comedy movies
 		{
 			auto newMovie = (Comedy*)MovFactory.makeMovie('F');
@@ -120,28 +114,36 @@ bool StoreDriver::readMovies(string File)
 		}
 	}
 	InFile.close();
+	Movies->showInventory();
 	return true;
 }
 
-bool readCustomers(string File)
+bool StoreDriver::readCustomers(string File)
 {
 	ifstream InFile;
 	InFile.open(File);
 	string Line;
 
-	// while not end of file
-	//while(!InFile.eof())
-	//{
-	//  // gets the next line
-	//  getline(InFile, Line);
+	//while not end of file
+	while (!InFile.eof())
+	{
+		// gets the next line
+		getline(InFile, Line);
 
-	//  // splits the line by comma and stores in a vector
-	//  vector<string> SplitByComma = split(Line, ',');
-	//  // 3333 Witch Wicked
-	//  Customers* NewCustomer = makeCustomer(stoi(SplitByComma[0]));
-	//  NewCustomer->FirstName = SplitByComma[1];
-	//  NewCustomer->LastName = SplitByComma[2];
-	//}
+		// splits the line by comma and stores in a vector
+		vector<string> SplitBySpace = split(Line, ' ');
+		if (Line != "")
+		{
+			Customer* NewCustomer = new Customer();
+			NewCustomer->CustomerId = stoi(SplitBySpace[0]);
+			NewCustomer->FirstName = SplitBySpace[1];
+			NewCustomer->LastName = SplitBySpace[2];
+			Customers->add(NewCustomer); //adds the customer to the hashmap
+			Customers->getCustomer(NewCustomer->CustomerId)->showHistory(); //for testing purposes
+		}
+		else
+			break; //we reached the EOF
+	}
 	return true;
 }
 
@@ -215,11 +217,18 @@ void Testing()
 //main function for input and output
 int main()
 {
-	auto store = new StoreDriver();
-	//bool check = readMovies(data4movies);
-	//cout << check << endl;
+	StoreDriver store;
 	Testing();
-	store->readMovies("data4movies.txt");
-	cout << endl << "Finished Tests" << endl;
-	return 1;
+	//if (store->readMovies("data4movies.txt"))
+	//{
+
+	//}
+	if (store.readCustomers("data4customers.txt"))
+	{
+		cout << "Customers Read & Stored Properly" << endl;
+		return 1;
+	}
+
+	cout << "Failed" << endl;
+	return 0;
 }

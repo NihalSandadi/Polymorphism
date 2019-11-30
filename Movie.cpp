@@ -75,7 +75,7 @@ Comedy::~Comedy() {}
 //printing out the comedy movie
 ostream& operator<<(ostream& Os, const Comedy& M)
 {
-	Os << "Type:" << M.MovieType << " Director:" << M.Director << " Title: " << M.Title << ", " << " Release Year " <<  M.ReleaseYear;
+	Os << "Type:" << M.MovieType << " Director:" << M.Director << " Title: " << M.Title << ", " << " Release Year " << M.ReleaseYear;
 	return Os;
 }
 

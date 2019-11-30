@@ -25,10 +25,11 @@ bool Transaction::execute()
 	return false;
 }
 
-//ostream& Transaction::operator<<(ostream& Os, const Transaction& T)
-//{
-//	// TODO: insert return statement here
-//}
+ostream& operator<<(ostream& Os, const Transaction& T)
+{
+	// TODO: insert return statement here
+	return Os;
+}
 
 TransactionDatabase::TransactionDatabase()
 {

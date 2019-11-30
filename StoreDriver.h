@@ -25,6 +25,7 @@ public:
     ~StoreDriver();
     bool readMovies(string File); // done
     bool readCustomers(string File);
+	void printMovies();
     // bool readTransactions(string File);
     // bool executeTransactions();
 private:

@@ -1,9 +1,20 @@
 #include "HashMapDatabase.h"
-
+HashMapDatabase::HashMapDatabase()
+{
+	//used for hashing function
+	Customers.resize(HASHSIZE);
+}
+HashMapDatabase::~HashMapDatabase()
+{
+	for (auto &Customer : Customers)
+	{
+		delete Customer; //delete all customers inside the database
+	}
+}
 //Add a customer to the hashtable of customers
 bool HashMapDatabase::add(Customer* C)
 {
-	if (Customers[C->CustomerId] == nullptr)
+	if (getCustomer(C->CustomerId) == nullptr)
 	{
 		Customers[C->CustomerId] = C;
 		return true;
@@ -15,7 +26,7 @@ bool HashMapDatabase::add(Customer* C)
 bool HashMapDatabase::remove(int ID)
 {
 	//might cause a memoryleak
-	if (Customers[ID] != nullptr)
+	if (getCustomer(ID) != nullptr)
 	{
 		Customer* temp = Customers[ID];
 		delete(temp);
@@ -29,13 +40,19 @@ bool HashMapDatabase::remove(int ID)
 Customer* HashMapDatabase::getCustomer(int ID)
 {
 	//this works in case of nullptr too because this will return nullptr
-	Customer* temp = Customers[ID];
+	int index = getHash(ID);
+	Customer* temp = Customers[index];
 	return temp;
 }
 
+//clears the entire Map of customer pointers
 bool HashMapDatabase::clear()
 {
-	return false;
+	for (auto& Customer : Customers)
+	{
+		delete Customer;
+	}
+	return true;
 }
 
 int HashMapDatabase::getHash(int ID)

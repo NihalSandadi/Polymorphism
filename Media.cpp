@@ -9,20 +9,20 @@ Media::~Media() {}
 ostream& operator<<(ostream& Os, const Media& M)
 {
 	Os << "MediaType = " << M.MediaType;
-  return Os;
+	return Os;
 }
 
 MediaFactory::MediaFactory()
 {
-  //MediaTypes = {'d'};
+	//MediaTypes = {'d'};
 }
 
 MediaFactory::~MediaFactory()
 {
-  MediaTypes.clear();
+	MediaTypes.clear();
 }
 
 Media* MediaFactory::makeMedia(char Type)
 {
-    return MediaTypes[Type];
+	return MediaTypes[Type];
 }
