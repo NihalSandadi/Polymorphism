@@ -129,7 +129,11 @@ Drama::~Drama() {}
 //Printing the Drama movie out
 ostream& operator<<(ostream& Os, const Drama& M)
 {
-	Os << "Type:" << M.MovieType << " Director:" << M.Director << " Title:" << M.Title << ", " << " Release Year " << M.ReleaseYear;
+	Os << "Drama" <<
+		setw(9) << M.Quantity << " "
+		<< setw(35) << M.Title <<
+		setw(25) << M.Director <<
+		setw(12) << M.ReleaseYear;
 	return Os;
 }
 
@@ -182,9 +186,17 @@ Classic::~Classic() {}
 //printing the classic Movie
 ostream& operator<<(ostream& Os, const Classic& M)
 {
-	Os << "Type:" << M.MovieType << "," << M.Title << " " <<
-		M.ActorFirstName << " " << M.ActorLastName << " " << M.ReleaseMonth
-		<< " " << M.ReleaseYear;
+	if (&M != nullptr)
+	{
+		Os << "Classic" <<
+			setw(8) << M.Quantity << " "
+			<< setw(35) << M.Title <<
+			setw(17) << M.ActorFirstName <<
+			" " << M.ActorLastName <<
+			setw(8) << M.ReleaseMonth << " " << M.ReleaseYear;
+	}
+	else
+		Os << "Null";
 	return Os;
 }
 

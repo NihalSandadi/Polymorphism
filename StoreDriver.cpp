@@ -71,7 +71,6 @@ bool StoreDriver::readMovies(string File)
 
 				cout << "1 if Comedy Movie ADDED?: ";
 				cout << comedyBST->contains(newMovie) << endl;
-				comedyBST->display();
 			}
 			else
 			{
@@ -238,12 +237,10 @@ int main()
 	{
 		cout << "FATE OF THE UNWEARY" << endl;
 	}
-	/*if (store.readCustomers("data4customers.txt"))
+	if (store.readCustomers("data4customers.txt"))
 	{
 		cout << "Customers Read & Stored Properly" << endl;
-		return 1;
-	}*/
-
-	cout << "Failed" << endl;
+	}
+	store.printMovies();
 	return 0;
 }

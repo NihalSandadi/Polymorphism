@@ -373,8 +373,8 @@ public:
 					<< setw(12) << "Quantity"
 					<< setw(20) << "Title"
 					<< setw(36) << "Director"
-					<< setw(15) << "Year\n";
-				inOrderTraverse();
+					<< setw(14) << "Year\n";
+				cout << *this << endl;
 			}
 			// Classic == 'C'
 			else if (genre == 'C') {
@@ -383,7 +383,7 @@ public:
 					<< setw(20) << "Title"
 					<< setw(36) << "Major Actor"
 					<< setw(15) << "Year\n";
-				inOrderTraverse();
+				cout << *this << endl;
 			}
 		}
 		// bad input
