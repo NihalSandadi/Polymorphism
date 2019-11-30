@@ -3,34 +3,33 @@
 #include "StoreDriver.h"
 StoreDriver::StoreDriver()
 {
-  Movies = new MovieDatabase();
-  Customers = new HashMapDatabase();
+	Movies = new MovieDatabase();
+	Customers = new HashMapDatabase();
 }
 
 StoreDriver::~StoreDriver()
 {
-  delete Movies;
-  delete Customers;
+	delete Movies;
+	delete Customers;
 }
 
 // code modified from https://www.fluentcpp.com
 // /2017/04/21/how-to-split-a-string-in-c/
 vector<string> StoreDriver::split(const string& s, char delimiter)
 {
-   vector<std::string> tokens;
-   string token;
-   istringstream tokenStream(s);
-   while (std::getline(tokenStream, token, delimiter)) //using comma as our delimiter
-   {
-      tokens.push_back(token);
-   }
-   return tokens;
+	vector<std::string> tokens;
+	string token;
+	istringstream tokenStream(s);
+	while (std::getline(tokenStream, token, delimiter)) //using comma as our delimiter
+	{
+		tokens.push_back(token);
+	}
+	return tokens;
 }
 
 //reading in the Movies
 bool StoreDriver::readMovies(string File)
 {
-	return false;
 	MovieFactory MovFactory; //MovieFactory
 	MediaFactory MediaFactory; //MediaFactory
 	ifstream InFile;
@@ -41,97 +40,109 @@ bool StoreDriver::readMovies(string File)
 		return false;
 	}
 
-  // while not end of file
-  while(!InFile.eof())
-  {
-    // gets the next line
-    getline(InFile, Line);
-
-    // splits the line by comma and stores in a vector
-    vector<string> SplitByComma = split(Line, ',');
-    if (SplitByComma[0] == "F") // for comedy movies
-    {
-		auto newMovie1 = (Comedy*)MovFactory.makeMovie('F');
-		// F, Stock, Director, Title, Year it released
-		if (Movies->add(newMovie1)) { //if it can insert the movie
-			newMovie1->MovieType = (const char)SplitByComma[0][0]; // (not exactly sure if/how) this works lol
-			newMovie1->Quantity = stoi(SplitByComma[1]);
-			newMovie1->Director = SplitByComma[2];
-			newMovie1->Title = SplitByComma[3];
-			newMovie1->ReleaseYear = stoi(SplitByComma[4]);
-		}
-		else
-		{
-			delete newMovie1;
-		}
-
-    }else if (SplitByComma[0] == "D") // for drama movies
-    {
-      // D, Stock, Director, Title, Year it released
-
-		auto newMovie1 = (Drama*)MovFactory.makeMovie('D');
-		// F, Stock, Director, Title, Year it released
-		if (Movies->add(newMovie1)) { //if it can insert the movie
-			newMovie1->MovieType = (const char)SplitByComma[0][0]; // (not exactly sure if/how) this works lol
-			newMovie1->Quantity = stoi(SplitByComma[1]);
-			newMovie1->Director = SplitByComma[2];
-			newMovie1->Title = SplitByComma[3];
-			newMovie1->ReleaseYear = stoi(SplitByComma[4]);
-		}
-		else
-		{
-			delete newMovie1;
-		}
-    }
-else if (SplitByComma[0] == "C") // for classic movies
+	// while not end of file
+	while (!InFile.eof())
 	{
-	// splits the last part of the line by space to differinciate between
-	// the actor and the release date
-	vector<string> SplitBySpace = split(SplitByComma[4], ' ');
+		// gets the next line
+		getline(InFile, Line);
 
-	// C, Stock, Director, Title, Major actor Release date
-	Classic* newMovie = (Classic*)MovFactory.makeMovie('C');
-	if (Movies->add(newMovie))
-	{
-		//newMovie->MovieType = (const char)SplitByComma[0][0]; // possible error, string to char
-		newMovie->Quantity = stoi(SplitByComma[1]);
-		newMovie->Director = SplitByComma[2];
-		newMovie->Title = SplitByComma[3];
-		//not working because unable to create a classic a properly
-		newMovie->ActorFirstName = SplitBySpace[0];
-		newMovie->ActorLastName = SplitBySpace[1];
-		newMovie->ReleaseMonth = stoi(SplitBySpace[2]);
-		newMovie->ReleaseYear = stoi(SplitBySpace[3]);
+		if (Line == " ")
+		{
+			InFile.close();
+			return true;
+		}
+		// splits the line by comma and stores in a vector
+		vector<string> SplitByComma = split(Line, ',');
+		if (SplitByComma[0] == "")
+		{
+			InFile.close();
+			return true;
+		}
+		if (SplitByComma[0] == "F") // for comedy movies
+		{
+			auto newMovie = (Comedy*)MovFactory.makeMovie('F');
+			// F, Stock, Director, Title, Year it released
+			if (Movies->add(newMovie)) { //if it can insert the movie
+				newMovie->MovieType = (const char)SplitByComma[0][0]; // (not exactly sure if/how) this works lol
+				newMovie->Quantity = stoi(SplitByComma[1]);
+				newMovie->Director = SplitByComma[2];
+				newMovie->Title = SplitByComma[3];
+				newMovie->ReleaseYear = stoi(SplitByComma[4]);
+				cout << *newMovie << endl;
+			}
+			else
+			{
+				delete newMovie;
+			}
+
+		}
+		else if (SplitByComma[0] == "D") // for drama movies
+		{
+			// D, Stock, Director, Title, Year it released
+
+			auto newMovie = (Drama*)MovFactory.makeMovie('D');
+			// F, Stock, Director, Title, Year it released
+			if (Movies->add(newMovie)) { //if it can insert the movie
+				newMovie->MovieType = (const char)SplitByComma[0][0]; // (not exactly sure if/how) this works lol
+				newMovie->Quantity = stoi(SplitByComma[1]);
+				newMovie->Director = SplitByComma[2];
+				newMovie->Title = SplitByComma[3];
+				newMovie->ReleaseYear = stoi(SplitByComma[4]);
+				cout << *newMovie << endl;
+
+			}
+			else
+			{
+				delete newMovie;
+			}
+		}
+		else if (SplitByComma[0] == "C") // for classic movies
+		{
+			// splits the last part of the line by space to differinciate between
+			// the actor and the release date
+			vector<string> SplitBySpace = split(SplitByComma[4], ' ');
+
+			// C, Stock, Director, Title, Major actor Release date
+			Classic* newMovie = (Classic*)MovFactory.makeMovie('C');
+			if (Movies->add(newMovie))
+			{
+				//newMovie->MovieType = (const char)SplitByComma[0][0]; // possible error, string to char
+				newMovie->Quantity = stoi(SplitByComma[1]);
+				newMovie->Director = SplitByComma[2];
+				newMovie->Title = SplitByComma[3];
+				//not working because unable to create a classic a properly
+				newMovie->ActorFirstName = SplitBySpace[1];
+				newMovie->ActorLastName = SplitBySpace[2];
+				newMovie->ReleaseMonth = stoi(SplitBySpace[3]); //broke here?
+				newMovie->ReleaseYear = stoi(SplitBySpace[4]);
+				cout << *newMovie << endl;
+			}
+		}
 	}
-    }else // bad case (incorrect movie type)
-    {
-      return false;
-    }
-  }
-  InFile.close();
-  return true;
+	InFile.close();
+	return true;
 }
 
 bool readCustomers(string File)
 {
-  ifstream InFile;
-  InFile.open(File);
-  string Line;
+	ifstream InFile;
+	InFile.open(File);
+	string Line;
 
-  // while not end of file
-  //while(!InFile.eof())
-  //{
-  //  // gets the next line
-  //  getline(InFile, Line);
+	// while not end of file
+	//while(!InFile.eof())
+	//{
+	//  // gets the next line
+	//  getline(InFile, Line);
 
-  //  // splits the line by comma and stores in a vector
-  //  vector<string> SplitByComma = split(Line, ',');
-  //  // 3333 Witch Wicked
-  //  Customers* NewCustomer = makeCustomer(stoi(SplitByComma[0]));
-  //  NewCustomer->FirstName = SplitByComma[1];
-  //  NewCustomer->LastName = SplitByComma[2];
-  //}
-  return true;
+	//  // splits the line by comma and stores in a vector
+	//  vector<string> SplitByComma = split(Line, ',');
+	//  // 3333 Witch Wicked
+	//  Customers* NewCustomer = makeCustomer(stoi(SplitByComma[0]));
+	//  NewCustomer->FirstName = SplitByComma[1];
+	//  NewCustomer->LastName = SplitByComma[2];
+	//}
+	return true;
 }
 
 //TESTING PURPOSES
@@ -173,22 +184,22 @@ bool readCustomers(string File)
 void testMovieFactory()
 {
 
-		//created a toy database
-		//MovieDatabase Movies;
-		cout << "===TESTING MOVIE FACTORY===" << endl;
-		MovieFactory Factory1;
-		auto newMovie1 = (Comedy*)Factory1.makeMovie('F');
-		//Movies.add(newMovie1);
-		newMovie1->ReleaseYear = 2019;
-		newMovie1->Director = "Jayden";
-		newMovie1->Title = "YEET";
-		newMovie1->Quantity = 0;
+	//created a toy database
+	//MovieDatabase Movies;
+	cout << "===TESTING MOVIE FACTORY===" << endl;
+	MovieFactory Factory1;
+	auto newMovie1 = (Comedy*)Factory1.makeMovie('F');
+	//Movies.add(newMovie1);
+	newMovie1->ReleaseYear = 2019;
+	newMovie1->Director = "Jayden";
+	newMovie1->Title = "YEET";
+	newMovie1->Quantity = 0;
 
-		cout << "newMovie1 Release Year = " << newMovie1->ReleaseYear << endl;
-		cout << *newMovie1 << endl;
-		cout << "===!!!WORKS!!!===" << endl;
-		delete newMovie1;
-		//delete Movies;
+	cout << "newMovie1 Release Year = " << newMovie1->ReleaseYear << endl;
+	cout << *newMovie1 << endl;
+	cout << "===!!!WORKS!!!===" << endl;
+	delete newMovie1;
+	//delete Movies;
 }
 
 // testing everything
@@ -204,11 +215,11 @@ void Testing()
 //main function for input and output
 int main()
 {
-	auto* store = new StoreDriver();
+	auto store = new StoreDriver();
 	//bool check = readMovies(data4movies);
 	//cout << check << endl;
 	Testing();
-	store->readMovies("data4movies");
+	store->readMovies("data4movies.txt");
 	cout << endl << "Finished Tests" << endl;
 	return 1;
 }

@@ -44,7 +44,7 @@ Movie* MovieFactory::makeMovie(char type)
 		cout << "BAD MOVIE TYPE" << endl;
 		//return nullptr;
 	}
-	return new Movie();
+	return nullptr;
 }
 
 //increase the Quanity
@@ -75,7 +75,7 @@ Comedy::~Comedy() {}
 //printing out the comedy movie
 ostream& operator<<(ostream& Os, const Comedy& M)
 {
-	Os << "Type:" << M.MovieType << " Director: " << M.Director << " Title: " << M.Title << ", " << " Release Year " <<  M.ReleaseYear;
+	Os << "Type:" << M.MovieType << " Director:" << M.Director << " Title: " << M.Title << ", " << " Release Year " <<  M.ReleaseYear;
 	return Os;
 }
 
@@ -89,8 +89,6 @@ bool operator<(const Comedy& lhs, const Comedy& rhs)
 	else if (lhs.Title == rhs.Title)
 	{
 		return false;
-
-		//return (this->ReleaseYear < rhs.ReleaseYear);
 	}
 	return false;
 }
@@ -126,7 +124,7 @@ Drama::~Drama() {}
 //Printing the Drama movie out
 ostream& operator<<(ostream& Os, const Drama& M)
 {
-	Os << M.MovieType << " D " << ", " << M.Title << ", " << M.ReleaseYear;
+	Os << "Type:" << M.MovieType << " Director:" << M.Director << " Title:" << M.Title << ", " << " Release Year " << M.ReleaseYear;
 	return Os;
 }
 
@@ -179,7 +177,7 @@ Classic::~Classic() {}
 //printing the classic Movie
 ostream& operator<<(ostream& Os, const Classic& M)
 {
-	Os << M.MovieType << " C " << ", " << M.Title << " " <<
+	Os << "Type:" << M.MovieType << "," << M.Title << " " <<
 		M.ActorFirstName << " " << M.ActorLastName << " " << M.ReleaseMonth
 		<< " " << M.ReleaseYear;
 	return Os;

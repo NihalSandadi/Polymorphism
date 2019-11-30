@@ -33,6 +33,7 @@ Movie* MovieDatabase::getMovie(string Command)
 	return nullptr;
 }
 
+//Sorting is perfect 
 bool sortVec(vector<Movie*> &MovieVec, Movie* NewMovie)
 {
 	vector<Movie*>::iterator It;
@@ -61,7 +62,6 @@ bool MovieDatabase::add(Movie* newMovie)
 			// adds to vector in the right place
 			sortVec(MoviesVector[type], newMovie);
 		}
-
 	}
 	else
 	{
@@ -110,7 +110,7 @@ void MovieDatabase::showInventory()
 {
 	for (auto X : MoviesVector)
 	{
-		// cout << X << endl; //The BST has a operator overload
+		 //cout << X.second.data << endl; //The BST has a operator overload
 	}
 }
 
