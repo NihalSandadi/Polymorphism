@@ -6,6 +6,7 @@
 #include "Transactions.h"
 
 using namespace std;
+
 // forward declaration
 class Transaction;
 class Movie;
@@ -18,10 +19,8 @@ public:
 	string FirstName;
 	string LastName;
 	void showHistory();
-	void updateHistory(Transaction);
+	void updateHistory(Transaction*);
 private:
-	vector<Transaction> History;
-	//vector<Movie*> CurrentlyBorrowed; not implementing atm 
+	vector<Transaction*> History;
+	//vector<Movie*> CurrentlyBorrowed; not implementing atm
 };
-
-
