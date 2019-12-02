@@ -296,7 +296,7 @@ bool StoreDriver::readTransactions(string File)
 		{
 			vector<string> SplitBySpace = split(Line, ' ');
 
-			if (SplitBySpace.size() != 2) {
+			if (SplitBySpace.size() != 2)
 				cout << "Invalid customer data. Exiting."; break;
 
 			auto NewTrans = new Transaction('H');
@@ -339,10 +339,9 @@ bool StoreDriver::readTransactions(string File)
 		}else if ((const char)Line[0] == 'R')
 		{
 			auto NewTrans = new Transaction('R');
+			vector<string> SplitBySpace = split(Line, ' ');
 			if ('C' == (const char)SplitBySpace[3][0])
 			{
-				vector<string> SplitBySpace = split(Line, ' ');
-
 				NewTrans->setTargetMovie(getMovie(SplitBySpace[2][0], 'C',
 					SplitBySpace[6] + " " + SplitBySpace[7], "", stoi(SplitBySpace[4]) *
 					stoi(SplitBySpace[5])));
@@ -379,7 +378,7 @@ bool StoreDriver::readTransactions(string File)
 			cout << "IMPROPER COMMAND TYPE : " << Line << endl;
 		}
 	}
-}
+
 
 	InFile.close();
 	return true;

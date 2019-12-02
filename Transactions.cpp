@@ -10,7 +10,7 @@ Transaction::Transaction()
 // showInventory
 Transaction::Transaction(char Type)
 {
-	if (Type != 'I' || Type != 'H' || Type != 'R' || Type != 'B')
+	if (Type == 'I' || Type == 'H' || Type == 'R' || Type == 'B')
 	{
 		cout << "BAD COMMAND" << endl;
 	}else
@@ -50,60 +50,6 @@ void Transaction::setTargetMovie(Movie* TargetMovie)
 {
 	this->TargetMovie = TargetMovie;
 }
-
-/* // moved to store driver
-bool Transaction::execute()
-{
-	if (Command == 'I')
-	{
-		// printMovies(); // possible redundent inheritance
-	// borrow
-	}else if (Command == 'B')
-	{
-		this->TargetMovie->decreaseQuantity();
-		this->TargetCustomer->updateHistory(*this);
-	// return
-	}else if (Command == 'R')
-	{
-		this->TargetMovie->increaseQuanity();
-		this->TargetCustomer->updateHistory(*this);
-	// history
-	}else if (Command == 'H')
-	{
-		this->TargetCustomer->.showHistory();
-	}else
-	{
-		return false;
-	}
-	return true;
-}
-*/
-
-/*
-ostream& operator<<(ostream& Os, const Transaction& T)
-{
-	Os << "Char = " << T.Command << endl;
-	if (T.Command == 'I')
-	{
-		Os << "SHOW INVENTORY";
-	}else if (T.Command == 'B')
-	{
-		Os << T.TargetMovie.Title << " IS BEING BORROWED BY ";
-		Os << T.TargetCustomer.FirstName << " " << T.TargetCustomer->LastName;
-	}else if (T.Command == 'R')
-	{
-		Os << T.TargetMovie.Title << " IS BEING RETURNED BY ";
-		Os << T.TargetCustomer.FirstName << " " << T.TargetCustomer.LastName;
-	}else if (T.Command == 'H')
-	{
-		Os << "SHOW HISTORY";
-	}else
-	{
-		return Os;
-	}
-	return Os;
-}
-*/
 
 TransactionDatabase::TransactionDatabase()
 {
