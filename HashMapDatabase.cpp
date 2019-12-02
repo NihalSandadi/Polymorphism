@@ -1,9 +1,13 @@
 #include "HashMapDatabase.h"
+
+// constructor
 HashMapDatabase::HashMapDatabase()
 {
 	//used for hashing function
 	Customers.resize(HASHSIZE);
 }
+
+// destructor
 HashMapDatabase::~HashMapDatabase()
 {
 	for (auto &Customer : Customers)
@@ -11,7 +15,8 @@ HashMapDatabase::~HashMapDatabase()
 		delete Customer; //delete all customers inside the database
 	}
 }
-//Add a customer to the hashtable of customers
+
+// Add a customer to the hashtable of customers
 bool HashMapDatabase::add(Customer* C)
 {
 	if (getCustomer(C->CustomerId) == nullptr)
@@ -33,7 +38,7 @@ bool HashMapDatabase::remove(int ID)
 		Customers[ID] = nullptr;
 		return true;
 	}
-	//does not exist 
+	//does not exist
 	return false;
 }
 
@@ -59,3 +64,12 @@ int HashMapDatabase::getHash(int ID)
 {
 	return ID;
 }
+
+/*
+void HashMapDatabase::printAllCustomers()
+{
+	cout << "CUSTOMERS:" << endl;
+	for (auto X : Customers)
+		cout << X << endl;
+}
+*/

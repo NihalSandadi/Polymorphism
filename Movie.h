@@ -6,34 +6,32 @@
 #include <map>
 #include <string>
 
-
 using namespace std;
-//got rid of : class Media (Was breaking the code)
 
+// Parent class for all movie types
 class Movie {
 	friend ostream& operator<<(ostream& Os, const Movie& M);
 public:
-	char MovieType;
+	char MovieType; // can be Classic, Comedy, and Drama for now
 	string Director;
 	string Title;
-	int Quantity;
+	int Quantity; // number of instances of a movie in the library
 
-	//virtual MediaFactory* makeMedia(ifstream&) = 0;
 	Movie();
-	void increaseQuanity();
-	void decreaseQuanity();
+	void increaseQuantity(); // +1
+	void decreaseQuantity(); // -1
 	virtual ~Movie();
 };
 
-//MovieFactory creates movies and is a child of the Movie class
+// MovieFactory creates movies
 class MovieFactory {
-public: // should be protected/private
 public:
-	MovieFactory();
-	~MovieFactory();
+	MovieFactory() {};
+	~MovieFactory() {};
 	Movie* makeMovie(char);
 };
 
+// Comedy movie
 class Comedy : public Movie {
 	friend ostream& operator<<(ostream& Os, const Comedy& M);
 	friend bool operator<(const Comedy& lhs, const Comedy& rhs);
@@ -43,9 +41,10 @@ public:
 
 	Comedy();
 	Comedy(string Director, int ReleaseYear);
-	~Comedy();
+	~Comedy() {};
 };
 
+// Drama movie
 class Drama : public Movie {
 	friend ostream& operator<<(ostream& Os, const Drama& M);
 	friend bool operator<(const Drama& lhs, const Drama& rhs);
@@ -55,9 +54,10 @@ public:
 
 	Drama();
 	Drama(string Director, int ReleaseYear);
-	~Drama();
+	~Drama() {};
 };
 
+// Classic movie
 class Classic : public Movie {
 	friend ostream& operator<<(ostream& Os, const Classic& M);
 	friend bool operator<(const Classic& lhs, const Classic& rhs);
@@ -70,5 +70,5 @@ public:
 	Classic();
 	Classic(string Director, int ReleaseYear, int ReleaseMonth,
 		string ActorFirstName, string ActorLastName);
-	~Classic();
+	~Classic() {};
 };

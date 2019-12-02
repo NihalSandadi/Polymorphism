@@ -2,33 +2,53 @@
 
 Transaction::Transaction()
 {
+	TargetCustomer = nullptr;
+	TargetMovie = nullptr;
+	Command = '\0';
 }
 
-Transaction::Transaction(char type)
+// showInventory
+Transaction::Transaction(char Type)
 {
+	if (Type == 'I' || Type == 'H' || Type == 'R' || Type == 'B')
+	{
+		Command = Type;
+		TargetCustomer = nullptr;
+		TargetMovie = nullptr;
+	}else
+	{
+		cout << "BAD COMMAND" << Type << endl;
+	}
 }
 
-Transaction::Transaction(char, Customer*)
+char Transaction::getCommand()
 {
+	return this->Command;
 }
 
-Transaction::Transaction(char, Customer*, Media*)
+void Transaction::setCommand(char Command)
 {
+	this->Command = Command;
 }
 
-Transaction::~Transaction()
+Customer* Transaction::getTargetCustomer()
 {
+	return this->TargetCustomer;
 }
 
-bool Transaction::execute()
+void Transaction::setTargetCustomer(Customer* TargetCustomer)
 {
-	return false;
+	this->TargetCustomer = TargetCustomer;
 }
 
-ostream& operator<<(ostream& Os, const Transaction& T)
+Movie* Transaction::getTargetMovie()
 {
-	// TODO: insert return statement here
-	return Os;
+	return this->TargetMovie;
+}
+
+void Transaction::setTargetMovie(Movie* TargetMovie)
+{
+	this->TargetMovie = TargetMovie;
 }
 
 TransactionDatabase::TransactionDatabase()
@@ -37,14 +57,41 @@ TransactionDatabase::TransactionDatabase()
 
 TransactionDatabase::~TransactionDatabase()
 {
+	clear();
 }
 
+bool TransactionDatabase::addTransaction(Transaction* Trans)
+{
+	if (Trans == nullptr) return false;
+	cout << "COMMAND " << Trans->getCommand() << endl;
+	cout << "CUSTOMER " << Trans->getTargetCustomer() << endl;
+	cout << "MOVIE " << Trans->getTargetMovie() << endl;
+
+	Transactions.push(Trans);
+	return true;
+}
+
+/* // Moved to Store Driver
 bool TransactionDatabase::executeTransactions()
 {
-	return false;
+	while (!Transactions.empty())
+	{
+		if (Transactions.front() == nullptr) return false;
+		Transactions.front()->execute();
+		Transactions.pop();
+	}
+	return true;
 }
+*/
 
 bool TransactionDatabase::clear()
 {
-	return false;
+	while (!Transactions.empty())
+	{
+		Transaction* Temp = Transactions.front();
+		Transactions.pop();
+		delete Temp;
+	}
+
+	return true;
 }
