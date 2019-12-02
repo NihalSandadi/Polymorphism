@@ -1,4 +1,4 @@
-//Media.h
+//Media.h 
 
 #pragma once
 #include <iostream>
@@ -15,7 +15,7 @@ class Media
 	public: // protected
 		char MediaType;
 		Media();
-		virtual ~Media() {};
+		virtual ~Media();
     friend ostream& operator<<(ostream& Os, const Media& M);
 };
 

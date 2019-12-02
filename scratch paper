@@ -100,15 +100,3 @@ bool Classic::operator==(const Movie& o) const
   return false;
 }
 =============================================================================
-string removeSpace(string old)
-{
-	string result;
-	int length = old.length();
-	if(old[0] == *" "){ //front
-		result = old.substr(1,1);
-	}
-	if(old[length-1] == *" "){ //back
-		result = old.substr(0,length-1);
-	}
-	return result;
-}

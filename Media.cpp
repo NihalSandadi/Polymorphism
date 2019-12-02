@@ -4,6 +4,7 @@ Media::Media()
 {
 	MediaType = '\0';
 }
+Media::~Media() {}
 
 ostream& operator<<(ostream& Os, const Media& M)
 {
@@ -13,11 +14,7 @@ ostream& operator<<(ostream& Os, const Media& M)
 
 MediaFactory::MediaFactory()
 {
-	// not being implemented
-	/*
-	MediaTypes = {);
-	MediaTypes['D'] = new DVD();
-	*/
+	//MediaTypes = {'d'};
 }
 
 MediaFactory::~MediaFactory()

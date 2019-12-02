@@ -2,93 +2,49 @@
 
 Transaction::Transaction()
 {
-	TargetCustomer = nullptr;
-	TargetMovie = nullptr;
-	Command = '\0';
 }
 
-// showInventory
-Transaction::Transaction(char Type)
+Transaction::Transaction(char type)
 {
-	if (Type == 'I' || Type == 'H' || Type == 'R' || Type == 'B')
-	{
-		cout << "BAD COMMAND" << endl;
-	}else
-	{
-		Command = Type;
-		TargetCustomer = nullptr;
-		TargetMovie = nullptr;
-	}
 }
 
-char Transaction::getCommand()
+Transaction::Transaction(char, Customer*)
 {
-	return this->Command;
 }
 
-void Transaction::setCommand(char Command)
+Transaction::Transaction(char, Customer*, Media*)
 {
-	this->Command = Command;
 }
 
-Customer* Transaction::getTargetCustomer()
+Transaction::~Transaction()
 {
-	return this->TargetCustomer;
 }
 
-void Transaction::setTargetCustomer(Customer* TargetCustomer)
+bool Transaction::execute()
 {
-	this->TargetCustomer = TargetCustomer;
+	return false;
 }
 
-Movie* Transaction::getTargetMovie()
+ostream& operator<<(ostream& Os, const Transaction& T)
 {
-	return this->TargetMovie;
-}
-
-void Transaction::setTargetMovie(Movie* TargetMovie)
-{
-	this->TargetMovie = TargetMovie;
+	// TODO: insert return statement here
+	return Os;
 }
 
 TransactionDatabase::TransactionDatabase()
 {
-	Transactions;
 }
 
 TransactionDatabase::~TransactionDatabase()
 {
-	clear();
 }
 
-bool TransactionDatabase::addTransaction(Transaction* Trans)
-{
-	if (Trans == nullptr) return false;
-	Transactions.push(Trans);
-	return true;
-}
-
-/* // Moved to Store Driver
 bool TransactionDatabase::executeTransactions()
 {
-	while (!Transactions.empty())
-	{
-		if (Transactions.front() == nullptr) return false;
-		Transactions.front()->execute();
-		Transactions.pop();
-	}
-	return true;
+	return false;
 }
-*/
 
 bool TransactionDatabase::clear()
 {
-	while (!Transactions.empty())
-	{
-		Transaction* Temp = Transactions.front();
-		Transactions.pop();
-		delete Temp;
-	}
-
-	return true;
+	return false;
 }

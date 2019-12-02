@@ -6,7 +6,6 @@
 // Uses Node which holds the Data
 // Uses templates to store any type of Data
 // binarysearchtreee.cpp file is included at the bottom of the .h file
-// binarysearchtreee.cpp is part of the template, cannot be compiled separately (wrong)
 
 #include <algorithm>
 #include <cmath>
@@ -318,27 +317,26 @@ public:
 			return containsRec(N->Right, Item);
 		}
 	}
-
-	bool Retrieve(T targetData, T& pointer) const {
-		if (findRecursive(Root, targetData, pointer))
+	bool Retrieve(T* targetData, T*& pointer) const {
+		if (findRecursive(Root), targetData, pointer)
 			return true;
 		pointer = nullptr;
+		//cout << "ERROR: could not locate " << targetData->
 	}
-
-	bool findRecursive(Node* current, T target, T &ptr) const
+	bool findRecursive(Node* current, T* target, T* &ptr) const
 	{
 		if (current == nullptr)
 			return false;
 
-		if (*target == *current->Data)
+		if (*target == *current->data)
 		{
-			ptr = current->Data;
+			ptr = current->data;
 			return true;
 		}
-		else if (*target < * current->Data)
-			findRecursive(current->Left, target, ptr);//less than
+		else if (*target > * current->data)
+			findRecursive(current->right, target, ptr);//greater than
 		else
-			findRecursive(current->Right, target, ptr); //greater than
+			findRecursive(current->Left, target, ptr); //less than 
 	}
 	// inorder traversal: left-root-right
 	//prints the tree 

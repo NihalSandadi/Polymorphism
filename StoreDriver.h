@@ -21,29 +21,23 @@ class TransactionDatabase;
 class StoreDriver
 {
 public:
-  StoreDriver();
-  ~StoreDriver();
-  bool readMovies(string File); // done
-  bool readCustomers(string File);
+    StoreDriver();
+    ~StoreDriver();
+    bool readMovies(string File); // done
+    bool readCustomers(string File);
 	void printMovies();
-  // void printCustomers();
-  Movie* getMovie(char, char, string, string, int);
-  bool executeTransaction(Transaction*);
-  bool executeTransactions();
-  bool readTransactions(string File);
-  string toStringTransactions();
-  void showCustomerHistory(Customer*);
+    // bool readTransactions(string File);
+    // bool executeTransactions();
 private:
 	BST<Comedy*>* comedyBST; //comedy stores all comedy movies
 	BST<Classic*>* classicBST; //classic stores all classic movies
 	BST<Drama*>* dramaBST; //drama stores all drama movies
-  vector<Comedy*> unorderedComedy;
-  vector<Classic*> unorderedClassic;
-  vector<Drama*> unorderedDrama;
 
-  HashMapDatabase* Customers;
-  TransactionDatabase* Transactions;
+    HashMapDatabase* Customers;
+    //MovieDatabase* Movies; // done
+    // TransactionDatabase* Transactions;
 	vector<string> split(const string& s, char delimiter);
-  void parseMovies();
-  void parseCustomers();
+    void parseMovies();
+    void parseCustomers();
 };
+
