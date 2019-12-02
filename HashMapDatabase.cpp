@@ -64,3 +64,12 @@ int HashMapDatabase::getHash(int ID)
 {
 	return ID;
 }
+
+/*
+void HashMapDatabase::printAllCustomers()
+{
+	cout << "CUSTOMERS:" << endl;
+	for (auto X : Customers)
+		cout << X << endl;
+}
+*/

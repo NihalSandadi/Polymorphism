@@ -7,21 +7,18 @@ Transaction::Transaction()
 	Command = '\0';
 }
 
-Transaction::~Transaction()
-{
-	delete TargetMovie;
-	delete TargetCustomer;
-}
-
 // showInventory
 Transaction::Transaction(char Type)
 {
 	if (Type != 'I' || Type != 'H' || Type != 'R' || Type != 'B')
-		throw "BAD COMMAND";
-
-	Command = Type;
-	TargetCustomer = nullptr;
-	TargetMovie = nullptr;
+	{
+		cout << "BAD COMMAND" << endl;
+	}else
+	{
+		Command = Type;
+		TargetCustomer = nullptr;
+		TargetMovie = nullptr;
+	}
 }
 
 char Transaction::getCommand()
@@ -92,7 +89,7 @@ ostream& operator<<(ostream& Os, const Transaction& T)
 	}else if (T.Command == 'B')
 	{
 		Os << T.TargetMovie.Title << " IS BEING BORROWED BY ";
-		Os << T.TargetCustomer.FirstName << " " << T.TargetCustomer.LastName;
+		Os << T.TargetCustomer.FirstName << " " << T.TargetCustomer->LastName;
 	}else if (T.Command == 'R')
 	{
 		Os << T.TargetMovie.Title << " IS BEING RETURNED BY ";
@@ -107,8 +104,6 @@ ostream& operator<<(ostream& Os, const Transaction& T)
 	return Os;
 }
 */
-
-
 
 TransactionDatabase::TransactionDatabase()
 {
@@ -144,7 +139,10 @@ bool TransactionDatabase::clear()
 {
 	while (!Transactions.empty())
 	{
+		Transaction* Temp = Transactions.front();
 		Transactions.pop();
+		delete Temp;
 	}
+
 	return true;
 }

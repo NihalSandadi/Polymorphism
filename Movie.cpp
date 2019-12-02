@@ -47,12 +47,12 @@ Movie* MovieFactory::makeMovie(char type)
 }
 
 //increase the Quanity
-void Movie::increaseQuanity()
+void Movie::increaseQuantity()
 {
 	++Quantity;
 }
 
-void Movie::decreaseQuanity()
+void Movie::decreaseQuantity()
 {
 	if (0 == Quantity) {
 		throw "Invalid quantity";

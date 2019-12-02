@@ -3,6 +3,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include  <iomanip>
 #include "Transactions.h"
 
 using namespace std;
@@ -13,6 +14,7 @@ class Movie;
 
 class Customer
 {
+	// friend ostream& operator<<(ostream& Os, Customer* o);
 public:
 	Customer();
 	int CustomerId;

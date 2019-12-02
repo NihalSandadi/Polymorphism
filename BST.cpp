@@ -318,26 +318,27 @@ public:
 			return containsRec(N->Right, Item);
 		}
 	}
-	bool Retrieve(T* targetData, T*& pointer) const {
-		if (findRecursive(Root), targetData, pointer)
+
+	bool Retrieve(T targetData, T& pointer) const {
+		if (findRecursive(Root, targetData, pointer))
 			return true;
 		pointer = nullptr;
-		//cout << "ERROR: could not locate " << targetData->
 	}
-	bool findRecursive(Node* current, T* target, T* &ptr) const
+
+	bool findRecursive(Node* current, T target, T &ptr) const
 	{
 		if (current == nullptr)
 			return false;
 
-		if (*target == *current->data)
+		if (*target == *current->Data)
 		{
-			ptr = current->data;
+			ptr = current->Data;
 			return true;
 		}
-		else if (*target > * current->data)
-			findRecursive(current->right, target, ptr);//greater than
+		else if (*target < * current->Data)
+			findRecursive(current->Left, target, ptr);//less than
 		else
-			findRecursive(current->Left, target, ptr); //less than 
+			findRecursive(current->Right, target, ptr); //greater than
 	}
 	// inorder traversal: left-root-right
 	//prints the tree 

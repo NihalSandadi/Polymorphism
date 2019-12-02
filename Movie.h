@@ -18,8 +18,8 @@ public:
 	int Quantity; // number of instances of a movie in the library
 
 	Movie();
-	void increaseQuanity(); // +1
-	void decreaseQuanity(); // -1
+	void increaseQuantity(); // +1
+	void decreaseQuantity(); // -1
 	virtual ~Movie();
 };
 

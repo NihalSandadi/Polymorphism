@@ -25,7 +25,7 @@ private:
   Movie* TargetMovie;
 public:
     Transaction();
-    ~Transaction();
+    ~Transaction() {};
     Transaction(char); // inventory
     char getCommand();
     void setCommand(char Command);
@@ -46,6 +46,5 @@ public:
     queue<Transaction*> Transactions;
     // bool executeTransactions(); // moved to store driver
 private:
-
     bool clear();
 };
