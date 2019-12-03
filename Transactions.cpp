@@ -79,8 +79,11 @@ bool TransactionDatabase::clear()
 	return true;
 }
 
-ostream& operator<<(ostream& Os, const Transaction& T)
+ostream& operator<<(ostream& Os, const Transaction &T)
 {
-	Os << T.getCommand() << " " << T.TargetMovie << " " << T.getTargetCustomer();
+	Movie* tempM = T.getTargetMovie();
+	Customer* tempC = T.getTargetCustomer();
+
+	Os << T.getCommand() << " " << tempM << " " << tempC;
 	return Os;
 }

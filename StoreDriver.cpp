@@ -620,15 +620,16 @@ int main()
 	StoreDriver store;
 	// Testing();
 	if (store.readMovies("data4movies.txt"))
-		cout << "Done reading movies" << endl;
+		cout << "Movies Read & Stored Properly" << endl << endl;
 	if (store.readCustomers("data4customers.txt"))
-		cout << "Customers Read & Stored Properly" << endl;
+		cout << "Customers Read & Stored Properly" << endl << endl;
 	if (store.readTransactions("data4commands.txt"))
-		cout << "Transactions Read & Stored Properly" << endl;
+		cout << "Transactions Read & Stored Properly" << endl << endl;
 
+	cout << "Executing Transactions" << endl;
 	store.executeTransactions();
 
-	cout << store.toStringTransactions() << endl;
+	//cout << store.toStringTransactions() << endl;
 
 
 	 return 0;

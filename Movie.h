@@ -24,7 +24,7 @@ using namespace std;
 
 // Parent class for all movie types
 class Movie {
-	friend ostream& operator<<(ostream& Os, const Movie& M);
+	friend ostream& operator<<(ostream& Os, const Movie*& M);
 public:
 	char MovieType; // can be Classic, Comedy, and Drama for now
 	string Director;

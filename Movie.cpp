@@ -17,9 +17,9 @@ Movie::~Movie()
 }
 
 // Printing out the movie
-ostream& operator<<(ostream& Os, const Movie& M)
+ostream& operator<<(ostream& Os, const Movie*& M)
 {
-	Os << " Title: " << M.Title << " Director: " << M.Director << " Quantity: " << M.Quantity;
+	Os << " Title: " << M->Title << " Director: " << M->Director << " Quantity: " << M->Quantity;
 	return Os;
 }
 
@@ -55,7 +55,7 @@ void Movie::increaseQuantity()
 void Movie::decreaseQuantity()
 {
 	if (0 >= Quantity) {
-		cout << "QUANTITY UNDER 0 Cannot Borrow" << endl;
+		cout << "QUANTITY UNDER 0 Cannot Borrow: " <<  this->Title << endl;
 		return;
 	}
 	--Quantity;
