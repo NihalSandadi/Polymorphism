@@ -1,13 +1,18 @@
-//Jayden Stipek stipejay@uw.edu
-// 15 Jan 2019
-
-// BST class
-// Creates a BST to store values
-// Uses Node which holds the Data
-// Uses templates to store any type of Data
-// binarysearchtreee.cpp file is included at the bottom of the .h file
-// binarysearchtreee.cpp is part of the template, cannot be compiled separately (wrong)
-
+// ------------------------------------------------ BST.cpp --------------------------------------------------------
+// Jayden Stipek CSS 343 B
+// Creation: 10/25/19
+// Modified: 12/2/19
+// -----------------------------------------------------------------------------------------------------------------
+// Purpose - Encapsulate Movie data inside A Binary Search Tree 
+// -----------------------------------------------------------------------------------------------------------------
+// Notes:
+//		BST class
+//		Creates a BST to store values
+//		Uses Node which holds the Data
+//		Uses templates to store any type of Data
+//		binarysearchtree.cpp file is included at the bottom of the .h file
+//		binarysearchtree.cpp is part of the template, cannot be compiled separately
+// -----------------------------------------------------------------------------------------------------------------
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
@@ -46,42 +51,6 @@ private:
 
 	// root of the tree
 	Node* Root;
-
-	/**
-	 * print tree sideways with root on left
-				  6
-			  2
-				  5
-		  0
-				  4
-			  1
-				  3
-	 */
-	static ostream& printSideways(ostream& Out, const Node* Curr, int Level = 0) {
-		const static char SP = ' ';
-		const static int ReadabilitySpaces = 4;
-		if (!Curr)
-			return Out;
-		printSideways(Out, Curr->Right, ++Level);
-		Out << setfill(SP) << setw(Level * ReadabilitySpaces) << SP;
-		Out << Curr->Data << endl;
-		printSideways(Out, Curr->Left, Level);
-		return Out;
-	}
-
-	static ostream& centeredPrint(ostream& Out, int Space,
-		const string& Str, char FillChar = ' ') {
-		auto StrL = static_cast<int>(Str.length());
-		int Extra = (Space - StrL) / 2;
-		if (Extra > 0) {
-			Out << setfill(FillChar) << setw(Extra + StrL) << Str;
-			Out << setfill(FillChar) << setw(Space - Extra - StrL) << FillChar;
-		}
-		else {
-			Out << setfill(FillChar) << setw(Space) << Str;
-		}
-		return Out;
-	}
 
 public:
 	// constructor, empty tree (Good)

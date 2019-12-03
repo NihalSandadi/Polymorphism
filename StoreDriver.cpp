@@ -158,7 +158,6 @@ bool StoreDriver::readMovies(string File)
 // reading in customers
 bool StoreDriver::readCustomers(string File)
 {
-	cout << "Printing customers" << endl;
 	ifstream InFile;
 	string Line;
 
@@ -188,12 +187,6 @@ bool StoreDriver::readCustomers(string File)
 
 		//adds the customer to the hashmap
 		if (Customers->add(NewCustomer)) {
-			cout << NewCustomer->CustomerId << " " << NewCustomer->FirstName << " " << NewCustomer->LastName << endl;
-
-		//	cout << Customers->getCustomer(NewCustomer->CustomerId)->CustomerId << endl;
-		//	cout << Customers->getCustomer(NewCustomer->CustomerId)->FirstName << endl;
-		//	//Customers->getCustomer(NewCustomer->CustomerId)->showHistory();
-		//	//for testing purposes
 		}
 		else
 		{
@@ -499,26 +492,30 @@ bool StoreDriver::executeTransaction(Transaction* Tran)
 {
 	if (Tran->getCommand() == 'I')
 	{
+		cout << "INVENTORY" << endl;
 		printMovies();
 		// borrow
 	} else if (Tran->getCommand() == 'B')
 	{
+		cout << "Borrow" << endl;
 		Tran->getTargetMovie()->decreaseQuantity();
 		Tran->getTargetCustomer()->updateHistory(Tran);
 		// return
 	} else if (Tran->getCommand() == 'R')
 	{
+		cout << "Return" << endl;
 		Tran->getTargetMovie()->increaseQuantity();
 		Tran->getTargetCustomer()->updateHistory(Tran);
+
 		// history
 	} else if (Tran->getCommand() == 'H')
 	{
-		// showCustomerHistory(Tran->TargetCustomer);
+		cout << "History" << endl;
+		 showCustomerHistory(Tran->getTargetCustomer());
 	}	else
 	{
 		return false;
 	}
-
 	return true;
 }
 
@@ -540,9 +537,7 @@ void StoreDriver::showCustomerHistory(Customer* Cus)
 	{
 		if (X == Cus)
 		{
-			cout << Cus->CustomerId << " " << Cus->FirstName << " " << Cus->LastName;
-			cout << endl;
-			Cus->showHistory();
+			Cus->showHistory(); // shows their history
 		}
 	}
 }
@@ -629,26 +624,10 @@ int main()
 	if (store.readTransactions("data4commands.txt"))
 		cout << "Transactions Read & Stored Properly" << endl;
 
-	cout << "PRINTING MOVIES" << endl;
-	store.printMovies();
-	cout << "DONE PRINTING MOVIES" << endl;
-/*
-	cout << "PRINTING CUSTOMERS" << endl;
-	cout << "PRINTING CUSTOMERS" << endl;
-	cout << "PRINTING CUSTOMERS" << endl;
-	store.printCustomers();
-	cout << "DONE PRINTING CUSTOMERS" << endl;
-	cout << "DONE PRINTING CUSTOMERS" << endl;
-	cout << "DONE PRINTING CUSTOMERS" << endl;
-*/
+	store.executeTransactions();
 
-	cout << "PRINTING TRANSACTIONS" << endl;
-	cout << "PRINTING TRANSACTIONS" << endl;
-	cout << "PRINTING TRANSACTIONS" << endl;
 	cout << store.toStringTransactions() << endl;
-	cout << "DONE PRINTING TRANSACTIONS" << endl;
-	cout << "DONE PRINTING TRANSACTIONS" << endl;
-	cout << "DONE PRINTING TRANSACTIONS" << endl;
+
 
 	 return 0;
 }

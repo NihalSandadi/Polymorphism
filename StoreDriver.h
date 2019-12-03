@@ -1,4 +1,20 @@
-// StoreDriver class
+// ------------------------------------------------ StoreDriver.h--------------------------------------------------------
+// Jayden Stipek Nihal CSS 343 B
+// Creation: 11/20/19
+// Modified: 12/2/19
+// -----------------------------------------------------------------------------------------------------------------
+// Purpose - The Driver for the Store (Reads in files and executes commands)
+// -----------------------------------------------------------------------------------------------------------------
+// Notes:
+//		Has a BST for each genre
+//		Genres include (Drama(D), Comedy(F), and Classic(C))
+//		Reads in files and creates movie, customer, and transaction obbjects
+//		Afterwards executes commands for each Transaction created
+//
+// Inputs:	data4commands.txt
+//			data4customers.txt
+//			data4movies.txt
+// -----------------------------------------------------------------------------------------------------------------
 
 #pragma once
 #include <vector>
