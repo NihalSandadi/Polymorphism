@@ -89,7 +89,6 @@ bool StoreDriver::readMovies(string File)
 				newMovie->Director = removeSpace(SplitByComma[2]);
 				newMovie->Title = removeSpace(SplitByComma[3]);
 				newMovie->ReleaseYear = stoi(SplitByComma[4]);
-				unorderedComedy.push_back(newMovie);
 			}
 			else
 			{
@@ -111,9 +110,6 @@ bool StoreDriver::readMovies(string File)
 				newMovie->Director = removeSpace(SplitByComma[2]);
 				newMovie->Title = removeSpace(SplitByComma[3]);
 				newMovie->ReleaseYear = stoi(SplitByComma[4]);
-				//
-				unorderedDrama.push_back(newMovie);
-				//
 			}
 			else
 			{
@@ -147,9 +143,6 @@ bool StoreDriver::readMovies(string File)
 				newMovie->ActorLastName = removeSpace(SplitBySpace[2]);
 				newMovie->ReleaseMonth = stoi(SplitBySpace[3]); //broke here?
 				newMovie->ReleaseYear = stoi(SplitBySpace[4]);
-				//
-				unorderedClassic.push_back(newMovie);
-				//
 			}
 			else
 			{
@@ -215,9 +208,9 @@ bool StoreDriver::readCustomers(string File)
 Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 	string Title, int ReleaseYear)
 {
-	cout << "Finding movie ..." << "Title:" << Title << " DirAct:"
-					<< DirAct << " MovieType:" << MovieType << " ReleaseYear:"
-					<< ReleaseYear << endl;
+	// cout << "Finding movie ..." << "Title:" << Title << " DirAct:"
+	// 				<< DirAct << " MovieType:" << MovieType << " ReleaseYear:"
+	// 				<< ReleaseYear << endl;
 	if (MediaType == 'D')
 	{
 		if (MovieType == 'F')
@@ -229,7 +222,7 @@ Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 			if (comedyBST->Retrieve(CMovie, pointer))
 			{
 				delete CMovie;
-				cout << "Returning after Retrieve " << pointer << endl;
+				// cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
 		}
@@ -242,7 +235,7 @@ Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 			if (dramaBST->Retrieve(DMovie, pointer))
 			{
 				delete DMovie; //delete the temp
-				cout << "Returning after Retrieve " << pointer << endl;
+				// cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
 		}
@@ -259,12 +252,12 @@ Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 			if (classicBST->Retrieve(CMovie, pointer))
 			{
 				delete CMovie; //delete the temp
-				cout << "Returning after Retrieve " << pointer << endl;
+				// cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
 		}
 	}
-	cout << "Returning nullptr" << endl;
+	// cout << "Returning nullptr" << endl;
 	return nullptr;
 }
 // reading in the Movies
