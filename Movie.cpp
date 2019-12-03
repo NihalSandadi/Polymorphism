@@ -167,17 +167,12 @@ Classic::Classic() : Movie()
 // printing the classic Movie
 ostream& operator<<(ostream& Os, const Classic& M)
 {
-	if (&M != nullptr)
-	{
-		Os << "Classic" <<
-			setw(8) << M.Quantity << " "
-			<< setw(35) << M.Title <<
-			setw(17) << M.ActorFirstName <<
-			" " << M.ActorLastName <<
-			setw(8) << M.ReleaseMonth << " " << M.ReleaseYear;
-	}
-	else
-		Os << "Null";
+	Os << "Classic" <<
+		setw(8) << M.Quantity << " "
+		<< setw(35) << M.Title <<
+		setw(17) << M.ActorFirstName <<
+		" " << M.ActorLastName <<
+		setw(8) << M.ReleaseMonth << " " << M.ReleaseYear;
 	return Os;
 }
 

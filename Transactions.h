@@ -27,11 +27,11 @@ public:
     Transaction();
     ~Transaction() {};
     Transaction(char); // inventory
-    char getCommand();
+    char getCommand() const;
     void setCommand(char Command);
-    Customer* getTargetCustomer();
+    Customer* getTargetCustomer() const;
     void setTargetCustomer(Customer* TargetCustomer);
-    Movie* getTargetMovie();
+    Movie* getTargetMovie() const;
     void setTargetMovie(Movie* TargetMovie);
     // bool execute(); // moved to store driver
 

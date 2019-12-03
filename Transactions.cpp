@@ -21,7 +21,7 @@ Transaction::Transaction(char Type)
 	}
 }
 
-char Transaction::getCommand()
+char Transaction::getCommand() const
 {
 	return this->Command;
 }
@@ -31,7 +31,7 @@ void Transaction::setCommand(char Command)
 	this->Command = Command;
 }
 
-Customer* Transaction::getTargetCustomer()
+Customer* Transaction::getTargetCustomer() const
 {
 	return this->TargetCustomer;
 }
@@ -41,7 +41,7 @@ void Transaction::setTargetCustomer(Customer* TargetCustomer)
 	this->TargetCustomer = TargetCustomer;
 }
 
-Movie* Transaction::getTargetMovie()
+Movie* Transaction::getTargetMovie() const
 {
 	return this->TargetMovie;
 }
@@ -63,10 +63,11 @@ TransactionDatabase::~TransactionDatabase()
 bool TransactionDatabase::addTransaction(Transaction* Trans)
 {
 	if (Trans == nullptr) return false;
+	/*
 	cout << "COMMAND " << Trans->getCommand() << endl;
 	cout << "CUSTOMER " << Trans->getTargetCustomer() << endl;
 	cout << "MOVIE " << Trans->getTargetMovie() << endl;
-
+*/
 	Transactions.push(Trans);
 	return true;
 }
@@ -94,4 +95,10 @@ bool TransactionDatabase::clear()
 	}
 
 	return true;
+}
+
+ostream& operator<<(ostream& Os, const Transaction& T)
+{
+	Os << T.getCommand() << " " << T.getTargetMovie() << " " << T.getTargetCustomer();
+	return Os;
 }
