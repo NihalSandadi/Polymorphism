@@ -15,8 +15,7 @@ Transaction::Transaction(char Type)
 		Command = Type;
 		TargetCustomer = nullptr;
 		TargetMovie = nullptr;
-	}
-	else
+	}else
 	{
 		cout << "BAD COMMAND" << Type << endl;
 	}
@@ -64,9 +63,27 @@ TransactionDatabase::~TransactionDatabase()
 bool TransactionDatabase::addTransaction(Transaction* Trans)
 {
 	if (Trans == nullptr) return false;
+	/*
+	cout << "COMMAND " << Trans->getCommand() << endl;
+	cout << "CUSTOMER " << Trans->getTargetCustomer() << endl;
+	cout << "MOVIE " << Trans->getTargetMovie() << endl;
+*/
 	Transactions.push(Trans);
 	return true;
 }
+
+/* // Moved to Store Driver
+bool TransactionDatabase::executeTransactions()
+{
+	while (!Transactions.empty())
+	{
+		if (Transactions.front() == nullptr) return false;
+		Transactions.front()->execute();
+		Transactions.pop();
+	}
+	return true;
+}
+*/
 
 bool TransactionDatabase::clear()
 {

@@ -38,11 +38,11 @@ vector<string> StoreDriver::split(const string& s, char delimiter)
 string removeSpace(string old)
 {
 	int length = old.length();
-	if (old[0] == *" ") { //front
+	if(old[0] == *" "){ //front
 		old = old.substr(1, length + 5);
 	}
-	if (old[length - 1] == *" ") { //back
-		old = old.substr(0, length - 2);
+	if(old[length-1] == *" "){ //back
+		old = old.substr(0,length-2);
 	}
 	return old;
 }
@@ -145,8 +145,7 @@ bool StoreDriver::readMovies(string File)
 			{
 				delete newMovie;
 			}
-		}
-		else
+		} else
 		{
 			continue;
 		}
@@ -189,11 +188,12 @@ bool StoreDriver::readCustomers(string File)
 
 		//adds the customer to the hashmap
 		if (Customers->add(NewCustomer)) {
-			//cout << NewCustomer->CustomerId << " " << NewCustomer->FirstName << " " << NewCustomer->LastName << endl;
-			//	cout << Customers->getCustomer(NewCustomer->CustomerId)->CustomerId << endl;
-			//	cout << Customers->getCustomer(NewCustomer->CustomerId)->FirstName << endl;
-			//	//Customers->getCustomer(NewCustomer->CustomerId)->showHistory();
-			//	//for testing purposes
+			cout << NewCustomer->CustomerId << " " << NewCustomer->FirstName << " " << NewCustomer->LastName << endl;
+
+		//	cout << Customers->getCustomer(NewCustomer->CustomerId)->CustomerId << endl;
+		//	cout << Customers->getCustomer(NewCustomer->CustomerId)->FirstName << endl;
+		//	//Customers->getCustomer(NewCustomer->CustomerId)->showHistory();
+		//	//for testing purposes
 		}
 		else
 		{
@@ -209,9 +209,10 @@ bool StoreDriver::readCustomers(string File)
 Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 	string Title, int ReleaseYear)
 {
-	cout << "Finding movie ..." << "Title:" << Title << " DirAct:"
-		<< DirAct << " MovieType:" << MovieType << " ReleaseYear:"
-		<< ReleaseYear << endl;
+	/* cout << "Finding movie ..." << "Title:" << Title << " DirAct:"
+	 				<< DirAct << " MovieType:" << MovieType << " ReleaseYear:"
+	 				<< ReleaseYear << endl;
+					*/
 	if (MediaType == 'D')
 	{
 		if (MovieType == 'F')
@@ -223,7 +224,7 @@ Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 			if (comedyBST->Retrieve(CMovie, pointer))
 			{
 				delete CMovie;
-				cout << "Returning after Retrieve " << pointer << endl;
+				//cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
 			delete CMovie;
@@ -237,7 +238,7 @@ Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 			if (dramaBST->Retrieve(DMovie, pointer))
 			{
 				delete DMovie; //delete the temp
-				cout << "Returning after Retrieve " << pointer << endl;
+				//cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
 			delete DMovie;
@@ -255,14 +256,14 @@ Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 			if (classicBST->Retrieve(CMovie, pointer))
 			{
 				delete CMovie; //delete the temp
-				cout << "Returning after Retrieve " << pointer << endl;
+				//cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
 			delete CMovie;
 		}
 	}
 
-	cout << "Returning nullptr" << endl;
+	//cout << "Returning nullptr" << endl;
 	//throw "bad";
 	return nullptr;
 }
@@ -291,18 +292,18 @@ bool StoreDriver::readTransactions(string File)
 
 		// inventory
 		// I
-		cout << Line << endl;
+		//cout << Line << endl;
 		if ((const char)Line[0] == 'I')
-			//if (Line.rfind("I", 0) == 0)
+		//if (Line.rfind("I", 0) == 0)
 		{
 			auto NewTrans = new Transaction('I');
 			Transactions->addTransaction(NewTrans);
 
-			// history
-			// H 1000
+		// history
+		// H 1000
 		}
 		else if ((const char)Line[0] == 'H')
-			//else if (Line.rfind("H", 0) == 0)
+		//else if (Line.rfind("H", 0) == 0)
 		{
 			vector<string> SplitBySpace = split(Line, ' ');
 			if (SplitBySpace.size() != 2)
@@ -312,12 +313,11 @@ bool StoreDriver::readTransactions(string File)
 			}
 
 			auto NewTrans = new Transaction('H');
-			NewTrans->setTargetCustomer(Customers->getCustomer(stoi(SplitBySpace[1])));
+			NewTrans->setTargetCustomer(Customers->getCustomer( stoi(SplitBySpace[1]) ));
 			Transactions->addTransaction(NewTrans);
 
-			// B 1000 D D Barry Levinson, Good Morning Vietnam,
-		}
-		else if ((const char)Line[0] == 'B')
+		// B 1000 D D Barry Levinson, Good Morning Vietnam,
+	} else if ((const char)Line[0] == 'B')
 		{
 			string Title = "";
 			int ReleaseYear = 0;
@@ -336,21 +336,18 @@ bool StoreDriver::readTransactions(string File)
 				Title = removeSpace(SplitByComma[0]);
 				ReleaseYear = stoi(SplitByComma[1]);
 
-			}
-			else if (MovieType == 'D') {
+			} else if (MovieType == 'D') {
 				string Temp = Line.substr(Line.find(" D ") + 5);
 				vector<string> SplitByComma = split(Temp, ',');
 				DirActor = removeSpace(SplitByComma[0]);
 				Title = removeSpace(SplitByComma[1]);
 
-			}
-			else if (MovieType == 'C') {
-				ReleaseYear = stoi(SplitBySpace[4] + SplitBySpace[5]);
+			} else if (MovieType == 'C') {
+				ReleaseYear = stoi(SplitBySpace[4]+SplitBySpace[5]);
 				DirActor = removeSpace(SplitBySpace[6]) + " " +
 					removeSpace(SplitBySpace[7]);
 
-			}
-			else {
+			} else {
 				cout << "INVALID MOVIE TYPE.. IGNORING... " << Line << endl;
 				continue;
 			}
@@ -373,64 +370,59 @@ bool StoreDriver::readTransactions(string File)
 			NewTrans->setTargetMovie(M);
 			Transactions->addTransaction(NewTrans);
 
-		}
-		else if ((const char)Line[0] == 'R')
+		} else if ((const char)Line[0] == 'R')
 		{
-			string Title = "";
-			int ReleaseYear = 0;
-			string DirActor = "";
+				string Title = "";
+				int ReleaseYear = 0;
+				string DirActor = "";
 
-			// read common data
-			vector<string> SplitBySpace = split(Line, ' ');
-			int CustomerId = stoi(SplitBySpace[1]);
-			char MediaType = (const char)SplitBySpace[2][0];
-			char MovieType = (const char)SplitBySpace[3][0];
+				// read common data
+				vector<string> SplitBySpace = split(Line, ' ');
+				int CustomerId = stoi(SplitBySpace[1]);
+				char MediaType = (const char)SplitBySpace[2][0];
+				char MovieType = (const char)SplitBySpace[3][0];
 
-			// read specific movie data
-			if (MovieType == 'F') {
-				string Temp = Line.substr(Line.find(" F ") + 3);
-				vector<string> SplitByComma = split(Temp, ',');
-				Title = removeSpace(SplitByComma[0]);
-				ReleaseYear = stoi(SplitByComma[1]);
+				// read specific movie data
+				if (MovieType == 'F') {
+					string Temp = Line.substr(Line.find(" F ") + 3);
+					vector<string> SplitByComma = split(Temp, ',');
+					Title = removeSpace(SplitByComma[0]);
+					ReleaseYear = stoi(SplitByComma[1]);
 
-			}
-			else if (MovieType == 'D') {
-				string Temp = Line.substr(Line.find(" D ") + 5);
-				vector<string> SplitByComma = split(Temp, ',');
-				DirActor = removeSpace(SplitByComma[0]);
-				Title = removeSpace(SplitByComma[1]);
+				} else if (MovieType == 'D') {
+					string Temp = Line.substr(Line.find(" D ") + 5);
+					vector<string> SplitByComma = split(Temp, ',');
+					DirActor = removeSpace(SplitByComma[0]);
+					Title = removeSpace(SplitByComma[1]);
 
-			}
-			else if (MovieType == 'C') {
-				ReleaseYear = stoi(SplitBySpace[4] + SplitBySpace[5]);
-				DirActor = removeSpace(SplitBySpace[6]) + " " + removeSpace(SplitBySpace[7]);
+				} else if (MovieType == 'C') {
+					ReleaseYear = stoi(SplitBySpace[4]+SplitBySpace[5]);
+					DirActor = removeSpace(SplitBySpace[6]) + " " + removeSpace(SplitBySpace[7]);
 
-			}
-			else {
-				cout << "INVALID MOVIE TYPE.. IGNORING... " << Line << endl;
-				continue;
-			}
+				} else {
+					cout << "INVALID MOVIE TYPE.. IGNORING... " << Line << endl;
+					continue;
+				}
 
-			// StoreDriver::getMovie(char MediaType, char MovieType, string Director,
-			// string Title, int ReleaseYear) {}
-			Customer* C = Customers->getCustomer(CustomerId);
-			if (C == nullptr) {
-				cout << "INVALID CUSTOMER TYPE.. IGNORING... " << Line << endl;
-				continue;
-			}
-			Movie* M = getMovie(MediaType, MovieType, DirActor, Title, ReleaseYear);
-			if (M == nullptr) {
-				cout << "INVALID MOVIE NAME.. IGNORING... " << Line << endl;
-				continue;
-			}
+				// StoreDriver::getMovie(char MediaType, char MovieType, string Director,
+				// string Title, int ReleaseYear) {}
+				Customer* C = Customers->getCustomer(CustomerId);
+				if (C == nullptr) {
+					cout << "INVALID CUSTOMER TYPE.. IGNORING... " << Line << endl;
+					continue;
+				}
+				Movie* M = getMovie(MediaType, MovieType, DirActor, Title, ReleaseYear);
+				if (M == nullptr) {
+					cout << "INVALID MOVIE NAME.. IGNORING... " << Line << endl;
+					continue;
+				}
 
-			auto NewTrans = new Transaction('R');
-			NewTrans->setTargetCustomer(C);
-			NewTrans->setTargetMovie(M);
-			Transactions->addTransaction(NewTrans);
+				auto NewTrans = new Transaction('R');
+				NewTrans->setTargetCustomer(C);
+				NewTrans->setTargetMovie(M);
+				Transactions->addTransaction(NewTrans);
 
-		}
-		else
+		} else
 		{
 			cout << "INVALID COMMAND TYPE.. IGNORING... " << Line << endl;
 		}
@@ -452,43 +444,39 @@ void StoreDriver::printMovies()
 	dramaBST->display();
 }
 
-void StoreDriver::printCustomers()
-{
-	Customers->printAllCustomers();
-}
+//void StoreDriver::printCustomers()
+//{
+//	Customers->printAllCustomers();
+//}
 
 
 string StoreDriver::toStringTransactions()
 {
 	string Output = "";
 	queue<Transaction*> temp;
-	while (!Transactions->Transactions.empty())
+	while(!Transactions->Transactions.empty())
 	{
 		Transaction* T = Transactions->Transactions.front();
-		//		cout << *T << endl;
+//		cout << *T << endl;
 		string s(1, T->getCommand()); // converts char to string
 		Output = Output + "CHAR = " + s;
 		if (s == "I")
 		{
 			Output = Output + " SHOW INVENTORY";
-		}
-		else if (s == "B")
+		}else if (s == "B")
 		{
 			Output = Output + " " + T->getTargetMovie()->Title + " IS BEING BORROWED BY ";
 			Output = Output + T->getTargetCustomer()->FirstName + " " +
-				T->getTargetCustomer()->LastName;
-		}
-		else if (s == "R")
+			T->getTargetCustomer()->LastName;
+		}else if (s == "R")
 		{
 			Output = Output + " " + T->getTargetMovie()->Title + " IS BEING RETURNED BY ";
 			Output = Output + T->getTargetCustomer()->FirstName + " " +
-				T->getTargetCustomer()->LastName;;
-		}
-		else if (s == "H")
+			T->getTargetCustomer()->LastName;;
+		}else if (s == "H")
 		{
 			Output = Output + " SHOW HISTORY";
-		}
-		else
+		}else
 		{
 			break;
 		}
@@ -513,24 +501,20 @@ bool StoreDriver::executeTransaction(Transaction* Tran)
 	{
 		printMovies();
 		// borrow
-	}
-	else if (Tran->getCommand() == 'B')
+	} else if (Tran->getCommand() == 'B')
 	{
 		Tran->getTargetMovie()->decreaseQuantity();
 		Tran->getTargetCustomer()->updateHistory(Tran);
 		// return
-	}
-	else if (Tran->getCommand() == 'R')
+	} else if (Tran->getCommand() == 'R')
 	{
 		Tran->getTargetMovie()->increaseQuantity();
 		Tran->getTargetCustomer()->updateHistory(Tran);
 		// history
-	}
-	else if (Tran->getCommand() == 'H')
+	} else if (Tran->getCommand() == 'H')
 	{
 		// showCustomerHistory(Tran->TargetCustomer);
-	}
-	else
+	}	else
 	{
 		return false;
 	}
@@ -640,37 +624,31 @@ int main()
 	// Testing();
 	if (store.readMovies("data4movies.txt"))
 		cout << "Done reading movies" << endl;
-	cout << "PRINTING MOVIES" << endl;
-	store.printMovies();
-	cout << "DONE PRINTING MOVIES" << endl;
-	cout << endl;
-	cout << endl;
-	cout << endl;
-	// store.classicBST->centeredPrint(cout, 20, "X");
-	cout << endl;
-	cout << endl;
-	cout << endl;
 	if (store.readCustomers("data4customers.txt"))
 		cout << "Customers Read & Stored Properly" << endl;
 	if (store.readTransactions("data4commands.txt"))
 		cout << "Transactions Read & Stored Properly" << endl;
-	if (store.readTransactions("data4commands.txt"))
-		cout << "reading properly" << endl;
+
 	cout << "PRINTING MOVIES" << endl;
 	store.printMovies();
 	cout << "DONE PRINTING MOVIES" << endl;
-	/*
-		cout << "PRINTING CUSTOMERS" << endl;
-		cout << "PRINTING CUSTOMERS" << endl;
-		cout << "PRINTING CUSTOMERS" << endl;
-		store.printCustomers();
-		cout << "DONE PRINTING CUSTOMERS" << endl;
-		cout << "DONE PRINTING CUSTOMERS" << endl;
-		cout << "DONE PRINTING CUSTOMERS" << endl;
-	*/
+/*
+	cout << "PRINTING CUSTOMERS" << endl;
+	cout << "PRINTING CUSTOMERS" << endl;
+	cout << "PRINTING CUSTOMERS" << endl;
+	store.printCustomers();
+	cout << "DONE PRINTING CUSTOMERS" << endl;
+	cout << "DONE PRINTING CUSTOMERS" << endl;
+	cout << "DONE PRINTING CUSTOMERS" << endl;
+*/
+
+	cout << "PRINTING TRANSACTIONS" << endl;
+	cout << "PRINTING TRANSACTIONS" << endl;
 	cout << "PRINTING TRANSACTIONS" << endl;
 	cout << store.toStringTransactions() << endl;
 	cout << "DONE PRINTING TRANSACTIONS" << endl;
+	cout << "DONE PRINTING TRANSACTIONS" << endl;
+	cout << "DONE PRINTING TRANSACTIONS" << endl;
 
-	return 0;
+	 return 0;
 }

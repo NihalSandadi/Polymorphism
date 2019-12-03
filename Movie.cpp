@@ -85,13 +85,28 @@ ostream& operator<<(ostream& Os, const Comedy& M)
 // overloading the compare operator for comedy movies
 bool operator<(const Comedy& lhs, const Comedy& rhs)
 {
+	//cout << "LHS: " << lhs.Title << " RHS:" << rhs.Title << endl;
+	//cout << "LHS: " << lhs.ReleaseYear << " RHS:" << rhs.ReleaseYear << endl;
+
 	if (lhs.Title < rhs.Title)
 	{
+		//cout << "Title is less" << endl;
 		return true;
 	}
 	else if (lhs.Title == rhs.Title)
 	{
-		return (lhs.ReleaseYear < rhs.ReleaseYear);
+		//cout << "Title is equal" << endl;
+		if (lhs.ReleaseYear < rhs.ReleaseYear)
+		{
+			//cout << "Year is less" << endl;
+			return true;
+		} else {
+			//cout << "Year is more" << endl;
+			return false;
+		}
+	} else {
+		//cout << "Title is greater" << endl;
+		return false;
 	}
 	return false;
 }

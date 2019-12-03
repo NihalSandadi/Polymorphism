@@ -47,6 +47,42 @@ private:
 	// root of the tree
 	Node* Root;
 
+	/**
+	 * print tree sideways with root on left
+				  6
+			  2
+				  5
+		  0
+				  4
+			  1
+				  3
+	 */
+	static ostream& printSideways(ostream& Out, const Node* Curr, int Level = 0) {
+		const static char SP = ' ';
+		const static int ReadabilitySpaces = 4;
+		if (!Curr)
+			return Out;
+		printSideways(Out, Curr->Right, ++Level);
+		Out << setfill(SP) << setw(Level * ReadabilitySpaces) << SP;
+		Out << Curr->Data << endl;
+		printSideways(Out, Curr->Left, Level);
+		return Out;
+	}
+
+	static ostream& centeredPrint(ostream& Out, int Space,
+		const string& Str, char FillChar = ' ') {
+		auto StrL = static_cast<int>(Str.length());
+		int Extra = (Space - StrL) / 2;
+		if (Extra > 0) {
+			Out << setfill(FillChar) << setw(Extra + StrL) << Str;
+			Out << setfill(FillChar) << setw(Space - Extra - StrL) << FillChar;
+		}
+		else {
+			Out << setfill(FillChar) << setw(Space) << Str;
+		}
+		return Out;
+	}
+
 public:
 	// constructor, empty tree (Good)
 	BST() {
@@ -178,14 +214,21 @@ public:
 			N->Data = Item;
 			N->Left = nullptr;
 			N->Right = nullptr;
+			//cout << "Adding node" << *Item << endl;
 			return true;
 		} //else if the we are not there yet keep going left
-		else if (Item < N->Data)
+		else if (*Item < *N->Data)
 		{
+			//cout << "Add checking left" << endl;
+			//cout << *Item << endl;
+			//cout << *N->Data << endl;
 			recurseAdd(N->Left, Item);
 		}
 		else
 		{ //or go right
+			//cout << "Add checking right" << endl;
+			//cout << *Item << endl;
+			//cout << *N->Data << endl;
 			recurseAdd(N->Right, Item);
 		}
 		return false;
@@ -207,7 +250,6 @@ public:
 		if (Root == nullptr) return false;
 
 		Root = removeRecursive(Root, Item);
-		rebalance();
 		if (Root == nullptr)
 			return false;
 		else
@@ -296,21 +338,21 @@ public:
 		if (current == nullptr)
 			return false;
 
-		cout << "Target: " << *target << endl;
-		cout << "Current: " << *current->Data << endl;
+		//cout << "Target: " << *target << endl;
+		//cout << "Current: " << *current->Data << endl;
 		if (*target == *current->Data)
 		{
 			ptr = current->Data;
-			cout << "returning true" << endl;;
+			//cout << "returning true" << endl;;
 			return true;
 		}
 		else if (*target < *current->Data)
 		{
-			cout << "calling left" << endl;
+			//cout << "calling left" << endl;
 			return findRecursive(current->Left, target, ptr);//less than
 		}
 		else {
-			cout << "calling right" << endl;
+			//cout << "calling right" << endl;
 			return findRecursive(current->Right, target, ptr); //greater than
 		}
 		return false;

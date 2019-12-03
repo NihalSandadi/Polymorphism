@@ -1,18 +1,5 @@
-// ------------------------------------------------ Movie.h --------------------------------------------------------
-// Jayden Stipek Nihal CSS 343 B
-// Creation: 10/25/19
-// Modified: 12/2/19
-// -----------------------------------------------------------------------------------------------------------------
-// Purpose - Enscapsulates Genres as a Movie type ('D','C','F')
-// -----------------------------------------------------------------------------------------------------------------
-// Notes:
-//		Able to have 3 different genres atm and able to add more
-//		Genres include (Drama(D), Comedy(F), and Classic(C))
-//		Using a Factory of the creation of Movie genres (MovieFactory)
-//		Purpose of this is for abstraction and expandability
-//		Now able to have different types of Media such as DVD'S,CD'S , etc
-//		Able to have Quantity outside the movie itself in order for higher Inheritance/Abstraction
-// -----------------------------------------------------------------------------------------------------------------
+//Movie, MovieFactory, Classic, Drama, Comedy
+
 #pragma once
 #include "Media.h"
 #include <iostream>
