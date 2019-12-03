@@ -89,9 +89,7 @@ bool StoreDriver::readMovies(string File)
 				newMovie->Director = removeSpace(SplitByComma[2]);
 				newMovie->Title = removeSpace(SplitByComma[3]);
 				newMovie->ReleaseYear = stoi(SplitByComma[4]);
-				//
 				unorderedComedy.push_back(newMovie);
-				//
 			}
 			else
 			{
@@ -167,6 +165,7 @@ bool StoreDriver::readMovies(string File)
 // reading in customers
 bool StoreDriver::readCustomers(string File)
 {
+	cout << "Printing customers" << endl;
 	ifstream InFile;
 	string Line;
 
@@ -195,8 +194,12 @@ bool StoreDriver::readCustomers(string File)
 
 		//adds the customer to the hashmap
 		if (Customers->add(NewCustomer)) {
-			//Customers->getCustomer(NewCustomer->CustomerId)->showHistory();
-			//for testing purposes
+			cout << NewCustomer->CustomerId << " " << NewCustomer->FirstName << " " << NewCustomer->LastName << endl;
+		
+		//	cout << Customers->getCustomer(NewCustomer->CustomerId)->CustomerId << endl;
+		//	cout << Customers->getCustomer(NewCustomer->CustomerId)->FirstName << endl;
+		//	//Customers->getCustomer(NewCustomer->CustomerId)->showHistory();
+		//	//for testing purposes
 		}
 		else
 		{
@@ -461,8 +464,6 @@ bool StoreDriver::executeTransaction(Transaction* Tran)
 	return true;
 }
 
-
-
 bool StoreDriver::executeTransactions()
 {
 	while (!Transactions->Transactions.empty())
@@ -591,12 +592,5 @@ int main()
 	cout << "DONE PRINTING TRANSACTIONS" << endl;
 	cout << "DONE PRINTING TRANSACTIONS" << endl;
 */
-
-
-
-
-
-
-
-	return 0;
+	 return 0;
 }
