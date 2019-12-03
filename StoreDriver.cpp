@@ -78,7 +78,8 @@ bool StoreDriver::readMovies(string File)
 		{
 			// F, Stock, Director, Title, Year it released
 			if (SplitByComma.size() != 5) {
-				cout << "Invalid customer data. Exiting."; break;
+				cout << "Invalid customer data. Exiting.";
+				continue;
 			}
 
 			auto newMovie = (Comedy*)MovFactory.makeMovie('F');
@@ -99,7 +100,8 @@ bool StoreDriver::readMovies(string File)
 		{
 			// D, Stock, Director, Title, Year it released
 			if (SplitByComma.size() != 5) {
-				cout << "Invalid customer data. Exiting."; break;
+				cout << "Invalid customer data. Exiting.";
+				continue;
 			}
 
 			auto newMovie = (Drama*)MovFactory.makeMovie('D');
@@ -120,14 +122,16 @@ bool StoreDriver::readMovies(string File)
 		{
 			// C, Stock, Director, Title, Major actor Release date
 			if (SplitByComma.size() != 5) {
-				cout << "Invalid customer data. Exiting."; break;
+				cout << "Invalid customer data. Exiting.";
+				continue;
 			}
 
 			// splits the last part of the line by space to differinciate between
 			// the actor and the release date
 			vector<string> SplitBySpace = split(SplitByComma[4], ' ');
 			if (SplitBySpace.size() != 5) {
-				cout << "Invalid customer data. Exiting."; break;
+				cout << "Invalid customer data. Exiting.";
+				continue;
 			}
 
 			// C, Stock, Director, Title, Major actor Release date
@@ -148,6 +152,9 @@ bool StoreDriver::readMovies(string File)
 			{
 				delete newMovie;
 			}
+		} else
+		{
+			continue;
 		}
 	}
 
@@ -177,7 +184,8 @@ bool StoreDriver::readCustomers(string File)
 		// splits the line by comma and stores in a vector
 		vector<string> SplitBySpace = split(Line, ' ');
 		if (SplitBySpace.size() != 3) {
-			cout << "Invalid customer data. Exiting."; break;
+			cout << "Invalid customer data. Exiting.";
+			continue;
 		}
 
 		Customer* NewCustomer = new Customer();
@@ -208,40 +216,42 @@ bool StoreDriver::readCustomers(string File)
 Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 	string Title, int ReleaseYear)
 {
-	// cout << "Finding movie ..." << "Title:" << Title << " DirAct:"
-	// 				<< DirAct << " MovieType:" << MovieType << " ReleaseYear:"
-	// 				<< ReleaseYear << endl;
+	 cout << "Finding movie ..." << "Title:" << Title << " DirAct:"
+	 				<< DirAct << " MovieType:" << MovieType << " ReleaseYear:"
+	 				<< ReleaseYear << endl;
 	if (MediaType == 'D')
 	{
 		if (MovieType == 'F')
 		{
-			auto* pointer = new Comedy();
+			Comedy* pointer = nullptr;
 			auto* CMovie = new Comedy();
 			CMovie->Title = Title;
 			CMovie->ReleaseYear = ReleaseYear;
 			if (comedyBST->Retrieve(CMovie, pointer))
 			{
 				delete CMovie;
-				// cout << "Returning after Retrieve " << pointer << endl;
+				cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
+			delete CMovie;
 		}
 		if (MovieType == 'D')
 		{
-			auto* pointer = new Drama();
+			Drama* pointer = nullptr;
 			auto* DMovie = new Drama();
 			DMovie->Director = DirAct; //organized by director and title
 			DMovie->Title = Title;
 			if (dramaBST->Retrieve(DMovie, pointer))
 			{
 				delete DMovie; //delete the temp
-				// cout << "Returning after Retrieve " << pointer << endl;
+				cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
+			delete DMovie;
 		}
 		if (MovieType == 'C')
 		{
-			auto* pointer = new Classic();
+			Classic* pointer = nullptr;
 			auto* CMovie = new Classic();
 			vector<string> SplitBySpace = split(DirAct, ' ');
 			//organized by month,release year 122019
@@ -252,12 +262,15 @@ Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 			if (classicBST->Retrieve(CMovie, pointer))
 			{
 				delete CMovie; //delete the temp
-				// cout << "Returning after Retrieve " << pointer << endl;
+				 cout << "Returning after Retrieve " << pointer << endl;
 				return pointer; //null if nothing
 			}
+			delete CMovie;
 		}
 	}
-	// cout << "Returning nullptr" << endl;
+
+	cout << "Returning nullptr" << endl;
+	//throw "bad";
 	return nullptr;
 }
 // reading in the Movies
@@ -326,18 +339,19 @@ bool StoreDriver::readTransactions(string File)
 			if (MovieType == 'F') {
 				string Temp = Line.substr(Line.find(" F ") + 3);
 				vector<string> SplitByComma = split(Temp, ',');
-				Title = SplitByComma[0];
+				Title = removeSpace(SplitByComma[0]);
 				ReleaseYear = stoi(SplitByComma[1]);
 
 			} else if (MovieType == 'D') {
 				string Temp = Line.substr(Line.find(" D ") + 5);
 				vector<string> SplitByComma = split(Temp, ',');
-				DirActor = SplitByComma[0];
-				Title = SplitByComma[1];
+				DirActor = removeSpace(SplitByComma[0]);
+				Title = removeSpace(SplitByComma[1]);
 
 			} else if (MovieType == 'C') {
 				ReleaseYear = stoi(SplitBySpace[4]+SplitBySpace[5]);
-				DirActor = SplitBySpace[6] + " " + SplitBySpace[7];
+				DirActor = removeSpace(SplitBySpace[6]) + " " +
+					removeSpace(SplitBySpace[7]);
 
 			} else {
 				cout << "INVALID MOVIE TYPE.. IGNORING... " << Line << endl;
@@ -616,6 +630,16 @@ int main()
 	// Testing();
 	if (store.readMovies("data4movies.txt"))
 		cout << "Done reading movies" << endl;
+	cout << "PRINTING MOVIES" << endl;
+	store.printMovies();
+	cout << "DONE PRINTING MOVIES" << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	// store.classicBST->centeredPrint(cout, 20, "X");
+	cout << endl;
+	cout << endl;
+	cout << endl;
 	if (store.readCustomers("data4customers.txt"))
 		cout << "Customers Read & Stored Properly" << endl;
 	if (store.readTransactions("data4commands.txt"))

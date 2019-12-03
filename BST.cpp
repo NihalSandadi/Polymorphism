@@ -330,12 +330,12 @@ public:
 		if (current == nullptr)
 			return false;
 
-		// cout << "Target: " << *target << endl;
-		// cout << "Current: " << *current->Data << endl;
+		//cout << "Target: " << *target << endl;
+		//cout << "Current: " << *current->Data << endl;
 		if (*target == *current->Data)
 		{
 			ptr = current->Data;
-			// cout << "returning true" << endl;;
+			//cout << "returning true" << endl;;
 			return true;
 		}
 		else if (*target < * current->Data)
