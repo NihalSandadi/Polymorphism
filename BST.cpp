@@ -330,18 +330,23 @@ public:
 		if (current == nullptr)
 			return false;
 
-		//cout << "Target: " << *target << endl;
-		//cout << "Current: " << *current->Data << endl;
+		cout << "Target: " << *target << endl;
+		cout << "Current: " << *current->Data << endl;
 		if (*target == *current->Data)
 		{
 			ptr = current->Data;
-			//cout << "returning true" << endl;;
+			cout << "returning true" << endl;;
 			return true;
 		}
-		else if (*target < * current->Data)
+		else if (*target < *current->Data)
+		{
+			cout << "calling left" << endl;
 			return findRecursive(current->Left, target, ptr);//less than
-		else
+		}
+		else {
+			cout << "calling right" << endl;
 			return findRecursive(current->Right, target, ptr); //greater than
+		}
 		return false;
 	}
 	// inorder traversal: left-root-right

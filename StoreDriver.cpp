@@ -83,16 +83,14 @@ bool StoreDriver::readMovies(string File)
 			}
 
 			auto newMovie = (Comedy*)MovFactory.makeMovie('F');
+			newMovie->MovieType = (const char)SplitByComma[0][0];
+			newMovie->Quantity = stoi(SplitByComma[1]);
+			newMovie->Director = removeSpace(SplitByComma[2]);
+			newMovie->Title = removeSpace(SplitByComma[3]);
+			newMovie->ReleaseYear = stoi(SplitByComma[4]);
 			// F, Stock, Director, Title, Year it released
-			if (comedyBST->Add(newMovie)) { //  if it can insert the movie
-				newMovie->MovieType = (const char)SplitByComma[0][0];
-				newMovie->Quantity = stoi(SplitByComma[1]);
-				newMovie->Director = removeSpace(SplitByComma[2]);
-				newMovie->Title = removeSpace(SplitByComma[3]);
-				newMovie->ReleaseYear = stoi(SplitByComma[4]);
-			}
-			else
-			{
+			if (!comedyBST->Add(newMovie)) 
+			{ //  if it can insert the movie
 				delete newMovie;
 			}
 		}
@@ -105,16 +103,14 @@ bool StoreDriver::readMovies(string File)
 			}
 
 			auto newMovie = (Drama*)MovFactory.makeMovie('D');
+			newMovie->MovieType = (const char)SplitByComma[0][0];
+			newMovie->Quantity = stoi(SplitByComma[1]);
+			newMovie->Director = removeSpace(SplitByComma[2]);
+			newMovie->Title = removeSpace(SplitByComma[3]);
+			newMovie->ReleaseYear = stoi(SplitByComma[4]);
 			// D, Stock, Director, Title, Year it released
-			if (dramaBST->Add(newMovie)) { // if it can insert the movie
-				newMovie->MovieType = (const char)SplitByComma[0][0];
-				newMovie->Quantity = stoi(SplitByComma[1]);
-				newMovie->Director = removeSpace(SplitByComma[2]);
-				newMovie->Title = removeSpace(SplitByComma[3]);
-				newMovie->ReleaseYear = stoi(SplitByComma[4]);
-			}
-			else
-			{
+			if (!dramaBST->Add(newMovie))
+			{ // if it can insert the movie
 				delete newMovie;
 			}
 		}
@@ -136,19 +132,16 @@ bool StoreDriver::readMovies(string File)
 
 			// C, Stock, Director, Title, Major actor Release date
 			Classic* newMovie = (Classic*)MovFactory.makeMovie('C');
-			if (classicBST->Add(newMovie))
-			{
-				newMovie->MovieType = (const char)SplitByComma[0][0];
-				newMovie->Quantity = stoi(SplitByComma[1]);
-				newMovie->Director = removeSpace(SplitByComma[2]);
-				newMovie->Title = removeSpace(SplitByComma[3]);
-				// not working because unable to create a classic a properly
-				newMovie->ActorFirstName = removeSpace(SplitBySpace[1]);
-				newMovie->ActorLastName = removeSpace(SplitBySpace[2]);
-				newMovie->ReleaseMonth = stoi(SplitBySpace[3]); //broke here?
-				newMovie->ReleaseYear = stoi(SplitBySpace[4]);
-			}
-			else
+			newMovie->MovieType = (const char)SplitByComma[0][0];
+			newMovie->Quantity = stoi(SplitByComma[1]);
+			newMovie->Director = removeSpace(SplitByComma[2]);
+			newMovie->Title = removeSpace(SplitByComma[3]);
+			// not working because unable to create a classic a properly
+			newMovie->ActorFirstName = removeSpace(SplitBySpace[1]);
+			newMovie->ActorLastName = removeSpace(SplitBySpace[2]);
+			newMovie->ReleaseMonth = stoi(SplitBySpace[3]); //broke here?
+			newMovie->ReleaseYear = stoi(SplitBySpace[4]);
+			if (!classicBST->Add(newMovie))
 			{
 				delete newMovie;
 			}
