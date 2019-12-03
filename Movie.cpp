@@ -28,7 +28,7 @@ Movie* MovieFactory::makeMovie(char type)
 {
 	if (type == 'F')
 	{
-		return new Comedy();
+		return new Comedy(); 
 	}
 	if (type == 'D')
 	{
@@ -54,8 +54,9 @@ void Movie::increaseQuantity()
 
 void Movie::decreaseQuantity()
 {
-	if (0 == Quantity) {
-		throw "Invalid quantity";
+	if (0 >= Quantity) {
+		cout << "QUANTITY UNDER 0 Cannot Borrow" << endl;
+		return;
 	}
 	--Quantity;
 }

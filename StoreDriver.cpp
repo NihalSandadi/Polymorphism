@@ -491,26 +491,29 @@ bool StoreDriver::executeTransaction(Transaction* Tran)
 {
 	if (Tran->getCommand() == 'I')
 	{
-		cout << "INVENTORY" << endl;
+		cout << endl << "INVENTORY" << endl;
 		printMovies();
+		return true;
 		// borrow
 	} else if (Tran->getCommand() == 'B')
 	{
-		cout << "Borrow" << endl;
+		//cout << "Borrow" << endl;
 		Tran->getTargetMovie()->decreaseQuantity();
 		Tran->getTargetCustomer()->updateHistory(Tran);
-		// return
+		return true;
 	} else if (Tran->getCommand() == 'R')
 	{
-		cout << "Return" << endl;
+		//cout << "Return" << endl;
 		Tran->getTargetMovie()->increaseQuantity();
 		Tran->getTargetCustomer()->updateHistory(Tran);
+		return true;
 
 		// history
 	} else if (Tran->getCommand() == 'H')
 	{
-		cout << "History" << endl;
+		//cout << "History" << endl;
 		 showCustomerHistory(Tran->getTargetCustomer());
+		 return true;
 	}	else
 	{
 		return false;

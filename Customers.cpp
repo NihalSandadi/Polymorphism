@@ -11,7 +11,8 @@ Customer::Customer()
 //shows all the transactions the customer has made
 void Customer::showHistory() // BROKEN
 {
-	
+
+	cout << endl << "History of: ";
 	cout << this->CustomerId << "-" << this->FirstName << " "
 		<< this->LastName << endl;
 	if (History.size() == 0)
@@ -22,7 +23,7 @@ void Customer::showHistory() // BROKEN
 	{
 		cout << *Item << endl;
 	}
-	
+
 }
 
 //Add a transaction to the history Vector
@@ -50,11 +51,11 @@ void Customer::updateHistory(Transaction* newT)
 	*/
 }
 
-ostream &operator<<(ostream &Os, Customer* o)
+ostream& operator<<(ostream& Os, Customer* o)
 {
 	Os << setw(8) << o->CustomerId << " " <<
-	setw(30) << o->FirstName <<
-	" " << o->LastName;
+		setw(30) << o->FirstName <<
+		" " << o->LastName;
 	return Os;
 }
 

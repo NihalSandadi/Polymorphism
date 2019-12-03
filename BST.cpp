@@ -286,13 +286,14 @@ public:
 		return false;
 	}
 
-	bool findRecursive(Node* current, T target, T &ptr) const
+	bool findRecursive(Node* current, T target
+		, T &ptr) const
 	{
 		if (current == nullptr)
 			return false;
 
-		//cout << "Target: " << *target << endl;
-		//cout << "Current: " << *current->Data << endl;
+		/*cout << "Target: " << *target << endl;
+		cout << "Cur" << *current->Data << endl;*/
 		if (*target == *current->Data)
 		{
 			ptr = current->Data;
