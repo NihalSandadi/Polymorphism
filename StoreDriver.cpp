@@ -437,10 +437,10 @@ void StoreDriver::printMovies()
 	dramaBST->display();
 }
 
-//void StoreDriver::printCustomers()
-//{
-//	Customers->printAllCustomers();
-//}
+void StoreDriver::printCustomers()
+{
+	Customers->printAllCustomers();
+}
 
 
 string StoreDriver::toStringTransactions()
@@ -450,7 +450,6 @@ string StoreDriver::toStringTransactions()
 	while(!Transactions->Transactions.empty())
 	{
 		Transaction* T = Transactions->Transactions.front();
-//		cout << *T << endl;
 		string s(1, T->getCommand()); // converts char to string
 		Output = Output + "CHAR = " + s;
 		if (s == "I")

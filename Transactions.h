@@ -17,17 +17,12 @@
 #include <iostream>
 #include <queue>
 #include <string>
-/*
-#include "Customers.h"
-#include "StoreDriver.h"
-*/
 
 using namespace std;
 
 //forward declaration
 class Customer;
 class Movie;
-// class StoreDriver;
 
 class Transaction
 {
@@ -46,7 +41,6 @@ public:
     void setTargetCustomer(Customer* TargetCustomer);
     Movie* getTargetMovie() const;
     void setTargetMovie(Movie* TargetMovie);
-    // bool execute(); // moved to store driver
 
 };
 
@@ -57,7 +51,6 @@ public:
     ~TransactionDatabase();
     bool addTransaction(Transaction*);
     queue<Transaction*> Transactions;
-    // bool executeTransactions(); // moved to store driver
 private:
     bool clear();
 };

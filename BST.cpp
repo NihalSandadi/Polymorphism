@@ -119,22 +119,6 @@ public:
 		else return false;
 	}
 
-	// 0 if empty, 1 if only root, otherwise
-	// height of root is max height of subtrees + 1
-	int getHeight() const {
-		if (Root == nullptr)
-			return 0;
-		else
-		{
-			int LDepth = getHeight(Root->Left);
-			int RDepth = getHeight(Root->Right);
-
-			if (LDepth > RDepth)
-				return(LDepth + 1);
-			else return(RDepth + 1);
-		}
-	}
-
 	Node* getRoot() const
 	{
 		return Root;

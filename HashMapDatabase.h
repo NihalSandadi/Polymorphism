@@ -22,7 +22,7 @@ public:
 	bool remove(int ID);
 	Customer* getCustomer(int ID);
 	bool clear();
-	// void printAllCustomers();
+	void printAllCustomers();
 	vector<Customer*> Customers; // Hashtable of customer pointers
 private:
 	const int HASHSIZE = 10000;

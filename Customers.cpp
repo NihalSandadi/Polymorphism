@@ -6,7 +6,6 @@ Customer::Customer()
 	FirstName = "";
 	LastName = "";
 	History = {};
-	// CurrentlyBorrowed = {}
 }
 
 //shows all the transactions the customer has made
@@ -21,7 +20,7 @@ void Customer::showHistory() // BROKEN
 	}
 	for (auto Item : History)
 	{
-		cout << Item << endl;
+		cout << *Item << endl;
 	}
 	
 }

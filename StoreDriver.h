@@ -42,7 +42,7 @@ public:
   bool readMovies(string File); // done
   bool readCustomers(string File);
 	void printMovies();
-  // void printCustomers();
+   void printCustomers();
   Movie* getMovie(char, char, string, string, int);
   bool executeTransaction(Transaction*);
   bool executeTransactions();
