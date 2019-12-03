@@ -34,7 +34,7 @@ class BST {
 		return output;
 	}
 private:
-	
+
 	// Node for BST
 	struct Node {
 		T Data;
@@ -226,7 +226,7 @@ public:
 		return false;
 	}
 
-	//Given a a non-empty binary tree, Return a node with minimum value 
+	//Given a a non-empty binary tree, Return a node with minimum value
 	Node* minValueNode(Node* N)
 	{
 		Node* Current = N;
@@ -330,19 +330,22 @@ public:
 		if (current == nullptr)
 			return false;
 
+		// cout << "Target: " << *target << endl;
+		// cout << "Current: " << *current->Data << endl;
 		if (*target == *current->Data)
 		{
 			ptr = current->Data;
+			// cout << "returning true" << endl;;
 			return true;
 		}
 		else if (*target < * current->Data)
-			findRecursive(current->Left, target, ptr);//less than
+			return findRecursive(current->Left, target, ptr);//less than
 		else
-			findRecursive(current->Right, target, ptr); //greater than
+			return findRecursive(current->Right, target, ptr); //greater than
 		return false;
 	}
 	// inorder traversal: left-root-right
-	//prints the tree 
+	//prints the tree
 	void inOrderTraverse() const {
 		inOrderHelper(Root);
 	}
@@ -402,25 +405,25 @@ public:
 	 stores its nodes pointers in vector nodes[] */
 	void storeBSTNodes(Node* root, vector<Node*>& nodes)
 	{
-		// Base case 
+		// Base case
 		if (root == nullptr)
 			return;
 
-		// Store nodes in Inorder (which is sorted 
-		// order for BST) 
+		// Store nodes in Inorder (which is sorted
+		// order for BST)
 		storeBSTNodes(root->Left, nodes);
 		nodes.push_back(root);
 		storeBSTNodes(root->Right, nodes);
 	}
-	// This functions converts an unbalanced BST to (Nothing ATM) 
-  // a balanced BST 
+	// This functions converts an unbalanced BST to (Nothing ATM)
+  // a balanced BST
 	Node* buildTree(Node* root)
 	{
-		// Store nodes of given BST in sorted order 
+		// Store nodes of given BST in sorted order
 		vector<Node*> nodes;
 		storeBSTNodes(root, nodes);
 
-		// Constucts BST from nodes[] 
+		// Constucts BST from nodes[]
 		int n = nodes.size();
 		return buildTreeUtil(nodes, 0, n - 1);
 	}
@@ -429,7 +432,7 @@ public:
 	Node* buildTreeUtil(vector<Node*>& nodes, int start,
 		int end)
 	{
-		// base case 
+		// base case
 		if (start > end)
 			return nullptr;
 
@@ -451,7 +454,7 @@ public:
 		clearTree(this->Root);
 		Root = nullptr;
 	}
-	//helper function for clear to 
+	//helper function for clear to
 	void clearTree(Node* N)
 	{
 		if (N == nullptr) return;
@@ -460,4 +463,3 @@ public:
 		delete(N);
 	}
 };
-

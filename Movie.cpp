@@ -101,7 +101,6 @@ bool operator==(const Comedy& lhs, const Comedy& rhs)
 {
 	return
 	(
-		lhs.Director == rhs.Director &&
 		lhs.Title == rhs.Title &&
 		lhs.ReleaseYear == rhs.ReleaseYear
 	) ? true : false;
@@ -147,8 +146,7 @@ bool operator==(const Drama& lhs, const Drama& rhs)
 	return
 	(
 		lhs.Director == rhs.Director &&
-		lhs.Title == rhs.Title &&
-		lhs.ReleaseYear == rhs.ReleaseYear
+		lhs.Title == rhs.Title
 	) ? true : false;
 }
 
@@ -212,8 +210,6 @@ bool operator==(const Classic& lhs, const Classic& rhs)
 {
 	return
 	(
-		lhs.Director == rhs.Director &&
-		lhs.Title == rhs.Title &&
 		lhs.ActorFirstName == rhs.ActorFirstName &&
 		lhs.ActorLastName == rhs.ActorLastName &&
 		lhs.ReleaseMonth == rhs.ReleaseMonth &&
