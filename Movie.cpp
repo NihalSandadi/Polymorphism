@@ -3,9 +3,8 @@
 #include  <iomanip>
 using namespace std;
 
-void Movie::display() const
-{
-}
+// virtual function
+void Movie::display() const {}
 
 // Default Constructor
 Movie::Movie()
@@ -14,20 +13,15 @@ Movie::Movie()
 	Quantity = 0;
 }
 
-//  Deconstructor
-Movie::~Movie()
-{
-	// empty - nothing to delete
-}
-
 // Printing out the movie
 ostream& operator<<(ostream& Os, const Movie*& M)
 {
-	Os << " Title: " << M->Title << " Director: " << M->Director << " Quantity: " << M->Quantity;
+	Os << " Title: " << M->Title << " Director: " << M->Director <<
+		" Quantity: " << M->Quantity;
 	return Os;
 }
 
-//creates a movie of a certain type and returns a movie pointer of that type
+// creates a movie of a certain type and returns a movie pointer of that type
 Movie* MovieFactory::makeMovie(char type)
 {
 	if (type == 'F')
@@ -40,34 +34,40 @@ Movie* MovieFactory::makeMovie(char type)
 	}
 	if (type == 'C')
 	{
-		return new Classic(); // is it these?
+		return new Classic();
 	}
 	else
 	{
 		cout << "BAD MOVIE TYPE" << endl;
-		//return nullptr;
 	}
 	return nullptr;
 }
 
-//increase the Quanity
+// dncrease the amount of movies stored in a database
 void Movie::increaseQuantity()
 {
 	++Quantity;
 }
 
+// decreases the amount of movies stored in a database
 void Movie::decreaseQuantity()
 {
+	// edge case
 	if (0 >= Quantity) {
 		cout << "QUANTITY UNDER 0 Cannot Borrow: " << this->Title << endl;
 		return;
 	}
+
 	--Quantity;
 }
 
-// Beginning of all the Genres
+//==============================================================================
+//=============================Beginning of Genres==============================
+//==============================================================================
 
-// Beginning Of Comedy Class
+// beginning of comedy
+
+// Comedy constructor
 Comedy::Comedy() : Movie()
 {
 	MovieType = 'F';
@@ -76,6 +76,7 @@ Comedy::Comedy() : Movie()
 	ReleaseYear = 0;
 }
 
+// displays the comparable attributes
 void Comedy::display() const
 {
 
@@ -96,32 +97,24 @@ ostream& operator<<(ostream& Os, const Comedy& M)
 	return Os;
 }
 
-// overloading the compare operator for comedy movies
+// overloading the less than operator for comedy movies
 bool operator<(const Comedy& lhs, const Comedy& rhs)
 {
-	//cout << "LHS: " << lhs.Title << " RHS:" << rhs.Title << endl;
-	//cout << "LHS: " << lhs.ReleaseYear << " RHS:" << rhs.ReleaseYear << endl;
-
 	if (lhs.Title < rhs.Title)
 	{
-		//cout << "Title is less" << endl;
 		return true;
 	}
 	else if (lhs.Title == rhs.Title)
 	{
-		//cout << "Title is equal" << endl;
 		if (lhs.ReleaseYear < rhs.ReleaseYear)
 		{
-			//cout << "Year is less" << endl;
 			return true;
 		}
 		else {
-			//cout << "Year is more" << endl;
 			return false;
 		}
 	}
 	else {
-		//cout << "Title is greater" << endl;
 		return false;
 	}
 	return false;
@@ -138,6 +131,8 @@ bool operator==(const Comedy& lhs, const Comedy& rhs)
 }
 
 // Beginning Of Drama Class
+
+// basic drama Constructor
 Drama::Drama() : Movie()
 {
 	MovieType = 'D';
@@ -146,6 +141,7 @@ Drama::Drama() : Movie()
 	ReleaseYear = 0;
 }
 
+// displays the comparable attributes
 void Drama::display() const
 {
 	cout << "Drama " <<
@@ -154,7 +150,7 @@ void Drama::display() const
 	" "<< this->ReleaseYear;
 }
 
-// Printing the Drama movie out
+// Printing the Drama movie out formatted
 ostream& operator<<(ostream& Os, const Drama& M)
 {
 	Os << "Drama " <<
@@ -165,7 +161,7 @@ ostream& operator<<(ostream& Os, const Drama& M)
 	return Os;
 }
 
-// overloading the compare operator for drama movies
+// overloading the less than operator for drama movies
 bool operator<(const Drama& lhs, const Drama& rhs)
 {
 	if (lhs.Director < rhs.Director)
@@ -188,6 +184,8 @@ bool operator==(const Drama& lhs, const Drama& rhs)
 }
 
 // Beginning Of Classic Class
+
+// basic constructor for classic movies
 Classic::Classic() : Movie()
 {
 	MovieType = 'C';
@@ -199,6 +197,7 @@ Classic::Classic() : Movie()
 	ActorLastName = "";
 }
 
+// displays the comparable attributes
 void Classic::display() const
 {
 
@@ -246,6 +245,7 @@ bool operator<(const Classic& lhs, const Classic& rhs)
 			}
 			else if (lhs.ActorFirstName == rhs.ActorFirstName)
 			{
+				// comparing actor last name
 				return (lhs.ActorLastName < rhs.ActorLastName);
 			}
 		}

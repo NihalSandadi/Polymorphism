@@ -5,12 +5,14 @@ Media::Media()
 	MediaType = '\0';
 }
 
+// ostream overloader to print media
 ostream& operator<<(ostream& Os, const Media& M)
 {
 	Os << "MediaType = " << M.MediaType;
 	return Os;
 }
 
+// creates a media object
 MediaFactory::MediaFactory()
 {
 	// not being implemented
@@ -20,6 +22,7 @@ MediaFactory::MediaFactory()
 	*/
 }
 
+// deconstructor
 MediaFactory::~MediaFactory()
 {
 	for (auto& Media : MediaTypes)
@@ -29,6 +32,8 @@ MediaFactory::~MediaFactory()
 	MediaTypes.clear();
 }
 
+// makes a media type depending on the passed in
+// variable and returns that object
 Media* MediaFactory::makeMedia(char Type)
 {
 	return MediaTypes[Type];

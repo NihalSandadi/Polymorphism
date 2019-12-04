@@ -27,6 +27,7 @@ class Customer
 	// friend ostream& operator<<(ostream& Os, Customer* o);
 public:
 	Customer();
+	~Customer();
 	int CustomerId;
 	string FirstName;
 	string LastName;
@@ -35,5 +36,5 @@ public:
 	void display();
 private:
 	vector<Transaction*> History;
-	//vector<Movie*> CurrentlyBorrowed; not implementing atm
+	//vector<Movie*> CurrentlyBorrowed; // not implementing atm
 };

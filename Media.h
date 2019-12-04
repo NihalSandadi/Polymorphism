@@ -23,11 +23,11 @@ using namespace std;
 
 class Media
 {
-	public: // protected
-		char MediaType;
-		Media();
-		virtual ~Media() {};
-    friend ostream& operator<<(ostream& Os, const Media& M);
+  friend ostream& operator<<(ostream& Os, const Media& M);
+public:
+	char MediaType;
+	Media();
+	virtual ~Media() {};
 };
 
 class MediaFactory

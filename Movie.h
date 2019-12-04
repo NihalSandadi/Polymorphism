@@ -1,5 +1,5 @@
 // ------------------------------------------------ Movie.h --------------------------------------------------------
-// Jayden Stipek Nihal CSS 343 B
+// Jayden Stipek Nihal Sandadi CSS 343 B
 // Creation: 10/25/19
 // Modified: 12/2/19
 // -----------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ using namespace std;
 class Movie {
 	friend ostream& operator<<(ostream& Os, const Movie*& M);
 public:
-	char MovieType; // can be Classic, Comedy, and Drama for now
+	char MovieType; // can be Classic, Comedy, and Drama so far
 	string Director;
 	string Title;
 	int Quantity; // number of instances of a movie in the library
@@ -34,7 +34,7 @@ public:
 	Movie();
 	void increaseQuantity(); // +1
 	void decreaseQuantity(); // -1
-	virtual ~Movie();
+	virtual ~Movie() {};
 };
 
 // MovieFactory creates movies

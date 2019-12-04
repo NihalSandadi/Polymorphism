@@ -1,5 +1,6 @@
 #include "Customers.h"
 
+// default constructor
 Customer::Customer()
 {
 	CustomerId = 0;
@@ -8,29 +9,41 @@ Customer::Customer()
 	History = {};
 }
 
-//shows all the transactions the customer has made
-void Customer::showHistory() // BROKEN
+// deconstructor for customer
+Customer::~Customer()
 {
+	for (auto X : History)
+	{
+		delete X;
+	}
+	History.clear();
+}
 
+// shows all the transactions the customer has made
+void Customer::showHistory()
+{
 	cout << endl << "History of: ";
 	cout << this->CustomerId << "-" << this->FirstName << " "
 		<< this->LastName << endl;
+
 	if (History.size() == 0)
 	{
 		cout << "NO HISTORY" << endl;
 	}
+
 	for (auto Item : History)
 	{
 		cout << *Item << endl;
 	}
-
 }
 
-//Add a transaction to the history Vector
+// Add a transaction to the history Vector
 void Customer::updateHistory(Transaction* newT)
 {
 	History.push_back(newT); //history is just a queue
 
+	// for further implementation
+	// takes into account of currently borrowed movies
 	/*
 	if (newT.getCommand() == 'B')
 	{
@@ -51,6 +64,7 @@ void Customer::updateHistory(Transaction* newT)
 	*/
 }
 
+// Displays the customer information formatted
 void Customer::display()
 {
 	cout << setw(8) << this->CustomerId << " " <<
@@ -58,6 +72,8 @@ void Customer::display()
 		" " << this->LastName;
 }
 
+// Displays the customer information formatted
+// using an ostream object
 ostream& operator<<(ostream& Os, Customer* o)
 {
 	Os << setw(8) << o->CustomerId << " " <<
@@ -65,4 +81,3 @@ ostream& operator<<(ostream& Os, Customer* o)
 		" " << o->LastName;
 	return Os;
 }
-

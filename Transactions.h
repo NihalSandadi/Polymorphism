@@ -10,7 +10,7 @@
 //		Genres include (Inventory(I), History(H),Return(R), and Borrow(B))
 //		Reads in files and creates movie, customer, and transaction obbjects
 //		Afterwards executes commands for each Transaction created
-// 
+//
 // -----------------------------------------------------------------------------------------------------------------
 
 #pragma once
@@ -36,13 +36,15 @@ public:
     Transaction();
     ~Transaction() {};
     Transaction(char); // inventory
+
     char getCommand() const;
     void setCommand(char Command);
+
     Customer* getTargetCustomer() const;
     void setTargetCustomer(Customer* TargetCustomer);
+
     Movie* getTargetMovie() const;
     void setTargetMovie(Movie* TargetMovie);
-
 };
 
 class TransactionDatabase

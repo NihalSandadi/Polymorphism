@@ -1,5 +1,6 @@
 #include "Transactions.h"
 
+// constructor
 Transaction::Transaction()
 {
 	TargetCustomer = nullptr;
@@ -7,7 +8,7 @@ Transaction::Transaction()
 	Command = '\0';
 }
 
-// showInventory
+// constructor taking a command type
 Transaction::Transaction(char Type)
 {
 	if (Type == 'I' || Type == 'H' || Type == 'R' || Type == 'B')
@@ -21,45 +22,50 @@ Transaction::Transaction(char Type)
 	}
 }
 
+// getter for the command
 char Transaction::getCommand() const
 {
 	return this->Command;
 }
 
+// sets the command value
 void Transaction::setCommand(char Command)
 {
 	this->Command = Command;
 }
 
+// getter returning the target customer
 Customer* Transaction::getTargetCustomer() const
 {
 	return this->TargetCustomer;
 }
 
+// sets the customer value
 void Transaction::setTargetCustomer(Customer* TargetCustomer)
 {
 	this->TargetCustomer = TargetCustomer;
 }
 
+// getter returning the target movie
 Movie* Transaction::getTargetMovie() const
 {
 	return this->TargetMovie;
 }
 
+// sets the target movie
 void Transaction::setTargetMovie(Movie* TargetMovie)
 {
 	this->TargetMovie = TargetMovie;
 }
 
-TransactionDatabase::TransactionDatabase()
-{
-}
+TransactionDatabase::TransactionDatabase() {}
 
 TransactionDatabase::~TransactionDatabase()
 {
 	clear();
 }
 
+// adds to the transaction queue
 bool TransactionDatabase::addTransaction(Transaction* Trans)
 {
 	if (Trans == nullptr) return false;
@@ -67,6 +73,7 @@ bool TransactionDatabase::addTransaction(Transaction* Trans)
 	return true;
 }
 
+// deletes every transaction
 bool TransactionDatabase::clear()
 {
 	while (!Transactions.empty())
@@ -79,6 +86,7 @@ bool TransactionDatabase::clear()
 	return true;
 }
 
+// ostream overrider for cout
 ostream& operator<<(ostream& Os, const Transaction &T)
 {
 	Movie* tempM = T.getTargetMovie();
