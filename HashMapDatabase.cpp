@@ -37,6 +37,7 @@ bool HashMapDatabase::remove(int ID)
 		return true;
 	}
 	//does not exist
+
 	return false;
 }
 
@@ -69,7 +70,7 @@ int HashMapDatabase::getHash(int ID)
 	return ID;
 }
 
-// prints all customers 
+// prints all customers
 void HashMapDatabase::printAllCustomers()
 {
 	cout << "CUSTOMERS:" << endl;

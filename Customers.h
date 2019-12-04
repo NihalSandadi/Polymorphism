@@ -11,9 +11,10 @@
 // -----------------------------------------------------------------------------------------------------------------
 
 #pragma once
+#include <algorithm>
+#include <iomanip>
 #include <string>
 #include <vector>
-#include  <iomanip>
 #include "Transactions.h"
 #include "Movie.h"
 
@@ -34,7 +35,9 @@ public:
 	void showHistory();
 	void updateHistory(Transaction*);
 	void display();
+	void deleteHistory(Transaction*);
 private:
 	vector<Transaction*> History;
+
 	//vector<Movie*> CurrentlyBorrowed; // not implementing atm
 };

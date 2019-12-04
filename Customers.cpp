@@ -12,10 +12,6 @@ Customer::Customer()
 // deconstructor for customer
 Customer::~Customer()
 {
-	for (auto X : History)
-	{
-		delete X;
-	}
 	History.clear();
 }
 
@@ -62,6 +58,18 @@ void Customer::updateHistory(Transaction* newT)
 		}
 	}
 	*/
+}
+
+void Customer::deleteHistory(Transaction* T)
+{
+	vector<Transaction*>::iterator It;
+	It = find(History.begin(), History.end(), T);
+	for (auto X : History) {
+		if (X == T) {
+			History.erase(It);
+			break;
+		}
+	}
 }
 
 // Displays the customer information formatted

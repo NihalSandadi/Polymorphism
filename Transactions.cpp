@@ -8,6 +8,13 @@ Transaction::Transaction()
 	Command = '\0';
 }
 
+Transaction::~Transaction()
+{
+		if (this->TargetCustomer != nullptr) {
+			this->getTargetCustomer()->deleteHistory(this);
+		}
+}
+
 // constructor taking a command type
 Transaction::Transaction(char Type)
 {
@@ -90,7 +97,6 @@ bool TransactionDatabase::clear()
 ostream& operator<<(ostream& Os, const Transaction &T)
 {
 	Movie* tempM = T.getTargetMovie();
-	Customer* tempC = T.getTargetCustomer();
 	cout << T.getCommand()  << " ";
 	tempM->display();
 	//Os << T.getCommand() << " " << " " << tempC;

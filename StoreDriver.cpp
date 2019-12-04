@@ -206,7 +206,7 @@ bool StoreDriver::readCustomers(string File)
 	return true;
 }
 
-
+// returns a movie based on it's comparative types
 Movie* StoreDriver::getMovie(char MediaType, char MovieType, string DirAct,
 	string Title, int ReleaseYear)
 {
@@ -305,8 +305,7 @@ bool StoreDriver::readTransactions(string File)
 
 		// history
 		// H 1000
-		}
-		else if ((const char)Line[0] == 'H')
+		} else if ((const char)Line[0] == 'H')
 			//else if (Line.rfind("H", 0) == 0)
 		{
 			vector<string> SplitBySpace = split(Line, ' ');
@@ -324,8 +323,7 @@ bool StoreDriver::readTransactions(string File)
 			Transactions->addTransaction(NewTrans); // adds a history command
 
 			// B 1000 D D Barry Levinson, Good Morning Vietnam,
-		}
-		else if ((const char)Line[0] == 'B')
+		} else if ((const char)Line[0] == 'B')
 		{
 			string Title = "";
 			int ReleaseYear = 0;
@@ -381,8 +379,7 @@ bool StoreDriver::readTransactions(string File)
 			NewTrans->setTargetMovie(M);
 			Transactions->addTransaction(NewTrans); // adds a borrow command
 
-		}
-		else if ((const char)Line[0] == 'R')
+		} else if ((const char)Line[0] == 'R')
 		{
 			string Title = "";
 			int ReleaseYear = 0;
@@ -438,8 +435,7 @@ bool StoreDriver::readTransactions(string File)
 			NewTrans->setTargetMovie(M);
 			Transactions->addTransaction(NewTrans); // adds a remove transaction
 
-		}
-		else
+		} else
 		{
 			cout << "INVALID COMMAND TYPE.. IGNORING... " << Line << endl;
 		}
@@ -565,12 +561,22 @@ bool StoreDriver::executeTransaction(Transaction* Tran)
 // executes all transactions
 bool StoreDriver::executeTransactions()
 {
+	queue<Transaction*> Temp;
+
 	while (!Transactions->Transactions.empty())
 	{
-		if (Transactions->Transactions.front() == nullptr) return false;
-		executeTransaction(Transactions->Transactions.front());
+		Transaction* T = Transactions->Transactions.front();
+		executeTransaction(T);
 		Transactions->Transactions.pop();
+		delete T;
 	}
+/*
+	while (!Temp.empty()) {
+		Transaction* T = Temp.front();
+		Temp.pop();
+		delete T;
+	}
+*/
 	return true;
 }
 

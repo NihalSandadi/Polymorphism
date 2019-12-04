@@ -34,8 +34,8 @@ private:
   Movie* TargetMovie;
 public:
     Transaction();
-    ~Transaction() {};
-    Transaction(char); // inventory
+    ~Transaction();
+    explicit Transaction(char); // inventory
 
     char getCommand() const;
     void setCommand(char Command);

@@ -3,7 +3,7 @@
 // Creation: 10/25/19
 // Modified: 12/2/19
 // -----------------------------------------------------------------------------------------------------------------
-// Purpose - Encapsulate Movie data inside A Binary Search Tree 
+// Purpose - Encapsulate Movie data inside A Binary Search Tree
 // -----------------------------------------------------------------------------------------------------------------
 // Notes:
 //		BST class
@@ -140,22 +140,24 @@ public:
 		return *Counter;
 	}
 
-	// add a new item, return true if successful (Good, but leak)
-	bool Add(const T& Item) {
-		if (Root == nullptr)
-		{
-			Root = new Node();
-			Root->Data = Item;
-			return true;
-		}
-		else
+// add a new item, return true if successful (Good, but leak)
+bool Add(const T& Item) {
+	if (Root == nullptr)
+	{
+		Root = new Node();
+		Root->Data = Item;
+		return true;
+	} else
+	{
+		if (!contains(Item))
 		{
 			recurseAdd(Root, Item);
 			rebalance();
 			return true;
 		}
-		return false;
 	}
+	return false;
+}
 
 	//helper function for Add to keep track of the value of the added item
 	bool recurseAdd(Node*& N, const T& Item)
@@ -427,6 +429,7 @@ public:
 		if (N == nullptr) return;
 		clearTree(N->Left);
 		clearTree(N->Right);
+		delete N->Data;
 		delete(N);
 	}
 };
