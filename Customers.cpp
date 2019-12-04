@@ -69,7 +69,8 @@ void Customer::deleteHistory(Transaction* T)
 			History.erase(It);
 			break;
 		}
-	}*/
+	}
+	T = nullptr;*/
 }
 
 // Displays the customer information formatted
