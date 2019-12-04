@@ -3,6 +3,10 @@
 #include  <iomanip>
 using namespace std;
 
+void Movie::display() const
+{
+}
+
 // Default Constructor
 Movie::Movie()
 {
@@ -28,7 +32,7 @@ Movie* MovieFactory::makeMovie(char type)
 {
 	if (type == 'F')
 	{
-		return new Comedy(); 
+		return new Comedy();
 	}
 	if (type == 'D')
 	{
@@ -36,12 +40,11 @@ Movie* MovieFactory::makeMovie(char type)
 	}
 	if (type == 'C')
 	{
-		return new Classic();
+		return new Classic(); // is it these?
 	}
 	else
 	{
 		cout << "BAD MOVIE TYPE" << endl;
-		//return nullptr;
 	}
 	return nullptr;
 }
@@ -55,7 +58,7 @@ void Movie::increaseQuantity()
 void Movie::decreaseQuantity()
 {
 	if (0 >= Quantity) {
-		cout << "QUANTITY UNDER 0 Cannot Borrow: " <<  this->Title << endl;
+		cout << "QUANTITY UNDER 0 Cannot Borrow: " << this->Title << endl;
 		return;
 	}
 	--Quantity;
@@ -70,6 +73,15 @@ Comedy::Comedy() : Movie()
 	Director = "";
 	Title = "";
 	ReleaseYear = 0;
+}
+
+void Comedy::display() const
+{
+
+	cout << "Comedy " <<
+		this->Title << " " <<
+		this->Director <<
+		" " << this->ReleaseYear;
 }
 
 // printing out the comedy movie
@@ -101,11 +113,13 @@ bool operator<(const Comedy& lhs, const Comedy& rhs)
 		{
 			//cout << "Year is less" << endl;
 			return true;
-		} else {
+		}
+		else {
 			//cout << "Year is more" << endl;
 			return false;
 		}
-	} else {
+	}
+	else {
 		//cout << "Title is greater" << endl;
 		return false;
 	}
@@ -116,10 +130,10 @@ bool operator<(const Comedy& lhs, const Comedy& rhs)
 bool operator==(const Comedy& lhs, const Comedy& rhs)
 {
 	return
-	(
-		lhs.Title == rhs.Title &&
-		lhs.ReleaseYear == rhs.ReleaseYear
-	) ? true : false;
+		(
+			lhs.Title == rhs.Title &&
+			lhs.ReleaseYear == rhs.ReleaseYear
+			) ? true : false;
 }
 
 // Beginning Of Drama Class
@@ -131,10 +145,18 @@ Drama::Drama() : Movie()
 	ReleaseYear = 0;
 }
 
+void Drama::display() const
+{
+	cout << "Drama " <<
+		this->Title << " " <<
+		this->Director <<
+	" "<< this->ReleaseYear;
+}
+
 // Printing the Drama movie out
 ostream& operator<<(ostream& Os, const Drama& M)
 {
-	Os << "Drama" <<
+	Os << "Drama " <<
 		setw(9) << M.Quantity << " "
 		<< setw(35) << M.Title <<
 		setw(25) << M.Director <<
@@ -160,10 +182,10 @@ bool operator<(const Drama& lhs, const Drama& rhs)
 bool operator==(const Drama& lhs, const Drama& rhs)
 {
 	return
-	(
-		lhs.Director == rhs.Director &&
-		lhs.Title == rhs.Title
-	) ? true : false;
+		(
+			lhs.Director == rhs.Director &&
+			lhs.Title == rhs.Title
+			) ? true : false;
 }
 
 // Beginning Of Classic Class
@@ -178,6 +200,16 @@ Classic::Classic() : Movie()
 	ActorLastName = "";
 }
 
+void Classic::display() const
+{
+
+	cout << "Classic " <<
+		this->Title <<
+		" " << this->ActorFirstName <<
+		" " << this->ActorLastName <<
+		setw(8) << this->ReleaseMonth << " " << this->ReleaseYear;
+}
+
 // printing the classic Movie
 ostream& operator<<(ostream& Os, const Classic& M)
 {
@@ -189,6 +221,7 @@ ostream& operator<<(ostream& Os, const Classic& M)
 		setw(8) << M.ReleaseMonth << " " << M.ReleaseYear;
 	return Os;
 }
+
 
 // overloading the compare operator for classic movies
 bool operator<(const Classic& lhs, const Classic& rhs)
@@ -225,10 +258,10 @@ bool operator<(const Classic& lhs, const Classic& rhs)
 bool operator==(const Classic& lhs, const Classic& rhs)
 {
 	return
-	(
-		lhs.ActorFirstName == rhs.ActorFirstName &&
-		lhs.ActorLastName == rhs.ActorLastName &&
-		lhs.ReleaseMonth == rhs.ReleaseMonth &&
-		lhs.ReleaseYear == rhs.ReleaseYear
-	) ? true : false;
+		(
+			lhs.ActorFirstName == rhs.ActorFirstName &&
+			lhs.ActorLastName == rhs.ActorLastName &&
+			lhs.ReleaseMonth == rhs.ReleaseMonth &&
+			lhs.ReleaseYear == rhs.ReleaseYear
+			) ? true : false;
 }

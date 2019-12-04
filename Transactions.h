@@ -17,6 +17,8 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include "Customers.h"
+#include "Movie.h"
 
 using namespace std;
 

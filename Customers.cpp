@@ -51,6 +51,13 @@ void Customer::updateHistory(Transaction* newT)
 	*/
 }
 
+void Customer::display()
+{
+	cout << setw(8) << this->CustomerId << " " <<
+		setw(30) << this->FirstName <<
+		" " << this->LastName;
+}
+
 ostream& operator<<(ostream& Os, Customer* o)
 {
 	Os << setw(8) << o->CustomerId << " " <<

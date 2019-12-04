@@ -32,6 +32,7 @@ public:
 	string LastName;
 	void showHistory();
 	void updateHistory(Transaction*);
+	void display();
 private:
 	vector<Transaction*> History;
 	//vector<Movie*> CurrentlyBorrowed; not implementing atm

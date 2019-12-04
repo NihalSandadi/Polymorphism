@@ -14,6 +14,7 @@ HashMapDatabase::~HashMapDatabase()
 	{
 		delete Customer; //delete all customers inside the database
 	}
+	Customers.clear();
 }
 
 // Add a customer to the hashtable of customers

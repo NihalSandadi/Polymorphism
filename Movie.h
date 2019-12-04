@@ -30,7 +30,7 @@ public:
 	string Director;
 	string Title;
 	int Quantity; // number of instances of a movie in the library
-
+	virtual void display() const;
 	Movie();
 	void increaseQuantity(); // +1
 	void decreaseQuantity(); // -1
@@ -54,6 +54,7 @@ public:
 	int ReleaseYear;
 
 	Comedy();
+	virtual void display() const;
 	Comedy(string Director, int ReleaseYear);
 	~Comedy() {};
 };
@@ -67,6 +68,7 @@ public:
 	int ReleaseYear;
 
 	Drama();
+	virtual void display() const;
 	Drama(string Director, int ReleaseYear);
 	~Drama() {};
 };
@@ -82,6 +84,7 @@ public:
 	string ActorFirstName, ActorLastName;
 
 	Classic();
+	virtual void display() const;
 	Classic(string Director, int ReleaseYear, int ReleaseMonth,
 		string ActorFirstName, string ActorLastName);
 	~Classic() {};

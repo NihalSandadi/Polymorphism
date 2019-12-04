@@ -53,9 +53,7 @@ private:
 	BST<Comedy*>* comedyBST; //comedy stores all comedy movies
 	BST<Classic*>* classicBST; //classic stores all classic movies
 	BST<Drama*>* dramaBST; //drama stores all drama movies
-
-
-  HashMapDatabase* Customers;
+	 HashMapDatabase* Customers;
   TransactionDatabase* Transactions;
 	vector<string> split(const string& s, char delimiter);
   void parseMovies();

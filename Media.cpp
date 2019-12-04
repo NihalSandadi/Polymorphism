@@ -22,6 +22,10 @@ MediaFactory::MediaFactory()
 
 MediaFactory::~MediaFactory()
 {
+	for (auto& Media : MediaTypes)
+	{
+		delete Media.second;
+	}
 	MediaTypes.clear();
 }
 

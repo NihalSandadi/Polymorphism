@@ -83,7 +83,9 @@ ostream& operator<<(ostream& Os, const Transaction &T)
 {
 	Movie* tempM = T.getTargetMovie();
 	Customer* tempC = T.getTargetCustomer();
-
-	Os << T.getCommand() << " " << tempM << " " << tempC;
+	cout << T.getCommand()  << " ";
+	tempM->display();
+	tempC->display();
+	//Os << T.getCommand() << " " << " " << tempC;
 	return Os;
 }
