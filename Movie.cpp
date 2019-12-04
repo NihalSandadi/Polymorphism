@@ -45,6 +45,7 @@ Movie* MovieFactory::makeMovie(char type)
 	else
 	{
 		cout << "BAD MOVIE TYPE" << endl;
+		//return nullptr;
 	}
 	return nullptr;
 }
@@ -182,10 +183,8 @@ bool operator<(const Drama& lhs, const Drama& rhs)
 bool operator==(const Drama& lhs, const Drama& rhs)
 {
 	return
-		(
-			lhs.Director == rhs.Director &&
-			lhs.Title == rhs.Title
-			) ? true : false;
+		(lhs.Director == rhs.Director &&
+			lhs.Title == rhs.Title);
 }
 
 // Beginning Of Classic Class

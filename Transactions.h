@@ -24,7 +24,6 @@ using namespace std;
 
 //forward declaration
 class Customer;
-class Movie;
 
 class Transaction
 {

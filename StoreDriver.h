@@ -27,12 +27,10 @@
 #include <stdlib.h>
 #include "Media.h"
 #include "HashMapDatabase.h"
+#include "Transactions.h"
 #include "BST.cpp"
 
 using namespace std;
-
-class HashMapDatabase;
-class TransactionDatabase;
 
 class StoreDriver
 {

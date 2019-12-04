@@ -12,7 +12,6 @@ StoreDriver::StoreDriver()
 
 StoreDriver::~StoreDriver()
 {
-
 	delete dramaBST;
 	delete comedyBST;
 	delete classicBST;
@@ -69,7 +68,7 @@ bool StoreDriver::readMovies(string File)
 
 		if (Line == "") //end of file
 		{
-			break; //memory leak?
+			break; 
 		}
 
 		// splits the line by comma and stores in a vector
@@ -78,10 +77,10 @@ bool StoreDriver::readMovies(string File)
 		{
 			// F, Stock, Director, Title, Year it released
 			if (SplitByComma.size() != 5) {
-				cout << "Invalid customer data. Exiting.";
+				cout << "Invalid Movie data. Exiting.";
 				continue;
 			}
-
+			cout << "Create a movie" << endl;
 			Comedy* CMovie = (Comedy*)MovFactory.makeMovie('F'); //NEW
 			CMovie->MovieType = (const char)SplitByComma[0][0];
 			CMovie->Quantity = stoi(SplitByComma[1]);
@@ -91,6 +90,7 @@ bool StoreDriver::readMovies(string File)
 			// F, Stock, Director, Title, Year it released
 			if (!comedyBST->Add(CMovie))
 			{ //  if it can insert the movie
+				cout << "DELETE" << endl;
 				delete CMovie;
 			}
 		}
@@ -98,27 +98,28 @@ bool StoreDriver::readMovies(string File)
 		{
 			// D, Stock, Director, Title, Year it released
 			if (SplitByComma.size() != 5) {
-				cout << "Invalid customer data. Exiting.";
+				cout << "Invalid Movie data. Exiting.";
 				continue;
 			}
-
-			Drama* newMovie = (Drama*)MovFactory.makeMovie('D'); //saying a memory leak
-			newMovie->MovieType = (const char)SplitByComma[0][0];
-			newMovie->Quantity = stoi(SplitByComma[1]);
-			newMovie->Director = removeSpace(SplitByComma[2]);
-			newMovie->Title = removeSpace(SplitByComma[3]);
-			newMovie->ReleaseYear = stoi(SplitByComma[4]);
+			cout << "Create a movie" << endl;
+			Drama* Dmovie = (Drama*)MovFactory.makeMovie('D'); //saying a memory leak
+			Dmovie->MovieType = (const char)SplitByComma[0][0];
+			Dmovie->Quantity = stoi(SplitByComma[1]);
+			Dmovie->Director = removeSpace(SplitByComma[2]);
+			Dmovie->Title = removeSpace(SplitByComma[3]);
+			Dmovie->ReleaseYear = stoi(SplitByComma[4]);
 			// D, Stock, Director, Title, Year it released
-			if (!dramaBST->Add(newMovie))
+			if (!dramaBST->Add(Dmovie))
 			{ // if it can insert the movie
-				delete newMovie;
+				cout << "DIDNT CREATE A MOVIE" << endl;
+				delete Dmovie;
 			}
 		}
 		else if (SplitByComma[0] == "C") // for classic movies
 		{
 			// C, Stock, Director, Title, Major actor Release date
 			if (SplitByComma.size() != 5) {
-				cout << "Invalid customer data. Exiting.";
+				cout << "Invalid Movie data. Exiting.";
 				continue;
 			}
 
@@ -126,29 +127,30 @@ bool StoreDriver::readMovies(string File)
 			// the actor and the release date
 			vector<string> SplitBySpace = split(SplitByComma[4], ' ');
 			if (SplitBySpace.size() != 5) {
-				cout << "Invalid customer data. Exiting.";
+				cout << "Invalid Movie data. Exiting.";
 				continue;
 			}
 
 			// C, Stock, Director, Title, Major actor Release date
-			Classic* newMovie = (Classic*)MovFactory.makeMovie('C');
-			newMovie->MovieType = (const char)SplitByComma[0][0];
-			newMovie->Quantity = stoi(SplitByComma[1]);
-			newMovie->Director = removeSpace(SplitByComma[2]);
-			newMovie->Title = removeSpace(SplitByComma[3]);
-			// not working because unable to create a classic a properly
-			newMovie->ActorFirstName = removeSpace(SplitBySpace[1]);
-			newMovie->ActorLastName = removeSpace(SplitBySpace[2]);
-			newMovie->ReleaseMonth = stoi(SplitBySpace[3]); //broke here?
-			newMovie->ReleaseYear = stoi(SplitBySpace[4]);
-			if (!classicBST->Add(newMovie))
+			cout << "Create a movie" << endl;
+			Classic* Cmovie = (Classic*)MovFactory.makeMovie('C');
+			Cmovie->MovieType = (const char)SplitByComma[0][0];
+			Cmovie->Quantity = stoi(SplitByComma[1]);
+			Cmovie->Director = removeSpace(SplitByComma[2]);
+			Cmovie->Title = removeSpace(SplitByComma[3]);
+			Cmovie->ActorFirstName = removeSpace(SplitBySpace[1]);
+			Cmovie->ActorLastName = removeSpace(SplitBySpace[2]);
+			Cmovie->ReleaseMonth = stoi(SplitBySpace[3]); //broke here?
+			Cmovie->ReleaseYear = stoi(SplitBySpace[4]);
+			if (!classicBST->Add(Cmovie))
 			{
-				delete newMovie;
+				cout << "DIDNT CREATE A MOVIE" << endl;
+				delete Cmovie;
 			}
 		}
 		else
 		{
-			continue;
+			cout << "Bad movie Genre: " << SplitByComma[0] << endl;
 		}
 	}
 

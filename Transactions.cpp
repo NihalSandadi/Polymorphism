@@ -85,7 +85,6 @@ ostream& operator<<(ostream& Os, const Transaction &T)
 	Customer* tempC = T.getTargetCustomer();
 	cout << T.getCommand()  << " ";
 	tempM->display();
-	tempC->display();
 	//Os << T.getCommand() << " " << " " << tempC;
 	return Os;
 }

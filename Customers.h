@@ -15,12 +15,12 @@
 #include <vector>
 #include  <iomanip>
 #include "Transactions.h"
+#include "Movie.h"
 
 using namespace std;
 
 // forward declaration
 class Transaction;
-class Movie;
 
 class Customer
 {
