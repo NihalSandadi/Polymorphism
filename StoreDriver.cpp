@@ -567,16 +567,17 @@ bool StoreDriver::executeTransactions()
 	{
 		Transaction* T = Transactions->Transactions.front();
 		executeTransaction(T);
+		Temp.push(T);
 		Transactions->Transactions.pop();
-		delete T;
+		// delete T;
 	}
-/*
+
 	while (!Temp.empty()) {
 		Transaction* T = Temp.front();
 		Temp.pop();
 		delete T;
 	}
-*/
+
 	return true;
 }
 
