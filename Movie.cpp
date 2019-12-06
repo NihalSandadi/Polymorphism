@@ -43,7 +43,7 @@ Movie* MovieFactory::makeMovie(char type)
 	return nullptr;
 }
 
-// dncrease the amount of movies stored in a database
+// decrease the amount of movies stored in a database
 void Movie::increaseQuantity()
 {
 	++Quantity;

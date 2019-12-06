@@ -118,13 +118,13 @@ public:
 		}
 		else return false;
 	}
-
+	// Grabs the Root of the BST
 	Node* getRoot() const
 	{
 		return Root;
 	}
 
-	// Number of nodes in BST using an inorder traversal (not done)
+	// Number of nodes in BST using an inorder traversal
 	int numberOfNodes() const {
 		if (Root == nullptr) return 0;
 		int counter = 0;

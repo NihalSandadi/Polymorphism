@@ -35,7 +35,7 @@ public:
 	void showHistory();
 	void updateHistory(Transaction*);
 	void display();
-	void deleteHistory(Transaction*);
+	//void deleteHistory(Transaction*);
 private:
 	vector<Transaction*> History;
 

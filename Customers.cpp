@@ -60,18 +60,18 @@ void Customer::updateHistory(Transaction* newT)
 	*/
 }
 
-void Customer::deleteHistory(Transaction* T)
-{/*
-	vector<Transaction*>::iterator It;
-	It = find(History.begin(), History.end(), T);
-	for (auto X : History) {
-		if (X == T) {
-			History.erase(It);
-			break;
-		}
-	}
-	T = nullptr;*/
-}
+//void Customer::deleteHistory(Transaction* T)
+//{/*
+//	vector<Transaction*>::iterator It;
+//	It = find(History.begin(), History.end(), T);
+//	for (auto X : History) {
+//		if (X == T) {
+//			History.erase(It);
+//			break;
+//		}
+//	}
+//	T = nullptr;*/
+//}
 
 // Displays the customer information formatted
 void Customer::display()

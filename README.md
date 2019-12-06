@@ -1,17 +1,6 @@
 Ass 4: Polymorphism
-Start your repository by visiting https://classroom.github.com/a/Yfqt-Avp (Links to an external site.) BUT the design and the implementation will be group projects, so make sure everybody in your group is working on the correct repository.
+Creators: Jayden Stipek, Nihal
 
-
-
-[ Added 14 Nov 2019
-
-if you are working as a pair watch this video (Links to an external site.) and fill in the spreadsheet at https://docs.google.com/spreadsheets/d/16Ytc7sv3GX167vfbP9NOp3jTmcN3FMMo4PeGDw7ZCD0/edit?usp=sharing  (Links to an external site.)so both people can work on the same repository
-
-]
-
-Design
-Work in groups of 3-4 students – setup your group on Canvas. Email me if you’d like me to assign you to a group
-"Design Peer Evaluation". Turn in soft copy on Canvas and bring hard copy of your design to class. See dues dates on Canvas. Your design will be peer evaluated. (30 points)
 Implementation
 Work individually or in pairs. If working in a pair, the teammates’ CSS 342 or CSS 343 grades should be within 10 points (out of 100) difference.
 "Implementation" . Submit the last commit URL of your GitHub repository to Canvas (120 points)

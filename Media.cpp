@@ -1,5 +1,6 @@
 #include "Media.h"
 
+//constructor
 Media::Media()
 {
 	MediaType = '\0';

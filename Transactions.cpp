@@ -8,11 +8,12 @@ Transaction::Transaction()
 	Command = '\0';
 }
 
+//destructor
 Transaction::~Transaction()
 {
-		if (this->TargetCustomer != nullptr) {
-			this->getTargetCustomer()->deleteHistory(this);
-		}
+	if (this->TargetCustomer != nullptr) {
+		//this->getTargetCustomer()->deleteHistory(this);
+	}
 }
 
 // constructor taking a command type
@@ -23,7 +24,8 @@ Transaction::Transaction(char Type)
 		Command = Type;
 		TargetCustomer = nullptr;
 		TargetMovie = nullptr;
-	}else
+	}
+	else
 	{
 		cout << "BAD COMMAND" << Type << endl;
 	}
@@ -64,9 +66,10 @@ void Transaction::setTargetMovie(Movie* TargetMovie)
 {
 	this->TargetMovie = TargetMovie;
 }
-
+//default constructor
 TransactionDatabase::TransactionDatabase() {}
 
+//destructor, calls clear whic is helper function
 TransactionDatabase::~TransactionDatabase()
 {
 	clear();
@@ -94,10 +97,10 @@ bool TransactionDatabase::clear()
 }
 
 // ostream overrider for cout
-ostream& operator<<(ostream& Os, const Transaction &T)
+ostream& operator<<(ostream& Os, const Transaction& T)
 {
 	Movie* tempM = T.getTargetMovie();
-	cout << T.getCommand()  << " ";
+	cout << T.getCommand() << " ";
 	tempM->display();
 	//Os << T.getCommand() << " " << " " << tempC;
 	return Os;
